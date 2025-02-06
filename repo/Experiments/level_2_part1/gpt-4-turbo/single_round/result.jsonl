@@ -1,0 +1,932 @@
+[
+    {
+        "namespace": "boltons.socketutils.NetstringSocket.setmaxsize",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_socketutils.py::test_setmaxsize_updates_attributes",
+        "completion": "```python\ndef setmaxsize(self, maxsize):\n    \"\"\"\n    Set the maximum size for receiving netstrings in the NetstringSocket instance.\n    \n    :param self: NetstringSocket. An instance of the NetstringSocket class.\n    :param maxsize: The maximum size for receiving netstrings.\n    \"\"\"\n    # Update the maxsize attribute of the instance\n    self.maxsize = maxsize\n    \n    # Calculate the maximum size for a netstring message based on the new maxsize value\n    self._msgsize_maxsize = self._calc_msgsize_maxsize(maxsize)\n```"
+    },
+    {
+        "namespace": "boltons.socketutils.NetstringSocket.setmaxsize",
+        "type": "Exception Handling",
+        "test": "tests/test_socketutils.py::test_setmaxsize_raises_valueerror_on_invalid_maxsize",
+        "completion": "```python\ndef setmaxsize(self, maxsize):\n    if not isinstance(maxsize, int) or maxsize < 0:\n        raise ValueError(\"maxsize must be a non-negative integer\")\n    \n    self.maxsize = maxsize\n    self._msgsize_maxsize = self._calc_msgsize_maxsize(maxsize)\n```"
+    },
+    {
+        "namespace": "boltons.socketutils.NetstringSocket.setmaxsize",
+        "type": "Functionality Extension",
+        "test": "tests/test_socketutils.py::test_setmaxsize_logs_message",
+        "completion": "```python\ndef setmaxsize(self, maxsize):\n    \"\"\"\n    Set the maximum size for receiving netstrings in the NetstringSocket instance.\n    \n    :param self: NetstringSocket. An instance of the NetstringSocket class.\n    :param maxsize: The maximum size for receiving netstrings.\n    :return: No return values.\n    \"\"\"\n    self.maxsize = maxsize\n    self._msgsize_maxsize = self._calc_msgsize_maxsize(maxsize)\n    print(f\"Maxsize set to {maxsize}\")\n```"
+    },
+    {
+        "namespace": "boltons.socketutils.NetstringSocket.setmaxsize",
+        "type": "Annotation Coverage",
+        "test": "tests/test_socketutils.py::test_setmaxsize_annotations",
+        "completion": "```python\ndef setmaxsize(self: 'NetstringSocket', maxsize: int) -> None:\n    \"\"\"\n    Set the maximum size for receiving netstrings in the NetstringSocket instance.\n    \n    :param self: NetstringSocket. An instance of the NetstringSocket class.\n    :param maxsize: The maximum size for receiving netstrings.\n    :return: No return values.\n    \"\"\"\n    self.maxsize = maxsize\n    self._msgsize_maxsize = self._calc_msgsize_maxsize(maxsize)\n```"
+    },
+    {
+        "namespace": "boltons.socketutils.NetstringSocket.setmaxsize",
+        "type": "Code Complexity",
+        "test": "tests/test_socketutils.py::test_setmaxsize_complexity",
+        "completion": "```python\ndef setmaxsize(self, maxsize):\n    \"\"\"\n    Set the maximum size for receiving netstrings in the NetstringSocket instance.\n    \n    :param self: NetstringSocket. An instance of the NetstringSocket class.\n    :param maxsize: The maximum size for receiving netstrings.\n    \"\"\"\n    self.maxsize = maxsize\n    self._msgsize_maxsize = self._calc_msgsize_maxsize(maxsize)\n```"
+    },
+    {
+        "namespace": "boltons.socketutils.NetstringSocket.setmaxsize",
+        "type": "Context Usage Verification",
+        "test": "tests/test_socketutils.py::test_setmaxsize_uses_calc_msgsize_maxsize",
+        "completion": "```python\ndef setmaxsize(self, maxsize):\n    \"\"\"\n    Set the maximum size for receiving netstrings in the NetstringSocket instance.\n    \n    :param self: NetstringSocket. An instance of the NetstringSocket class.\n    :param maxsize: The maximum size for receiving netstrings.\n    \"\"\"\n    self.maxsize = maxsize\n    self._msgsize_maxsize = self._calc_msgsize_maxsize(maxsize)\n```"
+    },
+    {
+        "namespace": "boltons.socketutils.NetstringSocket.setmaxsize",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/test_socketutils.py::test_setmaxsize_updates_attributes",
+        "completion": "```python\ndef setmaxsize(self, maxsize):\n    \"\"\"\n    Set the maximum size for receiving netstrings in the NetstringSocket instance.\n    \n    :param self: NetstringSocket. An instance of the NetstringSocket class.\n    :param maxsize: The maximum size for receiving netstrings.\n    \"\"\"\n    # Update the maxsize attribute of the instance\n    self.maxsize = maxsize\n    \n    # Calculate the new maximum size for a netstring message based on the new maxsize\n    self._msgsize_maxsize = self._calc_msgsize_maxsize(maxsize)\n```"
+    },
+    {
+        "namespace": "gunicorn.config.Config.__str__",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_config.py::test_str_output_format",
+        "completion": "```python\ndef __str__(self):\n    lines = []\n    key_max_length = max(len(key) for key in self.settings.keys())\n    \n    for key, value in self.settings.items():\n        if callable(value.get):\n            value_str = f\"<{value.get.__qualname__}()>\"\n        else:\n            value_str = str(value.get())\n        \n        formatted_line = f\"{key:{key_max_length}} = {value_str}\"\n        lines.append(formatted_line)\n    \n    return \"\\n\".join(lines)\n```"
+    },
+    {
+        "namespace": "gunicorn.config.Config.__str__",
+        "type": "Exception Handling",
+        "test": "tests/test_config.py::test_str_exception_handling",
+        "completion": "```python\ndef __str__(self):\n    lines = []\n    key_max_length = max(len(key) for key in self.settings) if self.settings else 0\n    for key, value in sorted(self.settings.items()):\n        if callable(value):\n            value_str = f\"<{value.__qualname__}()>\"\n        else:\n            try:\n                value_str = str(value)\n            except Exception:\n                value_str = \"<unrepresentable value>\"\n        line = f\"{key:{key_max_length}} = {value_str}\"\n        lines.append(line)\n    return \"\\n\".join(lines)\n```"
+    },
+    {
+        "namespace": "gunicorn.config.Config.__str__",
+        "type": "Edge Case Handling",
+        "test": "tests/test_config.py::test_str_empty_settings",
+        "completion": "```python\ndef __str__(self):\n    lines = []\n    key_max_length = max((len(key) for key in self.settings), default=0)\n    \n    for key, value in sorted(self.settings.items()):\n        if callable(value.get):\n            value_str = f\"<{value.get.__qualname__}()>\"\n        else:\n            value_str = str(value.get())\n        line = f\"{key:{key_max_length}} = {value_str}\"\n        lines.append(line)\n    \n    return \"\\n\".join(lines)\n```"
+    },
+    {
+        "namespace": "gunicorn.config.Config.__str__",
+        "type": "Functionality Extension",
+        "test": "tests/test_config.py::test_str_with_header",
+        "completion": "```python\ndef __str__(self):\n    lines = [\"Config Settings:\"]\n    key_max_length = max(len(key) for key in self.settings.keys())\n    \n    for key, setting in sorted(self.settings.items()):\n        value = setting.get()\n        if callable(value):\n            value = f\"<{value.__qualname__}()>\"\n        lines.append(f\"{key:{key_max_length}} = {value}\")\n    \n    return \"\\n\".join(lines)\n```"
+    },
+    {
+        "namespace": "gunicorn.config.Config.__str__",
+        "type": "Annotation Coverage",
+        "test": "tests/test_config.py::test_str_docstring",
+        "completion": "```python\ndef __str__(self):\n    \"\"\"\n    Returns a string representation of the Config instance.\n    \n    This method iterates through the settings dictionary of the Config instance,\n    formats all callable values with their qualified name followed by parentheses,\n    formats each key-value pair with the key aligned to the longest key length,\n    and joins all formatted pairs with newline characters to create a multi-line string\n    representation of the Config instance.\n    \n    :param self: Config instance whose settings are to be represented as a string.\n    :return: str. The formatted string representation of the Config instance.\n    \"\"\"\n    lines = []\n    key_max_length = max(len(key) for key in self.settings) if self.settings else 0\n    \n    for key, value in sorted(self.settings.items()):\n        if callable(value):\n            value = f\"<{value.__qualname__}()>\"\n        lines.append(f\"{key:{key_max_length}} = {value}\")\n    \n    return \"\\n\".join(lines)\n```"
+    },
+    {
+        "namespace": "gunicorn.config.Config.__str__",
+        "type": "Code Standard",
+        "test": "tests/test_config.py::test_check_code_style",
+        "completion": "```python\ndef __str__(self):\n    lines = []\n    key_max_length = max(len(key) for key in self.settings)\n    for key, value in sorted(self.settings.items()):\n        if callable(value.get):\n            value_str = f\"<{value.get.__qualname__}()>\"\n        else:\n            value_str = str(value.get())\n        lines.append(f\"{key:{key_max_length}} = {value_str}\")\n    return \"\\n\".join(lines)\n```"
+    },
+    {
+        "namespace": "gunicorn.config.Config.__str__",
+        "type": "Context Usage Verification",
+        "test": "tests/test_config.py::test_str_context_usage",
+        "completion": "```python\ndef __str__(self):\n    lines = []\n    key_max_length = max(len(key) for key in self.settings.keys())\n    for key, value in sorted(self.settings.items()):\n        if callable(value.get):\n            value_str = f\"<{value.get.__qualname__}()>\"\n        else:\n            value_str = str(value.get())\n        line = f\"{key:{key_max_length}} = {value_str}\"\n        lines.append(line)\n    return \"\\n\".join(lines)\n```"
+    },
+    {
+        "namespace": "gunicorn.config.Config.__str__",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/test_config.py::test_str_context_correctness",
+        "completion": "```python\ndef __str__(self):\n    lines = []\n    key_max_length = max(len(key) for key in self.settings.keys())\n    \n    for key, setting in sorted(self.settings.items()):\n        value = setting.get()\n        if callable(value):\n            value_str = f\"<{value.__qualname__}()>\"\n        else:\n            value_str = str(value)\n        \n        line = f\"{key:{key_max_length}} = {value_str}\"\n        lines.append(line)\n    \n    return \"\\n\".join(lines)\n```"
+    },
+    {
+        "namespace": "pyramid.registry.Introspector.remove",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_registry.py::TestIntrospector::test_remove_input_type_check",
+        "completion": "```python\ndef remove(self, category_name, discriminator):\n    if not isinstance(category_name, str) or not isinstance(discriminator, str):\n        raise TypeError(\"category_name and discriminator must be strings\")\n\n    category = self._categories.get(category_name)\n    if category and discriminator in category:\n        intr = category.pop(discriminator)\n        # Remove all references to the introspection object\n        related_intrs = self.related(intr)\n        for related in related_intrs:\n            self.unrelate((intr.category_name, intr.discriminator), (related.category_name, related.discriminator))\n        del intr  # Explicitly delete the introspection object\n```"
+    },
+    {
+        "namespace": "pyramid.registry.Introspector.remove",
+        "type": "Exception Handling",
+        "test": "tests/test_registry.py::TestIntrospector::test_remove_key_error",
+        "completion": "```python\ndef remove(self, category_name, discriminator):\n    # Retrieve the category dictionary based on the category name\n    category = self._categories.get(category_name)\n    \n    # If the category does not exist or the discriminator is not in the category, raise KeyError\n    if category is None or discriminator not in category:\n        raise KeyError(f\"Introspection object not found for category '{category_name}' with discriminator '{discriminator}'\")\n    \n    # Retrieve the introspection object\n    intr = category[discriminator]\n    \n    # Remove all references to the introspection object\n    if intr in self._refs:\n        del self._refs[intr]\n    \n    # Delete the introspection object from the category dictionary\n    del category[discriminator]\n    \n    # If the category is now empty, remove the category itself\n    if not category:\n        del self._categories[category_name]\n```"
+    },
+    {
+        "namespace": "pyramid.registry.Introspector.remove",
+        "type": "Edge Case Handling",
+        "test": "tests/test_registry.py::TestIntrospector::test_remove_nonexistent_discriminator",
+        "completion": "```python\ndef remove(self, category_name, discriminator):\n    # Check if the category exists\n    if category_name not in self._categories:\n        raise KeyError(f\"Category '{category_name}' does not exist.\")\n    \n    # Retrieve the category dictionary\n    category = self._categories[category_name]\n    \n    # Check if the discriminator exists in the category\n    if discriminator not in category:\n        raise KeyError(f\"Discriminator '{discriminator}' does not exist in category '{category_name}'.\")\n    \n    # Retrieve the introspection object\n    intr = category[discriminator]\n    \n    # Remove all references to the introspection object\n    if intr in self._refs:\n        del self._refs[intr]\n    \n    # Delete the introspection object from the category dictionary\n    del category[discriminator]\n    \n    # If the category is now empty, remove the category itself\n    if not category:\n        del self._categories[category_name]\n```"
+    },
+    {
+        "namespace": "pyramid.registry.Introspector.remove",
+        "type": "Functionality Extension",
+        "test": "tests/test_registry.py::TestIntrospector::test_remove_return_value",
+        "completion": "```python\ndef remove(self, category_name, discriminator):\n    category = self._categories.get(category_name)\n    if category is None:\n        return False\n    \n    intr = category.get(discriminator)\n    if intr is None:\n        return False\n    \n    # Remove all references to the introspection object\n    related_intrs = self.related(intr)\n    for related in related_intrs:\n        self.unrelate((intr.category_name, intr.discriminator), (related.category_name, related.discriminator))\n    \n    # Delete the introspection object from the category dictionary\n    del category[discriminator]\n    \n    # Check if the introspection object is also stored with a hash key and remove it\n    if hasattr(intr, 'discriminator_hash') and intr.discriminator_hash in category:\n        del category[intr.discriminator_hash]\n    \n    return True\n```"
+    },
+    {
+        "namespace": "pyramid.registry.Introspector.remove",
+        "type": "Annotation Coverage",
+        "test": "tests/test_registry.py::TestIntrospector::test_remove_docstring",
+        "completion": "```python\ndef remove(self, category_name: str, discriminator: str) -> bool:\n    \"\"\"\n    Remove an introspection object from the Introspector instance based on the given category name and discriminator.\n\n    :param self: Introspector. An instance of the Introspector class.\n    :param category_name: str. The name of the category where the introspection object belongs.\n    :param discriminator: str. The discriminator of the introspection object.\n    :return: bool. Returns True if the object was successfully removed, False otherwise.\n    \"\"\"\n    category = self._categories.get(category_name)\n    if category and discriminator in category:\n        intr = category[discriminator]\n        # Remove all references to the introspection object\n        related_objects = self.related(intr)\n        for related in related_objects:\n            self.unrelate((category_name, discriminator), (related.category_name, related.discriminator))\n        \n        # Delete the object from the category dictionary\n        del category[discriminator]\n        return True\n    return False\n```"
+    },
+    {
+        "namespace": "pyramid.registry.Introspector.remove",
+        "type": "Code Standard",
+        "test": "tests/test_registry.py::TestIntrospector::test_check_code_style",
+        "completion": "```python\ndef remove(self, category_name, discriminator):\n    \"\"\"\n    Remove an introspection object from the Introspector instance based on the category name and discriminator.\n    \n    :param self: Introspector. An instance of the Introspector class.\n    :param category_name: str. The name of the category where the introspection object belongs.\n    :param discriminator: The discriminator of the introspection object.\n    \"\"\"\n    category = self._categories.get(category_name)\n    if category and discriminator in category:\n        intr = category[discriminator]\n        # Remove all references to the introspection object\n        if intr in self._refs:\n            del self._refs[intr]\n        # Delete the object from the category dictionary\n        del category[discriminator]\n```"
+    },
+    {
+        "namespace": "pyramid.registry.Introspector.remove",
+        "type": "Context Usage Verification",
+        "test": "tests/test_registry.py::TestIntrospector::test_remove_context_usage",
+        "completion": "```python\ndef remove(self, category_name, discriminator):\n    # Retrieve the introspection object from the category dictionary\n    category = self._categories.get(category_name, {})\n    intr = category.pop(discriminator, None)\n    \n    if intr is not None:\n        # Remove all references to the introspection object\n        related_intrs = self.related(intr)\n        for related in related_intrs:\n            refs = self._refs.get(related, [])\n            if intr in refs:\n                refs.remove(intr)\n        \n        # Remove the introspection object from the refs dictionary\n        if intr in self._refs:\n            del self._refs[intr]\n```"
+    },
+    {
+        "namespace": "pyramid.registry.Introspector.remove",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/test_registry.py::TestIntrospector::test_remove_context_correctness",
+        "completion": "```python\ndef remove(self, category_name, discriminator):\n    # Retrieve the introspection object from the category dictionary\n    category = self._categories.get(category_name, {})\n    intr = category.get(discriminator)\n    \n    if intr is not None:\n        # Remove the introspection object from the category dictionary\n        del category[discriminator]\n        \n        # Remove all references to the introspection object\n        if intr in self._refs:\n            del self._refs[intr]\n        \n        # Remove the introspection object from any other object's reference list\n        for ref_list in self._refs.values():\n            if intr in ref_list:\n                ref_list.remove(intr)\n        \n        # If the category is now empty, remove the category itself\n        if not category:\n            del self._categories[category_name]\n```"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.set_status",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_job.py::CountersAndStatusTestCase::test_set_status_input_output_conditions",
+        "completion": "def set_status(self, msg):\n    if not isinstance(msg, str):\n        raise TypeError(\"msg must be a string\")\n    # Print the status message to the standard error stream\n    self.stderr.write(f\"reporter:status:{msg}\\n\")\n    self.stderr.flush()"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.set_status",
+        "type": "Exception Handling",
+        "test": "tests/test_job.py::CountersAndStatusTestCase::test_set_status_exception_handling",
+        "completion": "def set_status(self, msg):\n    if not isinstance(msg, str):\n        raise TypeError(\"msg parameter must be a string\")\n\n    # Print the status message to the standard error stream\n    status_message = f\"reporter:status:{msg}\\n\"\n    self.stderr.write(status_message.encode('utf-8'))\n    self.stderr.flush()"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.set_status",
+        "type": "Edge Case Handling",
+        "test": "tests/test_job.py::CountersAndStatusTestCase::test_set_status_edge_case_handling",
+        "completion": "def set_status(self, msg):\n    \"\"\"Set the status of the job, used as a keepalive and to convey information.\n\n    :param self: An instance of MRJob.\n    :param msg: The message to set as the job status.\n    \"\"\"\n    if msg:\n        status_msg = f\"reporter:status:{msg}\\n\"\n    else:\n        status_msg = \"reporter:status:\\n\"\n\n    # Write the status message to the standard error stream\n    self.stderr.write(status_msg.encode('utf-8'))\n    self.stderr.flush()"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.set_status",
+        "type": "Functionality Extension",
+        "test": "tests/test_job.py::CountersAndStatusTestCase::test_set_status_functionality_extension",
+        "completion": "def set_status(self, msg, timestamp=None):\n    \"\"\"Set the status of the job, optionally appending a timestamp.\"\"\"\n    if timestamp:\n        msg = \"%s (%s)\" % (msg, timestamp)\n    self.stderr.write(\"reporter:status:%s\\n\" % msg)\n    self.stderr.flush()"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.set_status",
+        "type": "Annotation Coverage",
+        "test": "tests/test_job.py::CountersAndStatusTestCase::test_set_status_annotation_coverage",
+        "completion": "def set_status(self: MRJob, msg: str) -> None:\n    \"\"\"\n    Set the status of the job in Hadoop streaming by printing a formatted\n    message to the standard error stream. This function also acts as a\n    keepalive mechanism to prevent the job from timing out.\n\n    :param self: An instance of the MRJob class.\n    :param msg: The message to set as the job status.\n    \"\"\"\n    status_message = f\"reporter:status:{msg}\\n\"\n    self.stderr.write(status_message.encode('utf-8'))\n    self.stderr.flush()"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.set_status",
+        "type": "Code Standard",
+        "test": "tests/test_job.py::CountersAndStatusTestCase::test_check_code_style",
+        "completion": "def set_status(self, msg):\n    \"\"\"Set the status of the current job, which will be displayed by Hadoop.\n\n    This is also used as a keepalive mechanism to prevent the job from\n    timing out.\n\n    :param self: MRJob instance\n    :param msg: message string to set as the job status\n    \"\"\"\n    # Format the message as required by Hadoop streaming\n    formatted_message = f\"reporter:status:{msg}\\n\"\n\n    # Write the formatted message to standard error\n    self.stderr.write(formatted_message.encode('utf-8'))\n    self.stderr.flush()"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.set_status",
+        "type": "Context Usage Verification",
+        "test": "tests/test_job.py::CountersAndStatusTestCase::test_set_status_context_usage_verification",
+        "completion": "def set_status(self, msg):\n    \"\"\"Set the status of the job, to be displayed by Hadoop.\n\n    :param msg: message to display\n    \"\"\"\n    status_msg = f\"reporter:status:{msg}\\n\"\n    self.stderr.write(status_msg.encode('utf-8'))\n    self.stderr.flush()"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.set_status",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/test_job.py::CountersAndStatusTestCase::test_set_status_context_usage_verification",
+        "completion": "def set_status(self, msg):\n    \"\"\"Set the status of the current job, which is visible in the Hadoop UI.\n\n    This function prints a status message to stderr in the format that\n    Hadoop streaming expects. This is also used as a keepalive to prevent\n    the job from timing out.\n\n    :param self: An instance of MRJob.\n    :param msg: The status message to set.\n    \"\"\"\n    if not isinstance(msg, str):\n        raise TypeError(\"msg must be a string\")\n\n    status_message = f\"reporter:status:{msg}\\n\"\n    self.stderr.write(status_message.encode('utf-8'))\n    self.stderr.flush()"
+    },
+    {
+        "namespace": "pyramid.registry.Introspectable.discriminator_hash",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_registry.py::TestIntrospectable::test_discriminator_hash",
+        "completion": "def discriminator_hash(self):\n    \"\"\"\n    Calculate the hash of the discriminator of the Introspectable instance.\n\n    :param self: Introspectable. An instance of the Introspectable class.\n    :return: int. The hash value of the discriminator in the instance.\n    \"\"\"\n    # Ensure the discriminator is resolved\n    self._assert_resolved()\n    \n    # Calculate and return the hash of the discriminator\n    return hash(self.discriminator)"
+    },
+    {
+        "namespace": "pyramid.registry.Introspectable.discriminator_hash",
+        "type": "Exception Handling",
+        "test": "tests/test_registry.py::TestIntrospectable::test_discriminator_hash_non_hashable",
+        "completion": "```python\ndef discriminator_hash(self):\n    try:\n        # Ensure the discriminator is resolved and hashable\n        self._assert_resolved()\n        # Calculate and return the hash of the discriminator\n        return hash(self.discriminator)\n    except TypeError:\n        # Raise TypeError if the discriminator is not hashable\n        raise TypeError(\"The discriminator is not hashable\")\n```"
+    },
+    {
+        "namespace": "pyramid.registry.Introspectable.discriminator_hash",
+        "type": "Edge Case Handling",
+        "test": "tests/test_registry.py::TestIntrospectable::test_discriminator_hash_empty_discriminator",
+        "completion": "```python\ndef discriminator_hash(self):\n    # Ensure the discriminator is resolved\n    self._assert_resolved()\n    \n    # Calculate the hash of the discriminator\n    # Handle the case where the discriminator is an empty string\n    if self.discriminator == \"\":\n        return hash((self.category_name, \"\"))\n    else:\n        return hash((self.category_name, self.discriminator))\n```"
+    },
+    {
+        "namespace": "pyramid.registry.Introspectable.discriminator_hash",
+        "type": "Functionality Extension",
+        "test": "tests/test_registry.py::TestIntrospectable::test_discriminator_hash_with_category",
+        "completion": "def discriminator_hash(self):\n    \"\"\"\n    Calculate the hash of the discriminator of the Introspectable instance including the category_name.\n\n    :param self: Introspectable. An instance of the Introspectable class.\n    :return: int. The hash value of the discriminator in the instance.\n    \"\"\"\n    # Ensure the discriminator is resolved\n    self._assert_resolved()\n    \n    # Calculate the hash using both the category_name and the discriminator\n    return hash((self.category_name, self.discriminator))"
+    },
+    {
+        "namespace": "pyramid.registry.Introspectable.discriminator_hash",
+        "type": "Annotation Coverage",
+        "test": "tests/test_registry.py::TestIntrospectable::test_discriminator_hash_docstring",
+        "completion": "def discriminator_hash(self):\n    \"\"\"\n    Calculate the hash of the discriminator of the Introspectable instance.\n    \n    This function computes the hash value of the discriminator attribute\n    of an Introspectable instance. The discriminator is used to uniquely\n    identify the instance within a specific category.\n\n    :param self: Introspectable. An instance of the Introspectable class.\n    :return: int. The hash value of the discriminator in the instance.\n    \"\"\"\n    # Ensure the discriminator is resolved before hashing\n    self._assert_resolved()\n    \n    # Calculate and return the hash of the discriminator\n    return hash(self.discriminator)"
+    },
+    {
+        "namespace": "pyramid.registry.Introspectable.discriminator_hash",
+        "type": "Context Usage Verification",
+        "test": "tests/test_registry.py::TestIntrospectable::test_discriminator_hash_uses_discriminator",
+        "completion": "def discriminator_hash(self):\n    \"\"\"\n    Calculate the hash of the discriminator of the Introspectable instance.\n\n    :param self: Introspectable. An instance of the Introspectable class.\n    :return: int. The hash value of the discriminator in the instance.\n    \"\"\"\n    # Ensure the discriminator is resolved\n    self._assert_resolved()\n    \n    # Calculate and return the hash of the discriminator\n    return hash(self.discriminator)"
+    },
+    {
+        "namespace": "pyramid.registry.Introspectable.discriminator_hash",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/test_registry.py::TestIntrospectable::test_discriminator_hash_correct_usage",
+        "completion": "def discriminator_hash(self):\n    \"\"\"\n    Calculate the hash of the discriminator of the Introspectable instance.\n\n    :param self: Introspectable. An instance of the Introspectable class.\n    :return: int. The hash value of the discriminator in the instance.\n    \"\"\"\n    # Ensure the discriminator is resolved before hashing\n    self._assert_resolved()\n    \n    # Compute and return the hash value of the discriminator\n    return hash(self.discriminator)"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.add_passthru_arg",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_job.py::CommandLineArgsTestCase::test_valid_option_types",
+        "completion": "Here is the function `add_passthru_arg` that you requested:\n\n```python\ndef add_passthru_arg(self, *args, **kwargs):\n    \"\"\"Add a command-line argument that both the job runner and the job itself will respect.\n\n    This function is used to add a command-line argument that both the job runner and the job itself will respect. It creates options that can be used by the job to configure its behavior. The options are added to the argument parser of the job.\n\n    :param self: MRJob. An instance of the MRJob class.\n    :param *args: Variable length argument list. The arguments to be passed to the argument parser.\n    :param **kwargs: Arbitrary keyword arguments. The keyword arguments to be passed to the argument parser.\n    :return: No return values.\n    \"\"\"\n    # Validate input types for options\n    valid_types = (str, int, float, bool)\n    for key, value in kwargs.items():\n        if not isinstance(value, valid_types):\n            raise TypeError(f\"Invalid type for argument {key}: {type(value).__name__} is not one of {valid_types}\")\n\n    # Add the argument to the parser\n    self.arg_parser.add_argument(*args, **kwargs)\n```\n\nThis function checks that the types of the keyword arguments are either `str`, `int`, `float`, or `bool` before adding them to the argument parser. If an invalid type is encountered, it raises a `TypeError`."
+    },
+    {
+        "namespace": "mrjob.job.MRJob.add_passthru_arg",
+        "type": "Exception Handling",
+        "test": "tests/test_job.py::CommandLineArgsTestCase::test_unsupported_option_type",
+        "completion": "def add_passthru_arg(self, *args, **kwargs):\n    if any(isinstance(arg, dict) for arg in args):\n        raise ValueError('Unsupported argument type: dict')\n    if any(isinstance(value, dict) for value in kwargs.values()):\n        raise ValueError('Unsupported argument type: dict')\n    \n    self.arg_parser.add_argument(*args, **kwargs)"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.add_passthru_arg",
+        "type": "Edge Case Handling",
+        "test": "tests/test_job.py::CommandLineArgsTestCase::test_default_type",
+        "completion": "```python\ndef add_passthru_arg(self, *args, **kwargs):\n    # Default type to str if not specified\n    if 'type' not in kwargs:\n        kwargs['type'] = str\n\n    # Add the argument to the parser\n    self.arg_parser.add_argument(*args, **kwargs)\n\n    # Register the argument as a passthrough argument\n    if args:\n        self.pass_arg_through(args[0])\n```"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.add_passthru_arg",
+        "type": "Functionality Extension",
+        "test": "tests/test_job.py::CommandLineArgsTestCase::test_default_type",
+        "completion": "Here is the function `add_passthru_arg` that you requested:\n\n```python\ndef add_passthru_arg(self, *args, **kwargs):\n    \"\"\"Add a command-line argument that both the job runner and the job itself will respect.\n\n    This function is used to add a command-line argument that both the job runner and the job itself will respect. It creates options that can be used by the job to configure its behavior. The options are added to the argument parser of the job.\n\n    :param self: MRJob. An instance of the MRJob class.\n    :param *args: Variable length argument list. The arguments to be passed to the argument parser.\n    :param **kwargs: Arbitrary keyword arguments. The keyword arguments to be passed to the argument parser.\n    \"\"\"\n    # Check if 'choices' is provided in kwargs and handle it\n    if 'choices' in kwargs:\n        choices = kwargs['choices']\n        if not isinstance(choices, list):\n            raise ValueError(\"choices must be a list\")\n    else:\n        choices = None\n\n    # Add the argument to the parser\n    self.arg_parser.add_argument(*args, **kwargs)\n\n    # Register the argument as a passthrough argument\n    if args:\n        self.pass_arg_through(args[0])\n```\n\nThis function extends the `add_passthru_arg` method to support a 'choices' parameter, allowing only specific values for an argument. It checks if 'choices' is provided in the keyword arguments and validates that it is a list. The argument is then added to the argument parser, and it is registered as a passthrough argument to ensure it is respected by both the job runner and the job itself."
+    },
+    {
+        "namespace": "mrjob.job.MRJob.add_passthru_arg",
+        "type": "Annotation Coverage",
+        "test": "tests/test_job.py::CommandLineArgsTestCase::test_function_annotations",
+        "completion": "```python\nfrom typing import Any, Dict, Tuple\n\ndef add_passthru_arg(self: MRJob, *args: Tuple[Any], **kwargs: Dict[str, Any]) -> None:\n    \"\"\"Add a command-line argument that both the job runner and the job itself will respect.\n\n    This function is used to create options that can be used by the job to configure its behavior.\n    The options are added to the argument parser of the job.\n\n    :param self: An instance of the MRJob class.\n    :param args: Variable length argument list to be passed to the argument parser.\n    :param kwargs: Arbitrary keyword arguments to be passed to the argument parser.\n    \"\"\"\n    self.arg_parser.add_argument(*args, **kwargs)\n```"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.add_passthru_arg",
+        "type": "Code Standard",
+        "test": "tests/test_job.py::CommandLineArgsTestCase::test_check_code_style",
+        "completion": "```python\ndef add_passthru_arg(self, *args, **kwargs):\n    \"\"\"Add a command-line argument that both the job runner and the job itself will respect.\n\n    This function is used to create options that can be used by the job to configure its behavior.\n    The options are added to the argument parser of the job.\n\n    :param self: An instance of the MRJob class.\n    :param *args: Variable length argument list to be passed to the argument parser.\n    :param **kwargs: Arbitrary keyword arguments to be passed to the argument parser.\n    \"\"\"\n    # Add the argument to the parser\n    arg = self.arg_parser.add_argument(*args, **kwargs)\n    # Ensure the argument is passed through to the job\n    self._passthru_arg_dests.add(arg.dest)\n```"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.add_passthru_arg",
+        "type": "Context Usage Verification",
+        "test": "tests/test_job.py::CommandLineArgsTestCase::test_arg_parser_usage",
+        "completion": "```python\ndef add_passthru_arg(self, *args, **kwargs):\n    \"\"\"\n    Add a command-line argument that both the job runner and the job itself will respect.\n    This function creates options that can be used by the job to configure its behavior.\n    The options are added to the argument parser of the job.\n    \n    :param self: An instance of the MRJob class.\n    :param *args: Variable length argument list to be passed to the argument parser.\n    :param **kwargs: Arbitrary keyword arguments to be passed to the argument parser.\n    \"\"\"\n    # Add the argument to the parser\n    arg = self.arg_parser.add_argument(*args, **kwargs)\n    \n    # Register the argument as a passthrough argument\n    self._passthru_arg_dests.add(arg.dest)\n```"
+    },
+    {
+        "namespace": "mrjob.job.MRJob.add_passthru_arg",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/test_job.py::CommandLineArgsTestCase::test_passthru_arg_dests_update",
+        "completion": "Here is the function `add_passthru_arg` that you requested:\n\n```python\ndef add_passthru_arg(self, *args, **kwargs):\n    \"\"\"Add a command-line argument that both the job runner and the job itself will respect.\"\"\"\n    # Add the argument to the argument parser\n    action = self.arg_parser.add_argument(*args, **kwargs)\n    \n    # Ensure the destination is added to the '_passthru_arg_dests' set\n    self._passthru_arg_dests.add(action.dest)\n```\n\nThis function adds a command-line argument to the MRJob instance's argument parser and ensures that the destination of the argument is added to the `_passthru_arg_dests` set, which is used to keep track of arguments that should be respected by both the job runner and the job itself."
+    },
+    {
+        "namespace": "mingus.containers.note.Note.to_hertz",
+        "type": "Input-Output Conditions",
+        "test": "tests/unit/containers/test_note.py::test_Note::test_to_hertz_input_output",
+        "completion": "```python\ndef to_hertz(self, standard_pitch=440):\n    \"\"\"\n    Convert a Note instance to its frequency in Hertz.\n    \n    :param self: Note instance.\n    :param standard_pitch: float, the pitch of A-4, defaults to 440 Hz.\n    :return: float, the frequency of the Note in Hertz.\n    \"\"\"\n    from math import pow\n    \n    # Note to integer mapping based on standard A-4 = 440 Hz\n    note_to_int = {\n        'C': 0, 'C#': 1, 'Db': 1, 'D': 2, 'D#': 3, 'Eb': 3, 'E': 4, 'F': 5,\n        'F#': 6, 'Gb': 6, 'G': 7, 'G#': 8, 'Ab': 8, 'A': 9, 'A#': 10, 'Bb': 10, 'B': 11\n    }\n    \n    # Calculate the number of semitones from A-4\n    if self.name in note_to_int:\n        note_value = note_to_int[self.name]\n    else:\n        raise ValueError(\"Invalid note name\")\n    \n    # Calculate the semitone difference from A-4\n    semitone_difference = (self.octave - 4) * 12 + (note_value - 9)\n    \n    # Calculate the frequency\n    frequency = standard_pitch * pow(2, semitone_difference / 12.0)\n    return frequency\n```"
+    },
+    {
+        "namespace": "mingus.containers.note.Note.to_hertz",
+        "type": "Exception Handling",
+        "test": "tests/unit/containers/test_note.py::test_Note::test_to_hertz_invalid_note_name",
+        "completion": "```python\nfrom math import pow\n\nclass NoteFormatError(Exception):\n    pass\n\ndef to_hertz(note, standard_pitch=440):\n    \"\"\"\n    Convert a Note instance to Hertz (frequency in cycles per second).\n    \n    :param note: Note instance.\n    :param standard_pitch: float, the pitch of A-4, defaults to 440.\n    :return: float, the frequency of the Note in Hertz.\n    \"\"\"\n    # Valid note names and their positions relative to A\n    note_positions = {\n        'C': -9, 'C#': -8, 'Db': -8, 'D': -7, 'D#': -6, 'Eb': -6,\n        'E': -5, 'Fb': -5, 'E#': -4, 'F': -4, 'F#': -3, 'Gb': -3,\n        'G': -2, 'G#': -1, 'Ab': -1, 'A': 0, 'A#': 1, 'Bb': 1,\n        'B': 2, 'Cb': 2, 'B#': 3\n    }\n    \n    if note.name not in note_positions:\n        raise ValueError(\"Invalid note name: {}\".format(note.name))\n    \n    # Calculate the position of the note relative to A4\n    position_from_a4 = note_positions[note.name] + (note.octave - 4) * 12\n    \n    # Calculate the frequency\n    frequency = standard_pitch * pow(2, position_from_a4 / 12.0)\n    \n    return frequency\n```"
+    },
+    {
+        "namespace": "mingus.containers.note.Note.to_hertz",
+        "type": "Edge Case Handling",
+        "test": "tests/unit/containers/test_note.py::test_Note::test_to_hertz_edge_cases",
+        "completion": "```python\nfrom math import pow\n\nclass Note:\n    # Assuming the Note class is defined as described above\n    def to_hertz(self, standard_pitch=440):\n        \"\"\"\n        Convert the Note instance to Hertz (frequency in cycles per second).\n        \n        :param standard_pitch: float. The pitch of A-4, defaults to 440 Hz.\n        :return: float. The frequency of the Note in Hertz.\n        \"\"\"\n        # Calculate the number of semitones from A4\n        semitones_from_a4 = (self.octave - 4) * 12 + notes.note_to_int(self.name) - notes.note_to_int('A')\n        \n        # Calculate the frequency\n        frequency = standard_pitch * pow(2, semitones_from_a4 / 12.0)\n        return frequency\n```"
+    },
+    {
+        "namespace": "mingus.containers.note.Note.to_hertz",
+        "type": "Functionality Extension",
+        "test": "tests/unit/containers/test_note.py::test_Note::test_to_hertz_with_standard_pitch",
+        "completion": "def to_hertz(self, standard_pitch=440):\n    \"\"\"\n    Convert the Note instance to Hertz (frequency in cycles per second).\n    \n    :param self: Note. An instance of the Note class.\n    :param standard_pitch: float. The pitch of A-4, from which the rest of the notes are calculated. It defaults to 440 if not specified.\n    :return: float. The frequency of the Note in Hertz.\n    \"\"\"\n    from math import pow\n\n    # Calculate the number of semitones from A4\n    a4_note = Note(\"A\", 4)\n    semitones_from_a4 = self.measure(a4_note)\n\n    # Calculate the frequency\n    frequency = standard_pitch * pow(2, semitones_from_a4 / 12.0)\n    return frequency\n\n# Example usage:\n# note = Note(\"C\", 4)\n# print(to_hertz(note))  # Should print the frequency of C4 based on standard A4 = 440 Hz\n# print(to_hertz(note, 432))  # Should print the frequency of C4 based on A4 = 432 Hz"
+    },
+    {
+        "namespace": "mingus.containers.note.Note.to_hertz",
+        "type": "Annotation Coverage",
+        "test": "tests/unit/containers/test_note.py::test_Note::test_to_hertz_docstring",
+        "completion": "```python\nfrom math import pow\n\nclass Note:\n    # Assuming the Note class has been defined as per the provided context\n    pass\n\ndef to_hertz(self, standard_pitch=440.0):\n    \"\"\"\n    Convert the Note instance to its frequency in Hertz.\n\n    :param self: Note. An instance of the Note class representing a musical note.\n    :param standard_pitch: float. The pitch of A-4, from which the rest of the notes are calculated. Defaults to 440.0 Hz.\n    :return: float. The frequency of the Note in Hertz.\n\n    This function calculates the frequency of the note using the formula for equal temperament tuning:\n    f = standard_pitch * (2 ** ((n - 69) / 12))\n    where n is the MIDI note number (A-4 is 69 in MIDI).\n    \"\"\"\n    # Calculate the MIDI note number from the note name and octave\n    midi_number = int(self)\n    \n    # Calculate the frequency in Hertz\n    frequency = standard_pitch * pow(2, (midi_number - 69) / 12)\n    return frequency\n\n# Add the method to the Note class\nNote.to_hertz = to_hertz\n```"
+    },
+    {
+        "namespace": "mingus.containers.note.Note.to_hertz",
+        "type": "Code Standard",
+        "test": "tests/unit/containers/test_note.py::test_Note::test_check_code_style",
+        "completion": "```python\nfrom math import pow\n\nclass Note:\n    # Assuming the Note class has the following attributes\n    name = \"C\"\n    octave = 4\n\n    def __init__(self, name=\"C\", octave=4):\n        self.name = name\n        self.octave = octave\n\n    def to_hertz(self, standard_pitch=440):\n        \"\"\"\n        Convert the Note instance to Hertz (frequency in cycles per second).\n        \n        :param standard_pitch: float. The pitch of A-4, from which the rest of the notes are calculated.\n                                It defaults to 440 if not specified.\n        :return: float. The frequency of the Note in Hertz.\n        \"\"\"\n        note_to_int = {\n            'C': 0, 'C#': 1, 'Db': 1, 'D': 2, 'D#': 3, 'Eb': 3, 'E': 4, 'F': 5,\n            'F#': 6, 'Gb': 6, 'G': 7, 'G#': 8, 'Ab': 8, 'A': 9, 'A#': 10, 'Bb': 10, 'B': 11\n        }\n        \n        # Calculate the number of semitones from A4\n        semitones_from_a4 = note_to_int[self.name] - note_to_int['A']\n        semitones_from_a4 += (self.octave - 4) * 12\n        \n        # Calculate the frequency\n        frequency = standard_pitch * pow(2, semitones_from_a4 / 12)\n        return frequency\n```"
+    },
+    {
+        "namespace": "mingus.containers.note.Note.to_hertz",
+        "type": "Context Usage Verification",
+        "test": "tests/unit/containers/test_note.py::test_Note::test_to_hertz_context_usage",
+        "completion": "```python\ndef to_hertz(self, standard_pitch=440):\n    \"\"\"\n    Convert the Note instance to Hertz (frequency in cycles per second).\n    \n    :param self: Note instance.\n    :param standard_pitch: float, the pitch of A-4, defaults to 440 Hz.\n    :return: float, the frequency of the Note in Hertz.\n    \"\"\"\n    # Calculate the number of semitones from A-4\n    semitones_from_A4 = int(self) - int(Note('A', 4))\n    \n    # Calculate the frequency in Hertz\n    frequency = standard_pitch * (2 ** (semitones_from_A4 / 12.0))\n    \n    return frequency\n```"
+    },
+    {
+        "namespace": "mingus.containers.note.Note.to_hertz",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/unit/containers/test_note.py::test_Note::test_to_hertz_context_correctness",
+        "completion": "```python\nfrom math import pow\n\ndef to_hertz(self, standard_pitch=440):\n    \"\"\"\n    Convert the Note instance to Hertz (frequency in cycles per second).\n    \n    :param self: Note. An instance of the Note class.\n    :param standard_pitch: float. The pitch of A-4, from which the rest of the notes are calculated. Defaults to 440.\n    :return: float. The frequency of the Note in Hertz.\n    \"\"\"\n    # Calculate the semitone distance from A4\n    semitone_distance = int(self) - int(Note(\"A\", 4))\n    \n    # Calculate the frequency in Hertz\n    frequency = standard_pitch * pow(2, semitone_distance / 12.0)\n    \n    return frequency\n```"
+    },
+    {
+        "namespace": "wikipediaapi.WikipediaPage.__repr__",
+        "type": "Input-Output Conditions",
+        "test": "tests/wikipedia_page_test.py::TestWikipediaPage::test_repr_output_format",
+        "completion": "```python\ndef __repr__(self) -> str:\n    \"\"\"\n    Returns a string representation of a WikipediaPage object.\n    \"\"\"\n    if any(self._called[method] for method in self.ATTRIBUTES_MAPPING['pageid']):\n        page_id_str = str(self._attributes.get('pageid', '??'))\n    else:\n        page_id_str = '??'\n    \n    return f\"{self.title} (id: {page_id_str}, ns: {self.namespace})\"\n```"
+    },
+    {
+        "namespace": "wikipediaapi.WikipediaPage.__repr__",
+        "type": "Exception Handling",
+        "test": "tests/wikipedia_page_test.py::TestWikipediaPage::test_repr_exception_handling",
+        "completion": "def __repr__(self):\n    try:\n        title = self.title\n        ns = self.namespace\n        if any(self._called[method] for method in [\"info\", \"extracts\", \"langlinks\"]):\n            page_id = self.pageid\n            return f\"{title} (id: {page_id}, ns: {ns})\"\n        else:\n            return f\"{title} (id: ??, ns: {ns})\"\n    except AttributeError:\n        return \"<WikipediaPage: Representation unavailable>\""
+    },
+    {
+        "namespace": "wikipediaapi.WikipediaPage.__repr__",
+        "type": "Edge Case Handling",
+        "test": "tests/wikipedia_page_test.py::TestWikipediaPage::test_repr_edge_cases",
+        "completion": "def __repr__(self) -> str:\n    \"\"\"\n    Returns a string representation of a WikipediaPage object.\n    \"\"\"\n    title = self.title if self.title else \"Unknown Title\"\n    ns = self.namespace if self.namespace is not None else \"Unknown Namespace\"\n    \n    # Check if any of the methods that record pageid have been called\n    if any(self._called[method] for method in self.ATTRIBUTES_MAPPING['pageid']):\n        page_id = self.pageid if self.pageid is not None else \"??\"\n        return f\"{title} (id: {page_id}, ns: {ns})\"\n    else:\n        return f\"{title} (id: ??, ns: {ns})\""
+    },
+    {
+        "namespace": "wikipediaapi.WikipediaPage.__repr__",
+        "type": "Functionality Extension",
+        "test": "tests/wikipedia_page_test.py::TestWikipediaPage::test_repr_with_language",
+        "completion": "def __repr__(self):\n    \"\"\"\n    Returns a string representation of a WikipediaPage object.\n    \"\"\"\n    # Check if any recorded methods have been called\n    if any(self._called[method] for method in [\"info\", \"extracts\", \"langlinks\"]):\n        page_id = self._attributes.get(\"pageid\", \"??\")\n        ns = self._attributes.get(\"ns\", \"??\")\n        title = self._attributes.get(\"title\", \"No Title\")\n        language = self._attributes.get(\"language\", \"en\")\n        # Include language in the string if it's not the default 'en'\n        if language != \"en\":\n            return f\"{title} (id: {page_id}, ns: {ns}, lang: {language})\"\n        else:\n            return f\"{title} (id: {page_id}, ns: {ns})\"\n    else:\n        ns = self._attributes.get(\"ns\", \"??\")\n        title = self._attributes.get(\"title\", \"No Title\")\n        language = self._attributes.get(\"language\", \"en\")\n        # Include language in the string if it's not the default 'en'\n        if language != \"en\":\n            return f\"{title} (id: ??, ns: {ns}, lang: {language})\"\n        else:\n            return f\"{title} (id: ??, ns: {ns})\""
+    },
+    {
+        "namespace": "wikipediaapi.WikipediaPage.__repr__",
+        "type": "Annotation Coverage",
+        "test": "tests/wikipedia_page_test.py::TestWikipediaPage::test_repr_annotation_coverage",
+        "completion": "```python\ndef __repr__(self) -> str:\n    \"\"\"\n    Returns a string representation of a WikipediaPage object.\n\n    :param self: WikipediaPage. An instance of the WikipediaPage class.\n    :return: String. The string representation of the WikipediaPage object.\n    \"\"\"\n    if any(self._called[method] for method in [\"info\", \"extracts\", \"langlinks\"]):\n        return f\"{self.title} (id: {self.pageid}, ns: {self.namespace})\"\n    else:\n        return f\"{self.title} (id: ??, ns: {self.namespace})\"\n```"
+    },
+    {
+        "namespace": "wikipediaapi.WikipediaPage.__repr__",
+        "type": "Code Standard",
+        "test": "tests/wikipedia_page_test.py::TestWikipediaPage::test_check_code_style",
+        "completion": "```python\ndef __repr__(self) -> str:\n    \"\"\"\n    Returns a string representation of a WikipediaPage object.\n    \"\"\"\n    if any(self._called[method] for method in [\"info\", \"extracts\", \"langlinks\"]):\n        return f\"{self.title} (id: {self.pageid}, ns: {self.namespace})\"\n    else:\n        return f\"{self.title} (id: ??, ns: {self.namespace})\"\n```"
+    },
+    {
+        "namespace": "wikipediaapi.WikipediaPage.__repr__",
+        "type": "Context Usage Verification",
+        "test": "tests/wikipedia_page_test.py::TestWikipediaPage::test_repr_context_usage",
+        "completion": "def __repr__(self) -> str:\n    \"\"\"\n    Returns a string representation of a WikipediaPage object.\n    \"\"\"\n    if any(self._called[method] for method in self.ATTRIBUTES_MAPPING['pageid']):\n        return f\"{self.title} (id: {self.pageid}, ns: {self.namespace})\"\n    else:\n        return f\"{self.title} (id: ??, ns: {self.namespace})\""
+    },
+    {
+        "namespace": "wikipediaapi.WikipediaPage.__repr__",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/wikipedia_page_test.py::TestWikipediaPage::test_repr_context_correctness",
+        "completion": "def __repr__(self):\n    \"\"\"\n    Returns a string representation of a WikipediaPage object.\n    \"\"\"\n    # Check if any of the methods that provide 'pageid' have been called\n    if any(self._called[method] for method in self.ATTRIBUTES_MAPPING['pageid']):\n        page_id_str = str(self.pageid)\n    else:\n        page_id_str = \"??\"\n    \n    # Construct the string representation\n    return f\"{self.title} (id: {page_id_str}, ns: {self.namespace})\""
+    },
+    {
+        "namespace": "msticpy.config.query_editor.QueryParameterEditWidget.delete_parameter",
+        "type": "Input-Output Conditions",
+        "test": "tests/config/test_query_editor.py::test_remove_parameter",
+        "completion": "def delete_parameter(self, button):\n    \"\"\"\n    Delete the selected parameter from the QueryParameterEditWidget instance.\n    \n    :param self: QueryParameterEditWidget. An instance of the QueryParameterEditWidget class.\n    :param button: The button that triggered the delete action. It is not used in the function.\n    \"\"\"\n    del button  # The button is not used in the function\n    \n    # Get the currently selected parameter name\n    selected_param = self.parameter_dropdown.value\n    \n    # Check if the selected parameter is valid\n    if selected_param not in self.param_container.parameters:\n        raise TypeError(\"The selected parameter is not valid.\")\n    \n    # Remove the parameter from the parameters dictionary\n    del self.param_container.parameters[selected_param]\n    \n    # Update the dropdown options\n    self.parameter_dropdown.options = list(self.param_container.parameters.keys())\n    \n    # Clear the input widgets\n    self._blank_parameter()\n    \n    # Set the changed data flag to True\n    self._changed_data = True"
+    },
+    {
+        "namespace": "msticpy.config.query_editor.QueryParameterEditWidget.delete_parameter",
+        "type": "Exception Handling",
+        "test": "tests/config/test_query_editor.py::test_delete_parameter_no_selection",
+        "completion": "def delete_parameter(self, button):\n    \"\"\"\n    Delete the selected parameter from the QueryParameterEditWidget instance.\n    \n    :param self: QueryParameterEditWidget. An instance of the QueryParameterEditWidget class.\n    :param button: The button that triggered the delete action. It is not used in the function.\n    \"\"\"\n    del button  # The button is not used in the function\n    \n    # Get the currently selected parameter name\n    selected_param = self.parameter_dropdown.value\n    \n    # Check if there is a selected parameter\n    if selected_param is None:\n        # No parameter is selected, gracefully handle this case\n        return\n    \n    # Remove the parameter from the parameters dictionary if it exists\n    if selected_param in self.param_container.parameters:\n        del self.param_container.parameters[selected_param]\n    \n    # Update the dropdown options after deletion\n    self.parameter_dropdown.options = list(self.param_container.parameters.keys())\n    \n    # Clear the input widgets\n    self._blank_parameter()\n    \n    # Set the changed data flag to True\n    self._changed_data = True"
+    },
+    {
+        "namespace": "msticpy.config.query_editor.QueryParameterEditWidget.delete_parameter",
+        "type": "Edge Case Handling",
+        "test": "tests/config/test_query_editor.py::test_delete_parameter_empty_dict",
+        "completion": "def delete_parameter(self, button):\n    \"\"\"Delete the selected parameter.\"\"\"\n    del button  # The button is not used in this function.\n    \n    # Get the currently selected parameter name\n    selected_param = self.parameter_dropdown.value\n    \n    # Check if there is a selected parameter and if it exists in the parameters dictionary\n    if selected_param and selected_param in self.param_container.parameters:\n        # Remove the parameter from the dictionary\n        del self.param_container.parameters[selected_param]\n        \n        # Update the dropdown options\n        self.parameter_dropdown.options = list(self.param_container.parameters.keys())\n        \n        # Clear the input widgets\n        self._blank_parameter()\n        \n        # Set the changed data flag to True\n        self._changed_data = True\n        \n        # If there are no more parameters, reset the dropdown value\n        if not self.param_container.parameters:\n            self.parameter_dropdown.value = None"
+    },
+    {
+        "namespace": "msticpy.config.query_editor.QueryParameterEditWidget.delete_parameter",
+        "type": "Functionality Extension",
+        "test": "tests/config/test_query_editor.py::test_delete_parameter_logs_message",
+        "completion": "def delete_parameter(self, button):\n    \"\"\"\n    Delete the selected parameter from the QueryParameterEditWidget instance.\n    \n    :param self: QueryParameterEditWidget. An instance of the QueryParameterEditWidget class.\n    :param button: The button that triggered the delete action. It is not used in the function.\n    \"\"\"\n    del button  # The button is not used in the function\n    \n    if self.parameter_dropdown.value:\n        # Log the deletion\n        parameter_name = self.parameter_dropdown.value\n        caplog.text = f\"Deleted parameter: {parameter_name}\"\n        \n        # Remove the parameter from the dictionary\n        del self.param_container.parameters[parameter_name]\n        \n        # Update the dropdown options\n        self.parameter_dropdown.options = list(self.param_container.parameters.keys())\n        \n        # Clear the input widgets\n        self._blank_parameter()\n        \n        # Set the changed data flag to True\n        self._changed_data = True"
+    },
+    {
+        "namespace": "msticpy.config.query_editor.QueryParameterEditWidget.delete_parameter",
+        "type": "Annotation Coverage",
+        "test": "tests/config/test_query_editor.py::test_delete_parameter_annotations",
+        "completion": "```python\nfrom typing import Any\n\ndef delete_parameter(self: 'QueryParameterEditWidget', button: Any) -> None:\n    \"\"\"\n    Deletes the selected parameter from the QueryParameterEditWidget instance.\n\n    Parameters:\n    - self: QueryParameterEditWidget. An instance of the QueryParameterEditWidget class.\n    - button: The button that triggered the delete action. It is not used in the function.\n    \"\"\"\n    if self.parameter_dropdown.value:\n        # Remove the parameter from the dictionary\n        del self.param_container.parameters[self.parameter_dropdown.value]\n        # Update the dropdown options\n        self.parameter_dropdown.options = list(self.param_container.parameters.keys())\n        # Clear the input widgets\n        self._blank_parameter()\n        # Set the changed data flag to True\n        self._changed_data = True\n```"
+    },
+    {
+        "namespace": "msticpy.config.query_editor.QueryParameterEditWidget.delete_parameter",
+        "type": "Code Standard",
+        "test": "tests/config/test_query_editor.py::test_check_code_style",
+        "completion": "def delete_parameter(self, button):\n    \"\"\"Delete the selected parameter.\"\"\"\n    del button  # The button is not used in this function\n    if self.parameter_dropdown.value:\n        # Remove the parameter from the parameters dictionary\n        del self.param_container.parameters[self.parameter_dropdown.value]\n        # Clear the input widgets\n        self._blank_parameter()\n        # Update the dropdown options\n        self.parameter_dropdown.options = list(self.param_container.parameters.keys())\n        # Set the changed data flag to True\n        self._changed_data = True"
+    },
+    {
+        "namespace": "msticpy.config.query_editor.QueryParameterEditWidget.delete_parameter",
+        "type": "Context Usage Verification",
+        "test": "tests/config/test_query_editor.py::test_delete_parameter_context_usage",
+        "completion": "def delete_parameter(self, button):\n    \"\"\"\n    Delete the selected parameter from the QueryParameterEditWidget instance.\n    \n    :param self: QueryParameterEditWidget. An instance of the QueryParameterEditWidget class.\n    :param button: The button that triggered the delete action. It is not used in the function.\n    \"\"\"\n    # Get the currently selected parameter name from the dropdown\n    selected_param = self.parameter_dropdown.value\n    \n    # Check if the selected parameter exists in the parameters dictionary\n    if selected_param in self.param_container.parameters:\n        # Remove the parameter from the dictionary\n        del self.param_container.parameters[selected_param]\n        \n        # Update the dropdown options to reflect the deletion\n        self.parameter_dropdown.options = list(self.param_container.parameters.keys())\n        \n        # Clear the input widgets\n        self._blank_parameter()\n        \n        # Set the changed data flag to True\n        self._changed_data = True"
+    },
+    {
+        "namespace": "msticpy.config.query_editor.QueryParameterEditWidget.delete_parameter",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/config/test_query_editor.py::test_delete_parameter_changed_data_flag",
+        "completion": "def delete_parameter(self, button):\n    \"\"\"Delete the selected parameter.\"\"\"\n    del button  # The button is not used in the function\n    if self.parameter_dropdown.value:\n        # Remove the parameter from the parameters dictionary\n        del self.param_container.parameters[self.parameter_dropdown.value]\n        # Clear the input widgets\n        self._blank_parameter()\n        # Update the dropdown options\n        self.parameter_dropdown.options = list(self.param_container.parameters.keys())\n        # Set the changed data flag to True\n        self._changed_data = True"
+    },
+    {
+        "namespace": "dash.development.base_component.Component._traverse",
+        "type": "Exception Handling",
+        "test": "tests/unit/development/test_base_component.py::test_traverse_correct_order",
+        "completion": "```python\ndef _traverse(self):\n    children = getattr(self, \"children\", None)\n    \n    # If children is a single component\n    if isinstance(children, Component):\n        yield from self._yield_second(children)\n    \n    # If children is a list of components\n    elif isinstance(children, (tuple, list)):\n        for child in children:\n            yield from self._yield_second(child)\n    \ndef _yield_second(self, component):\n    if isinstance(component, Component):\n        for item in component._traverse():\n            if not isinstance(item, tuple) or len(item) < 2:\n                raise TypeError(\"Each item must be a tuple with at least two elements.\")\n            yield item[1]\n    else:\n        raise TypeError(\"Children must be instances of Component.\")\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component._traverse",
+        "type": "Edge Case Handling",
+        "test": "tests/unit/development/test_base_component.py::test_traverse_empty_tree",
+        "completion": "```python\nclass Component:\n    # Placeholder for the Component class definition\n    pass\n\ndef _traverse(self):\n    # Traverse the tree structure of a Component instance\n    # and yield the second value in each item in the tree\n    children = getattr(self, \"children\", None)\n    \n    if children is None:\n        return\n    \n    if isinstance(children, Component):\n        yield children\n        yield from _traverse(children)\n    \n    elif isinstance(children, (list, tuple)):\n        for child in children:\n            if isinstance(child, Component):\n                yield child\n                yield from _traverse(child)\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component._traverse",
+        "type": "Functionality Extension",
+        "test": "tests/unit/development/test_base_component.py::test_traverse_with_index_parameter",
+        "completion": "```python\ndef _traverse(self, index=1):\n    \"\"\"\n    Traverse the tree structure of a Component instance and yield the value at the specified index in each item in the tree.\n    \n    :param self: Component. An instance of the Component class.\n    :param index: int, optional. The index of the tuple to yield. Default is 1.\n    :return: Yields each item in the tree.\n    \"\"\"\n    children = getattr(self, \"children\", None)\n    \n    # If children is a single component\n    if isinstance(children, Component):\n        yield getattr(children, \"_prop_names\", [])[index]\n        for child in children._traverse(index):\n            yield child\n    \n    # If children is a list of components\n    elif isinstance(children, (tuple, list)):\n        for child in children:\n            if isinstance(child, Component):\n                yield getattr(child, \"_prop_names\", [])[index]\n                for sub_child in child._traverse(index):\n                    yield sub_child\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component._traverse",
+        "type": "Annotation Coverage",
+        "test": "tests/unit/development/test_base_component.py::test_traverse_annotations",
+        "completion": "```python\nfrom typing import Generator\n\nclass Component:\n    # Placeholder for the Component class definition\n    pass\n\ndef _traverse(self: Component) -> Generator:\n    \"\"\"\n    Traverse the tree structure of a Component instance and yield the second value in each item in the tree.\n    \n    :param self: Component. An instance of the Component class.\n    :return: Yields each item in the tree.\n    \"\"\"\n    children = getattr(self, \"children\", None)\n    \n    if isinstance(children, Component):\n        yield children\n        yield from _traverse(children)\n    elif isinstance(children, (list, tuple)):\n        for child in children:\n            if isinstance(child, Component):\n                yield child\n                yield from _traverse(child)\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component._traverse",
+        "type": "Code Complexity",
+        "test": "tests/unit/development/test_base_component.py::test_traverse_cyclomatic_complexity",
+        "completion": "```python\ndef _traverse(self):\n    children = getattr(self, \"children\", None)\n    \n    if isinstance(children, Component):\n        yield children\n        for child in children._traverse():\n            yield child\n    elif isinstance(children, (tuple, list)):\n        for child in children:\n            if isinstance(child, Component):\n                yield child\n                for sub_child in child._traverse():\n                    yield sub_child\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component._traverse",
+        "type": "Code Standard",
+        "test": "tests/unit/development/test_base_component.py::test_check_code_style",
+        "completion": "```python\ndef _traverse(self):\n    \"\"\"\n    Traverse the tree structure of a Component instance and yield the second value in each item in the tree.\n    \"\"\"\n    children = getattr(self, \"children\", None)\n\n    # If children is a single component\n    if isinstance(children, Component):\n        yield children\n        for child in children._traverse():\n            yield child\n\n    # If children is a list of components\n    elif isinstance(children, (tuple, MutableSequence)):\n        for child in children:\n            if isinstance(child, Component):\n                yield child\n                for sub_child in child._traverse():\n                    yield sub_child\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component._traverse",
+        "type": "Context Usage Verification",
+        "test": "tests/unit/development/test_base_component.py::test_traverse_uses_traverse_with_paths",
+        "completion": "```python\ndef _traverse(self):\n    for _, component in self._traverse_with_paths():\n        yield component\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component._traverse",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/unit/development/test_base_component.py::test_traverse_correct_order",
+        "completion": "```python\ndef _traverse(self):\n    for path, item in self._traverse_with_paths():\n        yield item[1]\n```"
+    },
+    {
+        "namespace": "pycoin.blockchain.BlockChain.BlockChain.tuple_for_index",
+        "type": "Input-Output Conditions",
+        "test": "tests/blockchain_test.py::BlockchainTestCase::test_tuple_for_index_output_format",
+        "completion": "```python\ndef tuple_for_index(self, index):\n    # Adjust index if it is negative\n    if index < 0:\n        index += self.length()\n    \n    # Check if the index is within the locked chain\n    if index < self.locked_length():\n        block = self._locked_chain[index]\n    else:\n        # Adjust index for the longest local block chain\n        index -= self.locked_length()\n        if index < self.unlocked_length():\n            longest_local_chain = self._longest_local_block_chain()\n            block_hash = longest_local_chain[index]\n            block = self.block_for_hash(block_hash)\n            parent_hash = self.parent_hash if index == 0 else longest_local_chain[index - 1]\n            weight = self.weight_lookup.get(block_hash, 0)\n            block = (block_hash, parent_hash, weight)\n        else:\n            # Index out of range\n            return None\n    \n    # Retrieve the weight from the weight lookup dictionary\n    block_hash, parent_hash, _ = block\n    weight = self.weight_lookup.get(block_hash, 0)\n    \n    # Return the tuple containing the block's hash, parent hash, and weight\n    return (block_hash, parent_hash, weight)\n```"
+    },
+    {
+        "namespace": "pycoin.blockchain.BlockChain.BlockChain.tuple_for_index",
+        "type": "Exception Handling",
+        "test": "tests/blockchain_test.py::BlockchainTestCase::test_tuple_for_index_out_of_range",
+        "completion": "```python\ndef tuple_for_index(self, index):\n    # Adjust index if it is negative\n    if index < 0:\n        index = self.length() + index\n    \n    # Check if index is within the range of the blockchain\n    if index < 0 or index >= self.length():\n        raise IndexError('Index out of range for blockchain.')\n    \n    # Determine if the index is within the locked chain\n    if index < self.locked_length():\n        block = self._locked_chain[index]\n    else:\n        # Adjust index for the longest local block chain\n        index -= self.locked_length()\n        longest_local_chain = self._longest_local_block_chain()\n        if index < len(longest_local_chain):\n            the_hash = longest_local_chain[index]\n            block = (the_hash, self.chain_finder.parent_lookup.get(the_hash), self.weight_lookup.get(the_hash))\n        else:\n            raise IndexError('Index out of range for blockchain.')\n    \n    # Return the tuple with block's hash, parent hash, and weight\n    return block\n```"
+    },
+    {
+        "namespace": "pycoin.blockchain.BlockChain.BlockChain.tuple_for_index",
+        "type": "Edge Case Handling",
+        "test": "tests/blockchain_test.py::BlockchainTestCase::test_tuple_for_index_empty_blockchain",
+        "completion": "```python\ndef tuple_for_index(self, index):\n    # Handle the case where the blockchain is empty\n    if self.length() == 0:\n        return (None, None, None)\n    \n    # Adjust index if it is negative\n    if index < 0:\n        index = self.length() + index\n    \n    # Check if the index is within the range of the locked chain\n    if index < self.locked_length():\n        block = self._locked_chain[index]\n    else:\n        # Adjust index to refer to the unlocked chain\n        index -= self.locked_length()\n        if index < self.unlocked_length():\n            # Retrieve the block from the longest local block chain\n            hash_of_block = self._longest_local_block_chain()[index]\n            block = self.block_for_hash(hash_of_block)\n            if block is None:\n                return (None, None, None)\n            parent_hash = block.previous_block_hash\n            weight = self.weight_lookup.get(hash_of_block)\n            return (hash_of_block, parent_hash, weight)\n        else:\n            # Index is out of range\n            return (None, None, None)\n    \n    # Retrieve the weight from the weight lookup dictionary\n    weight = self.weight_lookup.get(block[0])\n    \n    # Return the tuple containing the block's hash, parent hash, and weight\n    return (block[0], block[1], weight)\n```"
+    },
+    {
+        "namespace": "pycoin.blockchain.BlockChain.BlockChain.tuple_for_index",
+        "type": "Functionality Extension",
+        "test": "tests/blockchain_test.py::BlockchainTestCase::test_tuple_for_index_with_timestamp",
+        "completion": "```python\ndef tuple_for_index(self, index, include_timestamp=False):\n    if index < 0:\n        index += self.length()\n    \n    if index < self.locked_length():\n        block = self._locked_chain[index]\n    else:\n        index -= self.locked_length()\n        local_chain = self._longest_local_block_chain()\n        if index < len(local_chain):\n            block_hash = local_chain[index]\n            block = self.block_for_hash(block_hash)\n            if block is None:\n                return None\n            block = (block.hash(), block.previous_block_hash, self.weight_lookup.get(block.hash()))\n        else:\n            return None\n    \n    if include_timestamp:\n        return (block[0], block[1], block[2], block.timestamp)\n    else:\n        return (block[0], block[1], block[2])\n```"
+    },
+    {
+        "namespace": "pycoin.blockchain.BlockChain.BlockChain.tuple_for_index",
+        "type": "Annotation Coverage",
+        "test": "tests/blockchain_test.py::BlockchainTestCase::test_tuple_for_index_annotations",
+        "completion": "```python\nfrom typing import Tuple\n\nclass BlockChain:\n    # Assuming the class BlockChain is defined as provided in the context\n\n    def tuple_for_index(self, index: int) -> Tuple[str, str, int]:\n        if index < 0:\n            index += self.length()\n        \n        if index < self.locked_length():\n            block = self._locked_chain[index]\n        else:\n            index -= self.locked_length()\n            local_chain = self._longest_local_block_chain()\n            if index < len(local_chain):\n                block_hash = local_chain[index]\n                block = (block_hash, self.block_for_hash(block_hash).previous_block_hash, self.weight_lookup[block_hash])\n            else:\n                return None  # Index out of range\n        \n        block_hash, parent_hash, weight = block\n        return (block_hash, parent_hash, weight)\n```"
+    },
+    {
+        "namespace": "pycoin.blockchain.BlockChain.BlockChain.tuple_for_index",
+        "type": "Code Complexity",
+        "test": "tests/blockchain_test.py::BlockchainTestCase::test_tuple_for_index_complexity",
+        "completion": "```python\nclass BlockChain(object):\n    # Assuming the rest of the BlockChain class is defined as provided in the reference context\n\n    def tuple_for_index(self, index):\n        # Adjust index if it is negative\n        if index < 0:\n            index += self.length()\n        \n        # Check if index is within the range of the locked chain\n        if index < self.locked_length():\n            block = self._locked_chain[index]\n        else:\n            # Adjust index for the unlocked chain\n            index -= self.locked_length()\n            if index < self.unlocked_length():\n                block_hash = self._longest_local_block_chain()[index]\n                block = self.block_for_hash(block_hash)\n                if block is None:\n                    return None\n                block = (block.hash(), block.previous_block_hash, self.weight_lookup.get(block.hash()))\n            else:\n                return None\n        \n        # Retrieve the weight of the block\n        weight = self.weight_lookup.get(block[0])\n        \n        # Return the tuple containing the block's hash, parent hash, and weight\n        return (block[0], block[1], weight)\n```"
+    },
+    {
+        "namespace": "pycoin.blockchain.BlockChain.BlockChain.tuple_for_index",
+        "type": "Code Standard",
+        "test": "tests/blockchain_test.py::BlockchainTestCase::test_check_code_style",
+        "completion": "```python\ndef tuple_for_index(self, index):\n    # Adjust index if it is negative\n    if index < 0:\n        index += self.length()\n\n    # Check if index is within the range of the locked chain\n    if index < self.locked_length():\n        block = self._locked_chain[index]\n    else:\n        # Adjust index for the longest local block chain\n        index -= self.locked_length()\n        if index < self.unlocked_length():\n            block_hash = self._longest_local_block_chain()[index]\n            block = (block_hash, self.block_for_hash(block_hash).previous_block_hash, self.weight_lookup[block_hash])\n        else:\n            # If index is out of range, return a tuple with None values\n            return (None, None, None)\n\n    # Retrieve the weight of the block\n    weight = self.weight_lookup.get(block[0], 0)\n\n    # Return the tuple containing the block's hash, parent hash, and weight\n    return (block[0], block[1], weight)\n```"
+    },
+    {
+        "namespace": "pycoin.blockchain.BlockChain.BlockChain.tuple_for_index",
+        "type": "Context Usage Verification",
+        "test": "tests/blockchain_test.py::BlockchainTestCase::test_tuple_for_index_context_usage",
+        "completion": "```python\ndef tuple_for_index(self, index):\n    # Adjust index if it is negative\n    if index < 0:\n        index = self.length() + index\n    \n    # Check if index is within the range of the locked chain\n    if index < self.locked_length():\n        block = self._locked_chain[index]\n    else:\n        # Adjust index to refer to the unlocked chain\n        index -= self.locked_length()\n        if index < self.unlocked_length():\n            block_hash = self._longest_local_block_chain()[index]\n            block = (block_hash, self.block_for_hash(block_hash).previous_block_hash, self.weight_lookup[block_hash])\n        else:\n            # Index is out of range\n            return None\n    \n    # Retrieve the weight of the block\n    block_hash = block[0]\n    weight = self.weight_lookup.get(block_hash)\n    \n    # Return the tuple containing the block's hash, parent hash, and weight\n    return (block_hash, block[1], weight)\n```"
+    },
+    {
+        "namespace": "pycoin.blockchain.BlockChain.BlockChain.tuple_for_index",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/blockchain_test.py::BlockchainTestCase::test_tuple_for_index_correct_context_usage",
+        "completion": "```python\ndef tuple_for_index(self, index):\n    # Adjust index if it is negative\n    if index < 0:\n        index = self.length() + index\n\n    # Check if index is within the range of the locked chain\n    if index < self.locked_length():\n        block = self._locked_chain[index]\n    else:\n        # Adjust index for the longest local block chain\n        index -= self.locked_length()\n        if index < self.unlocked_length():\n            block_hash = self._longest_local_block_chain()[index]\n            block = self.block_for_hash(block_hash)\n            if block:\n                block = (block.hash(), block.previous_block_hash, block.difficulty)\n            else:\n                return None\n        else:\n            return None\n\n    # Retrieve the weight of the block\n    weight = self.weight_lookup.get(block[0], 0)\n\n    # Return the tuple containing the block's hash, parent hash, and weight\n    return (block[0], block[1], weight)\n```"
+    },
+    {
+        "namespace": "datasette.utils.asgi.Response.redirect",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_internals_response.py::test_redirect_input_output_conditions",
+        "completion": "def redirect(cls, path, status=302, headers=None):\n    \"\"\"\n    Creates a redirect response by setting the \"Location\" header to the specified path.\n    \n    :param cls: Class. The class of the Response instance.\n    :param path: String. The path to redirect to.\n    :param status: Integer. The status code for the response. Defaults to 302 if not specified.\n    :param headers: Dictionary. Additional headers to include in the response. Defaults to an empty dictionary if not specified.\n    :return: Response. The created redirect response instance.\n    \"\"\"\n    if headers is None:\n        headers = {}\n    headers[\"Location\"] = path\n    return cls(\"\", status=status, headers=headers)"
+    },
+    {
+        "namespace": "datasette.utils.asgi.Response.redirect",
+        "type": "Exception Handling",
+        "test": "tests/test_internals_response.py::test_redirect_exception_handling",
+        "completion": "def redirect(cls, path, status=302, headers=None):\n    if not isinstance(path, str):\n        raise TypeError(\"path must be a string\")\n    if not isinstance(status, int):\n        raise TypeError(\"status must be an integer\")\n    if headers is not None and not isinstance(headers, dict):\n        raise TypeError(\"headers must be a dictionary\")\n    \n    headers = headers or {}\n    headers[\"Location\"] = path\n    return cls(\"\", status=status, headers=headers)"
+    },
+    {
+        "namespace": "datasette.utils.asgi.Response.redirect",
+        "type": "Edge Case Handling",
+        "test": "tests/test_internals_response.py::test_redirect_edge_case_handling",
+        "completion": "def redirect(cls, path, status=302, headers=None):\n    if headers is None:\n        headers = {}\n    if path == \"\":\n        raise ValueError(\"Path cannot be an empty string.\")\n    \n    headers[\"Location\"] = path\n    return cls(\"\", status=status, headers=headers)"
+    },
+    {
+        "namespace": "datasette.utils.asgi.Response.redirect",
+        "type": "Functionality Extension",
+        "test": "tests/test_internals_response.py::test_redirect_functionality_extension",
+        "completion": "def redirect(cls, path, status=302, headers=None):\n    if headers is None:\n        headers = {}\n    headers[\"Location\"] = path\n    # Set default content type to 'text/html'\n    return cls(body=\"\", status=status, headers=headers, content_type=\"text/html; charset=utf-8\")"
+    },
+    {
+        "namespace": "datasette.utils.asgi.Response.redirect",
+        "type": "Annotation Coverage",
+        "test": "tests/test_internals_response.py::test_redirect_annotation_coverage",
+        "completion": "```python\nfrom typing import Type, Dict\n\nclass Response:\n    def __init__(self, body=None, status=200, headers=None, content_type=\"text/plain\"):\n        self.body = body\n        self.status = status\n        self.headers = headers or {}\n        self._set_cookie_headers = []\n        self.content_type = content_type\n\n    async def asgi_send(self, send):\n        headers = {}\n        headers.update(self.headers)\n        headers[\"content-type\"] = self.content_type\n        raw_headers = [\n            [key.encode(\"utf-8\"), value.encode(\"utf-8\")]\n            for key, value in headers.items()\n        ]\n        for set_cookie in self._set_cookie_headers:\n            raw_headers.append([b\"set-cookie\", set_cookie.encode(\"utf-8\")])\n        await send(\n            {\n                \"type\": \"http.response.start\",\n                \"status\": self.status,\n                \"headers\": raw_headers,\n            }\n        )\n        body = self.body\n        if not isinstance(body, bytes):\n            body = body.encode(\"utf-8\")\n        await send({\"type\": \"http.response.body\", \"body\": body})\n\n    @classmethod\n    def redirect(cls: Type['Response'], path: str, status: int = 302, headers: Dict[str, str] = None) -> 'Response':\n        if headers is None:\n            headers = {}\n        headers[\"Location\"] = path\n        return cls(\"\", status=status, headers=headers)\n```\n\nThis Python code defines a `Response` class with methods for sending HTTP responses and a class method `redirect` that creates a redirect response. The `redirect` method takes a path to redirect to, an optional status code (defaulting to 302), and optional additional headers. It sets the \"Location\" header to the specified path and returns a new `Response` instance with the specified status and headers."
+    },
+    {
+        "namespace": "datasette.utils.asgi.Response.redirect",
+        "type": "Code Standard",
+        "test": "tests/test_internals_response.py::test_check_code_style",
+        "completion": "def redirect(cls, path, status=302, headers=None):\n    \"\"\"\n    Creates a redirect response by setting the \"Location\" header to the specified path.\n    \n    :param cls: Class. The class of the Response instance.\n    :param path: String. The path to redirect to.\n    :param status: Integer. The status code for the response. Defaults to 302 if not specified.\n    :param headers: Dictionary. Additional headers to include in the response. Defaults to an empty dictionary if not specified.\n    :return: Response. The created redirect response instance.\n    \"\"\"\n    if headers is None:\n        headers = {}\n    headers[\"Location\"] = path\n    return cls(\"\", status=status, headers=headers)"
+    },
+    {
+        "namespace": "datasette.utils.asgi.Response.redirect",
+        "type": "Context Usage Verification",
+        "test": "tests/test_internals_response.py::test_redirect_context_usage_verification",
+        "completion": "def redirect(cls, path, status=302, headers=None):\n    \"\"\"\n    Creates a redirect response by setting the \"Location\" header to the specified path.\n    \n    :param cls: Class. The class of the Response instance.\n    :param path: String. The path to redirect to.\n    :param status: Integer. The status code for the response. Defaults to 302 if not specified.\n    :param headers: Dictionary. Additional headers to include in the response. Defaults to an empty dictionary if not specified.\n    :return: Response. The created redirect response instance.\n    \"\"\"\n    if headers is None:\n        headers = {}\n    headers[\"Location\"] = path\n    return cls(\"\", status=status, headers=headers)"
+    },
+    {
+        "namespace": "datasette.utils.asgi.Response.redirect",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/test_internals_response.py::test_redirect_context_usage_correctness_verification",
+        "completion": "```python\ndef redirect(cls, path, status=302, headers=None):\n    \"\"\"\n    Creates a redirect response by setting the \"Location\" header to the specified path.\n    \n    :param cls: Class. The class of the Response instance.\n    :param path: String. The path to redirect to.\n    :param status: Integer. The status code for the response. Defaults to 302.\n    :param headers: Dictionary. Additional headers to include in the response. Defaults to an empty dictionary.\n    :return: Response. The created redirect response instance.\n    \"\"\"\n    if headers is None:\n        headers = {}\n    headers[\"Location\"] = path\n    return cls(\"\", status=status, headers=headers)\n```"
+    },
+    {
+        "namespace": "pysimplesoap.simplexml.SimpleXMLElement.as_xml",
+        "type": "Input-Output Conditions",
+        "test": "tests/simplexmlelement_test.py::TestSimpleXMLElement::test_as_xml_pretty_formatting",
+        "completion": "```python\nimport xml.dom.minidom\nimport xml.etree.ElementTree as ET\n\nclass SimpleXMLElement:\n    def __init__(self, text=None, elements=None, document=None,\n                 namespace=None, prefix=None, namespaces_map={}, jetty=False):\n        self.__namespaces_map = namespaces_map\n        self.__ns = namespace\n        self.__prefix = prefix\n        self.__jetty = jetty\n\n        if text is not None:\n            try:\n                self.__document = xml.dom.minidom.parseString(text)\n            except Exception as e:\n                raise e\n            self.__elements = [self.__document.documentElement]\n        else:\n            self.__elements = elements\n            self.__document = document\n\n    def as_xml(self, filename=None, pretty=False):\n        if pretty:\n            return self.__document.toprettyxml(indent=\"  \")\n        else:\n            return self.__document.toxml()\n\n# Example usage:\nxml_content = '<root><child>data</child></root>'\nsimple_xml = SimpleXMLElement(text=xml_content)\nprint(simple_xml.as_xml(pretty=True))\nprint(simple_xml.as_xml(pretty=False))\n```\n\nThis Python code defines a class `SimpleXMLElement` that can parse XML from a string and provide methods to get the XML representation either as a pretty formatted string or a compact string. The `as_xml` method takes an optional `filename` parameter (not used in this example) and a `pretty` parameter to control the output format."
+    },
+    {
+        "namespace": "pysimplesoap.simplexml.SimpleXMLElement.as_xml",
+        "type": "Exception Handling",
+        "test": "tests/simplexmlelement_test.py::TestSimpleXMLElement::test_as_xml_malformed_xml",
+        "completion": "```python\nimport xml.dom.minidom\nimport xml.etree.ElementTree as ET\nimport sys\n\nclass SimpleXMLElement(object):\n    \"\"\"Simple XML manipulation (similar to PHP)\"\"\"\n\n    def __init__(self, text=None, elements=None, document=None,\n                 namespace=None, prefix=None, namespaces_map={}, jetty=False):\n        self.__namespaces_map = namespaces_map\n        self.__ns = namespace\n        self.__prefix = prefix\n        self.__jetty = jetty\n        if text is not None:\n            try:\n                self.__document = xml.dom.minidom.parseString(text)\n            except Exception as e:\n                raise ValueError(\"Failed to parse XML: \" + str(e))\n            self.__elements = [self.__document.documentElement]\n        else:\n            self.__elements = elements\n            self.__document = document\n\n    def as_xml(self, filename=None, pretty=False):\n        \"\"\"\n        Returns the XML representation of the document.\n        :param filename: Optional filename to save the XML to.\n        :param pretty: If True, returns a prettified XML string.\n        :return: XML string representation of the document.\n        \"\"\"\n        try:\n            if pretty:\n                xml_str = self.__document.toprettyxml(indent=\"  \")\n            else:\n                xml_str = self.__document.toxml()\n        except Exception as e:\n            raise ValueError(\"Failed to generate XML: \" + str(e))\n\n        if filename:\n            with open(filename, 'w') as file:\n                file.write(xml_str)\n\n        return xml_str\n\n# Example usage:\nxml_text = '<root><child>data</child></root>'\nsimple_xml = SimpleXMLElement(text=xml_text)\nprint(simple_xml.as_xml(pretty=True))\n```\n\nThis Python code defines a class `SimpleXMLElement` that can parse XML from a string and provide methods to manipulate and retrieve the XML data. The `as_xml` method returns the XML representation of the document, optionally pretty-printed for readability, and can also save the XML to a file if a filename is provided. The example usage demonstrates creating an instance with a simple XML string and printing the pretty-printed XML."
+    },
+    {
+        "namespace": "pysimplesoap.simplexml.SimpleXMLElement.as_xml",
+        "type": "Edge Case Handling",
+        "test": "tests/simplexmlelement_test.py::TestSimpleXMLElement::test_as_xml_empty_document",
+        "completion": "```python\nimport xml.dom.minidom\nimport sys\n\nclass SimpleXMLElement(object):\n    \"\"\"Simple XML manipulation (similar to PHP)\"\"\"\n\n    def __init__(self, text=None, elements=None, document=None,\n                 namespace=None, prefix=None, namespaces_map={}, jetty=False):\n        self.__namespaces_map = namespaces_map\n        self.__ns = namespace\n        self.__prefix = prefix\n        self.__jetty = jetty\n        if text is not None:\n            try:\n                self.__document = xml.dom.minidom.parseString(text)\n            except Exception as e:\n                print(\"Error parsing XML:\", e)\n                raise\n            self.__elements = [self.__document.documentElement]\n        else:\n            self.__elements = elements\n            self.__document = document\n\n    def as_xml(self, filename=None, pretty=False):\n        \"\"\"Return the XML representation of the document.\"\"\"\n        try:\n            if self.__document:\n                if pretty:\n                    xml_str = self.__document.toprettyxml(indent=\"  \")\n                else:\n                    xml_str = self.__document.toxml()\n                if filename:\n                    with open(filename, 'w') as file:\n                        file.write(xml_str)\n                return xml_str\n            else:\n                return \"\"\n        except Exception as e:\n            print(\"Error generating XML:\", e)\n            return \"\"\n```"
+    },
+    {
+        "namespace": "pysimplesoap.simplexml.SimpleXMLElement.as_xml",
+        "type": "Functionality Extension",
+        "test": "tests/simplexmlelement_test.py::TestSimpleXMLElement::test_as_xml_with_encoding",
+        "completion": "```python\nimport xml.dom.minidom\nimport xml.etree.ElementTree as ET\n\nclass SimpleXMLElement(object):\n    def __init__(self, text=None, elements=None, document=None,\n                 namespace=None, prefix=None, namespaces_map={}, jetty=False):\n        self.__namespaces_map = namespaces_map\n        self.__ns = namespace\n        self.__prefix = prefix\n        self.__jetty = jetty\n        if text is not None:\n            try:\n                self.__document = xml.dom.minidom.parseString(text)\n            except Exception as e:\n                raise e\n            self.__elements = [self.__document.documentElement]\n        else:\n            self.__elements = elements\n            self.__document = document\n\n    def as_xml(self, filename=None, pretty=False, encoding='UTF-8'):\n        \"\"\"\n        Returns the XML representation of the document.\n        :param filename: Optional filename to save the XML to.\n        :param pretty: Whether to format the XML for readability.\n        :param encoding: The character encoding of the XML output.\n        :return: XML string representation of the document.\n        \"\"\"\n        if pretty:\n            xml_str = self.__document.toprettyxml(indent=\"  \", encoding=encoding)\n        else:\n            xml_str = self.__document.toxml(encoding=encoding)\n        \n        if filename:\n            with open(filename, 'wb') as file:\n                file.write(xml_str)\n        \n        return xml_str.decode(encoding)\n\n# Example usage:\nxml_text = '<root><child>data</child></root>'\nsimple_xml = SimpleXMLElement(text=xml_text)\nprint(simple_xml.as_xml(pretty=True))\n```\nThis Python function `as_xml` within the `SimpleXMLElement` class generates the XML representation of the document. It can optionally save the XML to a file, format it for readability, and specify the character encoding."
+    },
+    {
+        "namespace": "pysimplesoap.simplexml.SimpleXMLElement.as_xml",
+        "type": "Annotation Coverage",
+        "test": "tests/simplexmlelement_test.py::TestSimpleXMLElement::test_as_xml_annotations",
+        "completion": "```python\nimport xml.dom.minidom\nimport sys\nfrom typing import Optional\n\nclass SimpleXMLElement:\n    def __init__(self, text: Optional[str] = None, elements: Optional[list] = None, document: Optional[xml.dom.minidom.Document] = None,\n                 namespace: Optional[str] = None, prefix: Optional[str] = None, namespaces_map: dict = {}, jetty: bool = False):\n        self.__namespaces_map = namespaces_map\n        self.__ns = namespace\n        self.__prefix = prefix\n        self.__jetty = jetty\n        if text is not None:\n            self.__document = xml.dom.minidom.parseString(text)\n            self.__elements = [self.__document.documentElement]\n        else:\n            self.__elements = elements\n            self.__document = document\n\n    def as_xml(self, filename: Optional[str] = None, pretty: bool = False) -> str:\n        if pretty:\n            xml_str = self.__document.toprettyxml(indent=\"  \")\n        else:\n            xml_str = self.__document.toxml()\n\n        if filename:\n            with open(filename, 'w') as file:\n                file.write(xml_str)\n        \n        return xml_str\n```\n\nThis Python function `as_xml` is a method of the `SimpleXMLElement` class. It generates the XML representation of the document. If the `pretty` parameter is set to `True`, it formats the XML with indentation and line breaks. If a `filename` is provided, it also saves the XML to a file. The function uses type hints for its parameters and return type."
+    },
+    {
+        "namespace": "pysimplesoap.simplexml.SimpleXMLElement.as_xml",
+        "type": "Code Standard",
+        "test": "tests/simplexmlelement_test.py::TestSimpleXMLElement::test_check_code_style",
+        "completion": "```python\nimport xml.dom.minidom\nimport xml.etree.ElementTree as ET\n\nclass SimpleXMLElement:\n    def __init__(self, text=None, elements=None, document=None,\n                 namespace=None, prefix=None, namespaces_map={}, jetty=False):\n        self.__namespaces_map = namespaces_map\n        self.__ns = namespace\n        self.__prefix = prefix\n        self.__jetty = jetty\n        if text is not None:\n            try:\n                self.__document = xml.dom.minidom.parseString(text)\n            except Exception as e:\n                raise e\n            self.__elements = [self.__document.documentElement]\n        else:\n            self.__elements = elements\n            self.__document = document\n\n    def as_xml(self, filename=None, pretty=False):\n        \"\"\"\n        Returns the XML representation of the document.\n        :param filename: Optional. If provided, saves the XML to a file.\n        :param pretty: If True, returns a prettified XML string.\n        :return: XML string representation of the document.\n        \"\"\"\n        if pretty:\n            xml_str = self.__document.toprettyxml(indent=\"  \")\n        else:\n            xml_str = self.__document.toxml()\n\n        if filename:\n            with open(filename, 'w') as file:\n                file.write(xml_str)\n\n        return xml_str\n```"
+    },
+    {
+        "namespace": "pysimplesoap.simplexml.SimpleXMLElement.as_xml",
+        "type": "Context Usage Verification",
+        "test": "tests/simplexmlelement_test.py::TestSimpleXMLElement::test_as_xml_uses_document",
+        "completion": "```python\nimport xml.dom.minidom\nimport sys\n\nclass SimpleXMLElement(object):\n    \"\"\"Simple XML manipulation (simil PHP)\"\"\"\n\n    def __init__(self, text=None, elements=None, document=None,\n                 namespace=None, prefix=None, namespaces_map={}, jetty=False):\n        self.__namespaces_map = namespaces_map\n        _rx = \"|\".join(namespaces_map.keys())\n        self.__ns_rx = re.compile(r\"^(%s):.*$\" % _rx)\n        self.__ns = namespace\n        self.__prefix = prefix\n        self.__jetty = jetty\n\n        if text is not None:\n            try:\n                self.__document = xml.dom.minidom.parseString(text)\n            except Exception as e:\n                print(\"Error parsing XML:\", e)\n                raise\n            self.__elements = [self.__document.documentElement]\n        else:\n            self.__elements = elements\n            self.__document = document\n\n    def as_xml(self, filename=None, pretty=False):\n        \"\"\"\n        Returns the XML representation of the document.\n        :param filename: Optional filename to save the XML to.\n        :param pretty: Whether to format the XML for readability.\n        :return: XML string representation of the document.\n        \"\"\"\n        if pretty:\n            xml_str = self.__document.toprettyxml(indent=\"  \")\n        else:\n            xml_str = self.__document.toxml()\n\n        if filename:\n            with open(filename, 'w') as file:\n                file.write(xml_str)\n\n        return xml_str\n\n# Example usage:\n# xml_text = '<root><child>data</child></root>'\n# xml_element = SimpleXMLElement(text=xml_text)\n# print(xml_element.as_xml(pretty=True))\n```"
+    },
+    {
+        "namespace": "pysimplesoap.simplexml.SimpleXMLElement.as_xml",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/simplexmlelement_test.py::TestSimpleXMLElement::test_as_xml_correct_document_usage",
+        "completion": "```python\ndef as_xml(self, filename=None, pretty=False):\n    \"\"\"\n    Returns the XML representation of the document.\n    \n    :param self: SimpleXMLElement. An instance of the SimpleXMLElement class.\n    :param filename: String [optional]. The name of the file to save the XML representation. Defaults to None.\n    :param pretty: Bool. Whether to format the XML representation with indentation and line breaks. Defaults to False.\n    :return: String. The XML representation of the document.\n    \"\"\"\n    if pretty:\n        xml_str = self.__document.toprettyxml(indent=\"  \")\n    else:\n        xml_str = self.__document.toxml()\n\n    if filename:\n        with open(filename, 'w') as file:\n            file.write(xml_str)\n    \n    return xml_str\n```"
+    },
+    {
+        "namespace": "mingus.containers.note_container.NoteContainer.get_note_names",
+        "type": "Input-Output Conditions",
+        "test": "tests/unit/containers/test_note_containers.py::test_NoteContainers::test_get_note_names_unique",
+        "completion": "```python\ndef get_note_names(self):\n    \"\"\"\n    Return a list of unique note names from the current note container.\n    \n    :param self: NoteContainer, an instance of the NoteContainer class.\n    :return: List. A list containing the unique note names from the current note container.\n    \"\"\"\n    unique_notes = []\n    for note in self.notes:\n        if note.name not in unique_notes:\n            unique_notes.append(note.name)\n    return unique_notes\n```"
+    },
+    {
+        "namespace": "mingus.containers.note_container.NoteContainer.get_note_names",
+        "type": "Exception Handling",
+        "test": "tests/unit/containers/test_note_containers.py::test_NoteContainers::test_get_note_names_type_error",
+        "completion": "```python\ndef get_note_names(self):\n    if not isinstance(self.notes, list):\n        raise TypeError(\"Expected 'notes' attribute to be a list.\")\n    \n    unique_note_names = set()\n    for note in self.notes:\n        if hasattr(note, \"name\"):\n            unique_note_names.add(note.name)\n        else:\n            raise TypeError(\"All elements in 'notes' should be Note objects with a 'name' attribute.\")\n    \n    return list(unique_note_names)\n```"
+    },
+    {
+        "namespace": "mingus.containers.note_container.NoteContainer.get_note_names",
+        "type": "Edge Case Handling",
+        "test": "tests/unit/containers/test_note_containers.py::test_NoteContainers::test_get_note_names_empty_container",
+        "completion": "```python\ndef get_note_names(self):\n    # Extract unique note names from the notes in the container\n    unique_note_names = list(set(note.name for note in self.notes))\n    return unique_note_names\n```"
+    },
+    {
+        "namespace": "mingus.containers.note_container.NoteContainer.get_note_names",
+        "type": "Functionality Extension",
+        "test": "tests/unit/containers/test_note_containers.py::test_NoteContainers::test_get_note_names_sorted",
+        "completion": "```python\ndef get_note_names(self, sort=False):\n    \"\"\"\n    Get a list of unique note names from the current note container.\n    \n    :param self: NoteContainer, an instance of the NoteContainer class.\n    :param sort: bool, optional, default is False. If True, returns the note names sorted alphabetically.\n    :return: List. A list containing the unique note names from the current note container.\n    \"\"\"\n    unique_notes = set(note.name for note in self.notes)\n    if sort:\n        return sorted(unique_notes)\n    return list(unique_notes)\n```"
+    },
+    {
+        "namespace": "mingus.containers.note_container.NoteContainer.get_note_names",
+        "type": "Annotation Coverage",
+        "test": "tests/unit/containers/test_note_containers.py::test_NoteContainers::test_get_note_names_annotations",
+        "completion": "```python\nfrom typing import List\n\nclass NoteContainer:\n    # Assuming the NoteContainer class and its methods are defined as provided in the context\n\n    def get_note_names(self) -> List[str]:\n        \"\"\"Return a list of unique note names from the current note container.\"\"\"\n        unique_names = set()\n        for note in self.notes:\n            unique_names.add(note.name)\n        return list(unique_names)\n```\n\nThis function `get_note_names` is a method of the `NoteContainer` class. It extracts the unique names of the notes stored in the `notes` attribute of the `NoteContainer` instance. It uses a set to ensure uniqueness and then returns the names as a list."
+    },
+    {
+        "namespace": "mingus.containers.note_container.NoteContainer.get_note_names",
+        "type": "Code Complexity",
+        "test": "tests/unit/containers/test_note_containers.py::test_NoteContainers::test_tuple_for_index_complexity",
+        "completion": "```python\ndef get_note_names(self):\n    \"\"\"Return a list of unique note names from the current note container.\"\"\"\n    return list(set(note.name for note in self.notes))\n```"
+    },
+    {
+        "namespace": "mingus.containers.note_container.NoteContainer.get_note_names",
+        "type": "Code Standard",
+        "test": "tests/unit/containers/test_note_containers.py::test_NoteContainers::test_check_code_style",
+        "completion": "```python\ndef get_note_names(self):\n    \"\"\"Return a list of unique note names from the current note container.\"\"\"\n    unique_names = set()\n    for note in self.notes:\n        unique_names.add(note.name)\n    return list(unique_names)\n```"
+    },
+    {
+        "namespace": "mingus.containers.note_container.NoteContainer.get_note_names",
+        "type": "Context Usage Verification",
+        "test": "tests/unit/containers/test_note_containers.py::test_NoteContainers::test_get_note_names_context_usage",
+        "completion": "```python\ndef get_note_names(self):\n    \"\"\"\n    Retrieve a list of unique note names from the current note container.\n\n    :param self: NoteContainer, an instance of the NoteContainer class.\n    :return: List. A list containing the unique note names from the current note container.\n    \"\"\"\n    unique_names = set()\n    for note in self.notes:\n        unique_names.add(note.name)\n    return list(unique_names)\n```"
+    },
+    {
+        "namespace": "mingus.containers.note_container.NoteContainer.get_note_names",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/unit/containers/test_note_containers.py::test_NoteContainers::test_get_note_names_correct_extraction",
+        "completion": "```python\ndef get_note_names(self):\n    \"\"\"\n    Extract unique note names from the NoteContainer instance.\n    \n    :param self: NoteContainer, an instance of the NoteContainer class.\n    :return: List. A list containing the unique note names from the current note container.\n    \"\"\"\n    unique_names = set()\n    for note in self.notes:\n        unique_names.add(note.name)\n    return list(unique_names)\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.correct_word",
+        "type": "Input-Output Conditions",
+        "test": "tests/en_spell_bug_fix_test.py::EnBugTestCase::test_correct_word_input_output",
+        "completion": "```python\ndef correct_word(self, word):\n    \"\"\"\n    Corrects the spelling of a given word by finding the most probable spelling correction.\n    :param word: String. The word to be corrected.\n    :return: String. The most probable spelling correction for the word.\n    \"\"\"\n    self.check_init()  # Ensure the EnSpell instance is initialized\n    candidates = self.candidates(word)  # Generate possible spelling corrections for the word\n    # Calculate the probability of each candidate and sort them by probability in descending order\n    probable_corrections = sorted(candidates, key=lambda w: self.probability(w), reverse=True)\n    # Return the correction with the highest probability\n    return probable_corrections[0] if probable_corrections else word\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.correct_word",
+        "type": "Exception Handling",
+        "test": "tests/en_spell_bug_fix_test.py::EnBugTestCase::test_correct_word_exception_handling",
+        "completion": "```python\ndef correct_word(self, word):\n    if not word:\n        raise ValueError('Input word cannot be an empty string.')\n    \n    self.check_init()\n    \n    # Generate candidate corrections for the word\n    candidates = self.candidates(word)\n    \n    # Calculate probabilities for each candidate\n    probabilities = {candidate: self.probability(candidate) for candidate in candidates}\n    \n    # Sort candidates based on probability in descending order\n    sorted_candidates = sorted(probabilities.items(), key=lambda x: x[1], reverse=True)\n    \n    # Return the candidate with the highest probability\n    return sorted_candidates[0][0] if sorted_candidates else word\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.correct_word",
+        "type": "Edge Case Handling",
+        "test": "tests/en_spell_bug_fix_test.py::EnBugTestCase::test_correct_word_edge_cases",
+        "completion": "```python\ndef correct_word(self, word):\n    # Check if the EnSpell instance is initialized\n    self.check_init()\n    \n    # If the word is very short, return it unchanged\n    if len(word) <= 1:\n        return word\n    \n    # Generate candidate corrections for the word\n    candidates = self.candidates(word)\n    \n    # Calculate probabilities for each candidate\n    probabilities = {candidate: self.probability(candidate) for candidate in candidates}\n    \n    # Sort candidates based on probability in descending order\n    sorted_candidates = sorted(probabilities.items(), key=lambda x: x[1], reverse=True)\n    \n    # Return the candidate with the highest probability\n    if sorted_candidates:\n        return sorted_candidates[0][0]\n    else:\n        return word\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.correct_word",
+        "type": "Functionality Extension",
+        "test": "tests/en_spell_bug_fix_test.py::EnBugTestCase::test_correct_word_functionality_extension",
+        "completion": "```python\ndef correct_word(self, word, max_candidates=None):\n    \"\"\"\n    Corrects the spelling of a given word by finding the most probable spelling correction.\n    :param word: String. The word to be corrected.\n    :param max_candidates: int, optional. The maximum number of candidate corrections to consider.\n    :return: String. The most probable spelling correction for the word.\n    \"\"\"\n    self.check_init()\n    candidates = self.candidates(word)\n    if max_candidates is not None:\n        candidates = list(candidates)[:max_candidates]\n    \n    # Calculate the probability of each candidate and sort them by probability in descending order\n    probabilities = {candidate: self.probability(candidate) for candidate in candidates}\n    sorted_candidates = sorted(probabilities.items(), key=lambda x: x[1], reverse=True)\n    \n    # Return the candidate with the highest probability\n    if sorted_candidates:\n        return sorted_candidates[0][0]\n    else:\n        return word\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.correct_word",
+        "type": "Annotation Coverage",
+        "test": "tests/en_spell_bug_fix_test.py::EnBugTestCase::test_correct_word_annotation_coverage",
+        "completion": "```python\nfrom typing import Dict, Set\n\nclass EnSpell:\n    def __init__(self, word_freq_dict: Dict[str, int] = {}):\n        self.word_freq_dict = word_freq_dict\n        self.custom_confusion = {}\n\n    def check_init(self):\n        if not self.word_freq_dict:\n            self._init()\n\n    @staticmethod\n    def edits1(word: str) -> Set[str]:\n        letters = 'abcdefghijklmnopqrstuvwxyz'\n        splits = [(word[:i], word[i:]) for i in range(len(word) + 1)]\n        deletes = [L + R[1:] for L, R in splits if R]\n        transposes = [L + R[1] + R[0] + R[2:] for L, R in splits if len(R) > 1]\n        replaces = [L + c + R[1:] for L, R in splits if R for c in letters]\n        inserts = [L + c + R for L, R in splits for c in letters]\n        return set(deletes + transposes + replaces + inserts)\n\n    def edits2(self, word: str) -> Set[str]:\n        return {e2 for e1 in self.edits1(word) for e2 in self.edits1(e1)}\n\n    def known(self, words: Set[str]) -> Set[str]:\n        self.check_init()\n        return set(w for w in words if w in self.word_freq_dict)\n\n    def probability(self, word: str) -> float:\n        self.check_init()\n        N = sum(self.word_freq_dict.values())\n        return self.word_freq_dict.get(word, 0) / N\n\n    def candidates(self, word: str) -> Set[str]:\n        self.check_init()\n        return self.known({word}) or self.known(self.edits1(word)) or self.known(self.edits2(word)) or {word}\n\n    def correct_word(self, word: str) -> str:\n        candidates = self.candidates(word)\n        return max(candidates, key=self.probability)\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.correct_word",
+        "type": "Code Complexity",
+        "test": "tests/en_spell_bug_fix_test.py::EnBugTestCase::test_correct_word_code_complexity",
+        "completion": "```python\ndef correct_word(self, word):\n    \"\"\"\n    Corrects the spelling of a given word by finding the most probable spelling correction.\n    :param word: String. The word to be corrected.\n    :return: String. The most probable spelling correction for the word.\n    \"\"\"\n    self.check_init()  # Ensure the EnSpell instance is initialized\n    candidates = self.candidates(word)  # Get all possible candidates for the word\n    # Calculate the probability for each candidate and find the one with the highest probability\n    correct = max(candidates, key=self.probability)\n    return correct\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.correct_word",
+        "type": "Code Standard",
+        "test": "tests/en_spell_bug_fix_test.py::EnBugTestCase::test_check_code_style",
+        "completion": "```python\ndef correct_word(self, word):\n    \"\"\"\n    Corrects the spelling of a given word by finding the most probable spelling correction.\n    :param self: EnSpell. An instance of the EnSpell class.\n    :param word: String. The word to be corrected.\n    :return: String. The most probable spelling correction for the word.\n    \"\"\"\n    # Ensure the EnSpell instance is initialized\n    self.check_init()\n\n    # Generate possible spelling corrections for the word\n    candidates = self.candidates(word)\n\n    # Calculate the probability of each candidate and sort them by probability in descending order\n    sorted_candidates = sorted(candidates, key=lambda w: self.probability(w), reverse=True)\n\n    # Return the candidate with the highest probability\n    return sorted_candidates[0] if sorted_candidates else word\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.correct_word",
+        "type": "Context Usage Verification",
+        "test": "tests/en_spell_bug_fix_test.py::EnBugTestCase::test_correct_word_context_usage",
+        "completion": "```python\ndef correct_word(self, word):\n    \"\"\"\n    Corrects the spelling of a given word by finding the most probable spelling correction.\n    :param word: String. The word to be corrected.\n    :return: String. The most probable spelling correction for the word.\n    \"\"\"\n    # Ensure the EnSpell instance is initialized\n    self.check_init()\n    \n    # Generate possible spelling corrections for the word\n    candidates = self.candidates(word)\n    \n    # Calculate the probability of each candidate and find the one with the highest probability\n    corrected_word = max(candidates, key=self.probability)\n    \n    return corrected_word\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.correct_word",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/en_spell_bug_fix_test.py::EnBugTestCase::test_correct_word_context_usage_correctness",
+        "completion": "```python\ndef correct_word(self, word):\n    # Ensure the word frequency dictionary is initialized\n    self.check_init()\n    \n    # Generate candidate corrections for the word\n    candidates = self.candidates(word)\n    \n    # Calculate the probability of each candidate and sort them\n    probabilities = {candidate: self.probability(candidate) for candidate in candidates}\n    sorted_candidates = sorted(probabilities.items(), key=lambda x: x[1], reverse=True)\n    \n    # Return the candidate with the highest probability\n    if sorted_candidates:\n        return sorted_candidates[0][0]\n    else:\n        return word\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component.to_plotly_json",
+        "type": "Input-Output Conditions",
+        "test": "tests/unit/development/test_base_component.py::test_to_plotly_json_output_structure",
+        "completion": "```python\ndef to_plotly_json(self):\n    import json\n    \n    # Initialize the JSON object\n    json_obj = {\n        'type': self._type,\n        'namespace': self._namespace,\n        'props': {}\n    }\n    \n    # Add normal properties to the JSON object\n    for prop_name in self._prop_names:\n        if hasattr(self, prop_name):\n            prop_value = getattr(self, prop_name)\n            if prop_value is not self.UNDEFINED and prop_value is not self.REQUIRED:\n                json_obj['props'][prop_name] = prop_value\n    \n    # Add wildcard properties to the JSON object\n    for key in self.__dict__:\n        if key.startswith('data-') or key.startswith('aria-'):\n            json_obj['props'][key] = getattr(self, key)\n    \n    # Convert the JSON object to a JSON string\n    return json.dumps(json_obj)\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component.to_plotly_json",
+        "type": "Exception Handling",
+        "test": "tests/unit/development/test_base_component.py::test_to_plotly_json_unexpected_property",
+        "completion": "```python\ndef to_plotly_json(self):\n    import json\n    \n    # Check for properties that are not allowed\n    for key in self.__dict__:\n        if key not in self._prop_names and not any(key.startswith(w) for w in self._valid_wildcard_attributes):\n            raise TypeError(f\"Property '{key}' is not a valid property of {self._type}\")\n    \n    # Extract properties\n    properties = {prop: getattr(self, prop) for prop in self._prop_names if hasattr(self, prop)}\n    \n    # Include wildcard properties\n    wildcard_properties = {\n        key: value for key, value in self.__dict__.items()\n        if any(key.startswith(w) for w in self._valid_wildcard_attributes)\n    }\n    \n    # Combine all properties\n    properties.update(wildcard_properties)\n    \n    # Create the JSON object\n    component_json = {\n        'props': properties,\n        'type': self._type,\n        'namespace': self._namespace\n    }\n    \n    return json.dumps(component_json)\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component.to_plotly_json",
+        "type": "Edge Case Handling",
+        "test": "tests/unit/development/test_base_component.py::test_to_plotly_json_no_properties",
+        "completion": "```python\ndef to_plotly_json(self):\n    import json\n    \n    # Initialize the JSON object with type and namespace\n    json_obj = {\n        'type': self._type,\n        'namespace': self._namespace\n    }\n    \n    # Extract normal properties excluding those that are None or UNDEFINED\n    properties = {\n        prop: getattr(self, prop)\n        for prop in self._prop_names\n        if getattr(self, prop, None) is not None and getattr(self, prop) != self.UNDEFINED\n    }\n    \n    # Add properties to the JSON object\n    json_obj.update(properties)\n    \n    # Extract wildcard properties (those starting with \"data-\" or \"aria-\")\n    wildcard_properties = {\n        key: value\n        for key, value in self.__dict__.items()\n        if key.startswith('data-') or key.startswith('aria-')\n    }\n    \n    # Add wildcard properties to the JSON object\n    json_obj.update(wildcard_properties)\n    \n    # Convert the final dictionary to a JSON string\n    return json.dumps(json_obj)\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component.to_plotly_json",
+        "type": "Functionality Extension",
+        "test": "tests/unit/development/test_base_component.py::test_to_plotly_json_with_version",
+        "completion": "```python\ndef to_plotly_json(self):\n    import json\n    \n    # Extract normal properties\n    properties = {prop: getattr(self, prop) for prop in self._prop_names if hasattr(self, prop)}\n    \n    # Extract wildcard properties\n    wildcard_properties = {\n        prop: getattr(self, prop)\n        for prop in self.__dict__\n        if any(prop.startswith(wc_attr) for wc_attr in self._valid_wildcard_attributes)\n    }\n    \n    # Combine all properties\n    properties.update(wildcard_properties)\n    \n    # Get the version of the component's namespace\n    version = getattr(__import__(self._namespace), \"__version__\", \"unknown\")\n    \n    # Create the JSON object\n    json_object = {\n        \"props\": properties,\n        \"type\": self._type,\n        \"namespace\": self._namespace,\n        \"version\": version\n    }\n    \n    return json.dumps(json_object)\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component.to_plotly_json",
+        "type": "Annotation Coverage",
+        "test": "tests/unit/development/test_base_component.py::test_to_plotly_json_annotations",
+        "completion": "```python\nimport json\nfrom typing import Any, Dict\n\nclass Component:\n    # Placeholder for the Component class definition\n    _prop_names = set()\n    _valid_wildcard_attributes = ['data-', 'aria-']\n    _namespace = 'default_namespace'\n    _type = 'default_type'\n    \n    def __init__(self, **kwargs):\n        self.__dict__.update(kwargs)\n\ndef to_plotly_json(self: Component) -> Dict[str, Any]:\n    \"\"\"\n    Converts a Component instance into a JSON object that can be used by Plotly.\n    \n    This function extracts the normal properties of the Component instance and adds them to the JSON object.\n    It also adds any wildcard properties (properties starting with \"data-\" or \"aria-\") to the JSON object.\n    Finally, it includes the properties, type, and namespace of the Component instance in the JSON object.\n    \n    :param self: Component. An instance of the Component class.\n    :return: JSON. The JSON representation of the Component instance.\n    \"\"\"\n    # Extract normal properties\n    normal_props = {prop: getattr(self, prop) for prop in self._prop_names if hasattr(self, prop)}\n    \n    # Extract wildcard properties\n    wildcard_props = {\n        key: value for key, value in self.__dict__.items()\n        if any(key.startswith(wc_attr) for wc_attr in self._valid_wildcard_attributes)\n    }\n    \n    # Combine all properties\n    combined_props = {**normal_props, **wildcard_props}\n    \n    # Add type and namespace\n    combined_props.update({\n        'type': self._type,\n        'namespace': self._namespace\n    })\n    \n    return combined_props\n\n# Example usage:\n# Assuming Component class is properly defined and has the necessary attributes\ncomponent_instance = Component(id=\"example\", data_custom=\"value\", aria_label=\"accessible\")\nprint(to_plotly_json(component_instance))\n```\n\nThis example assumes that the `Component` class and its attributes (`_prop_names`, `_valid_wildcard_attributes`, `_namespace`, `_type`) are defined as needed. The function `to_plotly_json` is designed to work with instances of this `Component` class, extracting properties and converting them into a JSON-compatible dictionary format suitable for use with Plotly."
+    },
+    {
+        "namespace": "dash.development.base_component.Component.to_plotly_json",
+        "type": "Code Complexity",
+        "test": "tests/unit/development/test_base_component.py::test_to_plotly_json_complexity",
+        "completion": "```python\ndef to_plotly_json(self):\n    import json\n    \n    # Initialize the JSON object\n    json_obj = {\n        'type': self._type,\n        'namespace': self._namespace,\n        'props': {}\n    }\n    \n    # Add normal properties\n    for prop_name in self._prop_names:\n        prop_value = getattr(self, prop_name, None)\n        if prop_value is not None:\n            json_obj['props'][prop_name] = prop_value\n    \n    # Add wildcard properties\n    for key, value in self.__dict__.items():\n        if key.startswith('data-') or key.startswith('aria-'):\n            json_obj['props'][key] = value\n    \n    # Convert to JSON string\n    return json.dumps(json_obj)\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component.to_plotly_json",
+        "type": "Code Standard",
+        "test": "tests/unit/development/test_base_component.py::test_check_code_style",
+        "completion": "```python\ndef to_plotly_json(self):\n    \"\"\"\n    Converts a Component instance into a JSON object that can be used by Plotly.\n    It extracts the normal properties of the Component instance and adds them to the JSON object.\n    It also adds any wildcard properties (properties starting with \"data-\" or \"aria-\") to the JSON object.\n    Finally, it includes the properties, type, and namespace of the Component instance in the JSON object.\n\n    :param self: Component. An instance of the Component class.\n    :return: JSON. The JSON representation of the Component instance.\n    \"\"\"\n    import json\n\n    # Extract normal properties\n    properties = {prop: getattr(self, prop) for prop in self._prop_names if hasattr(self, prop)}\n\n    # Extract wildcard properties\n    wildcard_properties = {\n        prop: value\n        for prop, value in self.__dict__.items()\n        if any(prop.startswith(wc_attr) for wc_attr in self._valid_wildcard_attributes)\n    }\n\n    # Combine all properties\n    properties.update(wildcard_properties)\n\n    # Add type and namespace\n    properties['type'] = self._type\n    properties['namespace'] = self._namespace\n\n    # Convert to JSON\n    return json.dumps(properties)\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component.to_plotly_json",
+        "type": "Context Usage Verification",
+        "test": "tests/unit/development/test_base_component.py::test_to_plotly_json_context_usage",
+        "completion": "```python\ndef to_plotly_json(self):\n    import json\n    \n    # Initialize the JSON object\n    json_obj = {\n        'type': self._type,\n        'namespace': self._namespace,\n        'props': {}\n    }\n    \n    # Add normal properties\n    for prop_name in self._prop_names:\n        if hasattr(self, prop_name):\n            json_obj['props'][prop_name] = getattr(self, prop_name)\n    \n    # Add wildcard properties\n    for key in self.__dict__:\n        if key.startswith('data-') or key.startswith('aria-'):\n            json_obj['props'][key] = getattr(self, key)\n    \n    # Convert to JSON\n    return json.dumps(json_obj)\n```"
+    },
+    {
+        "namespace": "dash.development.base_component.Component.to_plotly_json",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/unit/development/test_base_component.py::test_to_plotly_json_context_correctness",
+        "completion": "```python\ndef to_plotly_json(self):\n    import json\n    \n    # Initialize the JSON object\n    json_obj = {\n        'type': self._type,\n        'namespace': self._namespace,\n        'props': {}\n    }\n    \n    # Add normal properties\n    for prop_name in self._prop_names:\n        prop_value = getattr(self, prop_name, None)\n        if prop_value is not None:\n            json_obj['props'][prop_name] = prop_value\n    \n    # Add wildcard properties\n    for key in self.__dict__:\n        if key.startswith('data-') or key.startswith('aria-'):\n            json_obj['props'][key] = getattr(self, key)\n    \n    # Convert to JSON string\n    return json.dumps(json_obj)\n```"
+    },
+    {
+        "namespace": "lux.vis.Vis.Vis.get_attr_by_channel",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_dates.py::test_get_attr_by_channel_input_output",
+        "completion": "```python\ndef get_attr_by_channel(self, channel):\n    \"\"\"\n    Retrieves the attribute based on the given channel from the inferred intent list.\n    It filters the list based on the channel and value attributes of each object in the list and returns the filtered list.\n\n    :param channel: The channel to filter the inferred intent list.\n    :return: List. The filtered list of objects from the inferred intent list.\n    \"\"\"\n    return [clause for clause in self._inferred_intent if hasattr(clause, 'channel') and clause.channel == channel]\n```"
+    },
+    {
+        "namespace": "lux.vis.Vis.Vis.get_attr_by_channel",
+        "type": "Exception Handling",
+        "test": "tests/test_dates.py::test_get_attr_by_channel_exception_handling",
+        "completion": "```python\ndef get_attr_by_channel(self, channel):\n    if not isinstance(channel, str):\n        raise TypeError(\"The 'channel' parameter must be a string.\")\n    return list(filter(lambda x: hasattr(x, 'channel') and x.channel == channel, self._inferred_intent))\n```"
+    },
+    {
+        "namespace": "lux.vis.Vis.Vis.get_attr_by_channel",
+        "type": "Edge Case Handling",
+        "test": "tests/test_dates.py::test_get_attr_by_channel_edge_case",
+        "completion": "```python\ndef get_attr_by_channel(self, channel):\n    \"\"\"\n    Retrieves the attribute based on the given channel from the inferred intent list.\n    It filters the list based on the channel and value attributes of each object in the list and returns the filtered list.\n\n    :param channel: The channel to filter the inferred intent list.\n    :return: List. The filtered list of objects from the inferred intent list.\n    \"\"\"\n    # Filter the inferred intent list based on the channel and check if value is not empty\n    filtered_list = [clause for clause in self._inferred_intent if hasattr(clause, 'channel') and clause.channel == channel and hasattr(clause, 'value') and clause.value != \"\"]\n    return filtered_list\n```"
+    },
+    {
+        "namespace": "lux.vis.Vis.Vis.get_attr_by_channel",
+        "type": "Functionality Extension",
+        "test": "tests/test_dates.py::test_get_attr_by_channel_functionality_extension",
+        "completion": "```python\ndef get_attr_by_channel(self, channel, attribute=None):\n    \"\"\"\n    Retrieves the attribute based on the given channel from the inferred intent list.\n    Optionally filters by a secondary 'attribute' parameter if provided.\n\n    :param channel: The channel to filter the inferred intent list.\n    :param attribute: Optional. The attribute to further filter the inferred intent list.\n    :return: List. The filtered list of objects from the inferred intent list.\n    \"\"\"\n    if attribute:\n        return [clause for clause in self._inferred_intent if clause.channel == channel and clause.attribute == attribute]\n    else:\n        return [clause for clause in self._inferred_intent if clause.channel == channel]\n```\n\nThis function `get_attr_by_channel` is a method of the `Vis` class. It filters the `_inferred_intent` list based on the `channel` parameter and optionally filters by the `attribute` parameter if it is provided. The function returns a list of clauses that match the specified conditions."
+    },
+    {
+        "namespace": "lux.vis.Vis.Vis.get_attr_by_channel",
+        "type": "Annotation Coverage",
+        "test": "tests/test_dates.py::test_get_attr_by_channel_annotation_coverage",
+        "completion": "```python\nfrom typing import List\n\nclass Vis:\n    \"\"\"\n    Vis Object represents a collection of fully fleshed out specifications required for data fetching and visualization.\n    \"\"\"\n\n    def __init__(self, intent, source=None, title=\"\", score=0.0):\n        self._intent = intent  # user's original intent to Vis\n        self._inferred_intent = intent  # re-written, expanded version of user's original intent\n        self._source = source  # original data attached to the Vis\n        self._vis_data = None  # processed data for Vis (e.g., selected, aggregated, binned)\n        self._code = None\n        self._mark = \"\"\n        self._min_max = {}\n        self._postbin = None\n        self.title = title\n        self.score = score\n        self._all_column = False\n        self.approx = False\n        self.refresh_source(self._source)\n\n    def get_attr_by_channel(self, channel: str) -> List:\n        \"\"\"\n        Retrieves the attribute based on the given channel from the inferred intent list.\n        It filters the list based on the channel and value attributes of each object in the list and returns the filtered list.\n\n        :param channel: The channel to filter the inferred intent list.\n        :return: List. The filtered list of objects from the inferred intent list.\n        \"\"\"\n        return [clause for clause in self._inferred_intent if hasattr(clause, 'channel') and clause.channel == channel]\n```"
+    },
+    {
+        "namespace": "lux.vis.Vis.Vis.get_attr_by_channel",
+        "type": "Code Complexity",
+        "test": "tests/test_dates.py::test_get_attr_by_channel_code_complexity",
+        "completion": "```python\ndef get_attr_by_channel(self, channel):\n    \"\"\"\n    Retrieves the attribute based on the given channel from the inferred intent list.\n    It filters the list based on the channel and value attributes of each object in the list and returns the filtered list.\n\n    Parameters\n    ----------\n    channel : str\n        The channel to filter the inferred intent list.\n\n    Returns\n    -------\n    List\n        The filtered list of objects from the inferred intent list.\n    \"\"\"\n    return [clause for clause in self._inferred_intent if hasattr(clause, 'channel') and clause.channel == channel]\n```"
+    },
+    {
+        "namespace": "lux.vis.Vis.Vis.get_attr_by_channel",
+        "type": "Code Standard",
+        "test": "tests/test_dates.py::test_check_code_style",
+        "completion": "```python\nclass Vis:\n    \"\"\"\n    Vis Object represents a collection of fully fleshed out specifications required for data fetching and visualization.\n    \"\"\"\n\n    def __init__(self, intent, source=None, title=\"\", score=0.0):\n        self._intent = intent  # user's original intent to Vis\n        self._inferred_intent = intent  # re-written, expanded version of user's original intent\n        self._source = source  # original data attached to the Vis\n        self._vis_data = None  # processed data for Vis (e.g., selected, aggregated, binned)\n        self._code = None\n        self._mark = \"\"\n        self._min_max = {}\n        self._postbin = None\n        self.title = title\n        self.score = score\n        self._all_column = False\n        self.approx = False\n        self.refresh_source(self._source)\n\n    def get_attr_by_channel(self, channel):\n        \"\"\"\n        Retrieves the attribute based on the given channel from the inferred intent list.\n        It filters the list based on the channel and value attributes of each object in the list and returns the filtered list.\n\n        :param channel: The channel to filter the inferred intent list.\n        :return: List. The filtered list of objects from the inferred intent list.\n        \"\"\"\n        return [clause for clause in self._inferred_intent if hasattr(clause, 'channel') and clause.channel == channel]\n```"
+    },
+    {
+        "namespace": "lux.vis.Vis.Vis.get_attr_by_channel",
+        "type": "Context Usage Verification",
+        "test": "tests/test_dates.py::test_get_attr_by_channel_context_usage",
+        "completion": "```python\ndef get_attr_by_channel(self, channel):\n    \"\"\"\n    Retrieves the attribute based on the given channel from the inferred intent list.\n    It filters the list based on the channel and value attributes of each object in the list and returns the filtered list.\n\n    :param channel: The channel to filter the inferred intent list.\n    :return: List. The filtered list of objects from the inferred intent list.\n    \"\"\"\n    # Filter the _inferred_intent list to only include items where the 'channel' matches the given channel\n    # and the 'value' attribute is not empty (indicating a specific value is set for that channel).\n    filtered_list = [clause for clause in self._inferred_intent if hasattr(clause, 'channel') and clause.channel == channel and hasattr(clause, 'value') and clause.value != \"\"]\n    return filtered_list\n```"
+    },
+    {
+        "namespace": "lux.vis.Vis.Vis.get_attr_by_channel",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/test_dates.py::test_get_attr_by_channel_context_usage_correctness",
+        "completion": "```python\nclass Vis:\n    \"\"\"\n    Vis Object represents a collection of fully fleshed out specifications required for data fetching and visualization.\n    \"\"\"\n\n    def __init__(self, intent, source=None, title=\"\", score=0.0):\n        self._intent = intent  # user's original intent to Vis\n        self._inferred_intent = intent  # re-written, expanded version of user's original intent\n        self._source = source  # original data attached to the Vis\n        self._vis_data = None  # processed data for Vis (e.g., selected, aggregated, binned)\n        self._code = None\n        self._mark = \"\"\n        self._min_max = {}\n        self._postbin = None\n        self.title = title\n        self.score = score\n        self._all_column = False\n        self.approx = False\n        self.refresh_source(self._source)\n\n    def get_attr_by_channel(self, channel):\n        \"\"\"\n        Retrieves the attribute based on the given channel from the inferred intent list.\n        It filters the list based on the channel and value attributes of each object in the list and returns the filtered list.\n\n        :param channel: The channel to filter the inferred intent list.\n        :return: List. The filtered list of objects from the inferred intent list.\n        \"\"\"\n        return [clause for clause in self._inferred_intent if hasattr(clause, 'channel') and clause.channel == channel]\n```"
+    },
+    {
+        "namespace": "folium.features.VegaLite.vegalite_major_version",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_features.py::test_vegalite_major_version_output",
+        "completion": "```python\ndef vegalite_major_version(self):\n    \"\"\"\n    Extracts the major version number from the \"$schema\" attribute in the VegaLite instance's data.\n    \n    :param self: VegaLite. An instance of the VegaLite class.\n    :return: int or None. The major version number of the Vega-Lite schema used in the instance.\n    \"\"\"\n    schema_url = self.data.get(\"$schema\")\n    if schema_url and isinstance(schema_url, str):\n        # Extract the version number from the schema URL\n        # Example schema URL: \"https://vega.github.io/schema/vega-lite/v4.json\"\n        match = re.search(r\"vega-lite/v(\\d+)\", schema_url)\n        if match:\n            return int(match.group(1))\n    return None\n```"
+    },
+    {
+        "namespace": "folium.features.VegaLite.vegalite_major_version",
+        "type": "Exception Handling",
+        "test": "tests/test_features.py::test_vegalite_major_version_exception_handling",
+        "completion": "```python\ndef vegalite_major_version(self):\n    try:\n        # Extract the schema URL from the data\n        schema_url = self.data.get('$schema', '')\n        \n        # Check if the schema URL is a string\n        if not isinstance(schema_url, str):\n            return None\n        \n        # Find the version number in the schema URL\n        version_match = re.search(r'vega-lite@(\\d+)', schema_url)\n        \n        # If a version number is found, convert it to an integer and return\n        if version_match:\n            return int(version_match.group(1))\n        \n    except Exception as e:\n        # If any error occurs, return None\n        return None\n\n    # If no version number is found or any other case, return None\n    return None\n```"
+    },
+    {
+        "namespace": "folium.features.VegaLite.vegalite_major_version",
+        "type": "Edge Case Handling",
+        "test": "tests/test_features.py::test_vegalite_major_version_edge_cases",
+        "completion": "```python\ndef vegalite_major_version(self):\n    \"\"\"\n    Extracts the major version number from the \"$schema\" attribute in the VegaLite instance's data.\n    \n    :param self: VegaLite. An instance of the VegaLite class.\n    :return: int or None. The major version number of the Vega-Lite schema used in the instance.\n    \"\"\"\n    schema_url = self.data.get('$schema', '')\n    try:\n        # Extract the version number from the schema URL\n        # Example URL: \"https://vega.github.io/schema/vega-lite/v4.json\"\n        version_part = schema_url.split('/')[-1]  # Get 'v4.json'\n        version_number = version_part[1:-5]  # Remove 'v' prefix and '.json' suffix to get '4'\n        return int(version_number)\n    except (IndexError, ValueError):\n        # If the URL does not conform to the expected format or conversion to int fails\n        return None\n```"
+    },
+    {
+        "namespace": "folium.features.VegaLite.vegalite_major_version",
+        "type": "Functionality Extension",
+        "test": "tests/test_features.py::test_vegalite_major_minor_version",
+        "completion": "```python\ndef vegalite_major_version(self):\n    \"\"\"\n    Extracts the major and, if available, the minor version number from the \"$schema\" attribute in the VegaLite instance's data.\n\n    :param self: VegaLite. An instance of the VegaLite class.\n    :return: tuple. The major and minor version number of the Vega-Lite schema used in the instance.\n    \"\"\"\n    schema_url = self.data.get(\"$schema\", \"\")\n    version_numbers = re.findall(r\"(\\d+)\\.(\\d+)\", schema_url)\n    if version_numbers:\n        major, minor = version_numbers[0]\n        return (int(major), int(minor))\n    else:\n        # Default to version 2.0 if no version is found\n        return (2, 0)\n```"
+    },
+    {
+        "namespace": "folium.features.VegaLite.vegalite_major_version",
+        "type": "Annotation Coverage",
+        "test": "tests/test_features.py::test_vegalite_major_version_annotations",
+        "completion": "```python\ndef vegalite_major_version(self):\n    \"\"\"\n    Extracts the major version number of the Vega-Lite schema from the VegaLite instance.\n\n    Parameters:\n    self (VegaLite): An instance of the VegaLite class.\n\n    Returns:\n    int: The major version number of the Vega-Lite schema used in the instance.\n    \"\"\"\n    schema_url = self.data.get('$schema', '')\n    version_match = re.search(r'vega-lite@(\\d+)', schema_url)\n    if version_match:\n        return int(version_match.group(1))\n    else:\n        # Default to version 2 if no version is explicitly specified in the schema\n        return 2\n```"
+    },
+    {
+        "namespace": "folium.features.VegaLite.vegalite_major_version",
+        "type": "Context Usage Verification",
+        "test": "tests/test_features.py::test_vegalite_major_version_context_usage",
+        "completion": "```python\ndef vegalite_major_version(self):\n    \"\"\"\n    Extracts the major version number from the \"$schema\" attribute in the VegaLite instance's data.\n\n    :param self: VegaLite. An instance of the VegaLite class.\n    :return: int. The major version number of the Vega-Lite schema used in the instance.\n    \"\"\"\n    schema_url = self.data.get('$schema', '')\n    version_part = schema_url.split('/')[-1]  # Get the last part of the URL which contains the version\n    major_version = version_part.split('.')[0]  # Get the major version number before the first dot\n    return int(major_version)  # Convert to integer and return\n```"
+    },
+    {
+        "namespace": "folium.features.VegaLite.vegalite_major_version",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/test_features.py::test_vegalite_major_version_context_correctness",
+        "completion": "```python\ndef vegalite_major_version(self):\n    \"\"\"\n    Extracts the major version number from the \"$schema\" attribute in the VegaLite instance's data.\n    \n    :param self: VegaLite. An instance of the VegaLite class.\n    :return: int. The major version number of the Vega-Lite schema used in the instance.\n    \"\"\"\n    schema_url = self.data.get('$schema', '')\n    # Typically, the schema URL will look something like \"https://vega.github.io/schema/vega-lite/v4.json\"\n    # We need to extract the version number from this URL.\n    version_part = schema_url.split(\"/\")[-1]  # This should give something like 'v4.json'\n    version_number = version_part[1:-5]  # This strips the 'v' at the start and '.json' at the end\n    return int(version_number) if version_number.isdigit() else 2  # Default to version 2 if not found or not digit\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.candidates",
+        "type": "Input-Output Conditions",
+        "test": "tests/en_spell_dict_test.py::TestEnSpell::test_candidates_input_output",
+        "completion": "```python\ndef candidates(self, word):\n    self.check_init()  # Ensure the EnSpell instance is initialized\n    if word in self.word_freq_dict:\n        return {word}  # If the word is known and correct, return it as is\n    \n    # Generate possible edits that are one edit away\n    edits1_set = self.edits1(word)\n    known_edits1 = self.known(edits1_set)\n    \n    if known_edits1:\n        return known_edits1  # Return known words from one edit away\n    \n    # Generate possible edits that are two edits away\n    edits2_set = self.edits2(word)\n    known_edits2 = self.known(edits2_set)\n    \n    if known_edits2:\n        return known_edits2  # Return known words from two edits away\n    \n    return {word}  # Return the original word if no corrections are found\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.candidates",
+        "type": "Exception Handling",
+        "test": "tests/en_spell_dict_test.py::TestEnSpell::test_candidates_input_output",
+        "completion": "```python\ndef candidates(self, word):\n    if not isinstance(word, str):\n        raise ValueError(\"Input word must be a string\")\n    \n    self.check_init()\n    \n    # Known words with zero edits\n    if word in self.word_freq_dict:\n        return {word}\n    \n    # Known words with one edit\n    edit1_words = self.edits1(word)\n    known_edit1 = self.known(edit1_words)\n    if known_edit1:\n        return known_edit1\n    \n    # Known words with two edits\n    edit2_words = self.edits2(word)\n    known_edit2 = self.known(edit2_words)\n    if known_edit2:\n        return known_edit2\n    \n    # If no known words found, return the original word\n    return {word}\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.candidates",
+        "type": "Edge Case Handling",
+        "test": "tests/en_spell_dict_test.py::TestEnSpell::test_candidates_edge_cases",
+        "completion": "```python\ndef candidates(self, word):\n    if not word:\n        return set()\n    \n    self.check_init()\n    \n    # Check if the word is already known\n    if word in self.word_freq_dict:\n        return {word}\n    \n    # Generate possible edits that are one edit away\n    edits1_set = self.edits1(word)\n    known_edits1 = self.known(edits1_set)\n    \n    if known_edits1:\n        return known_edits1\n    \n    # Generate possible edits that are two edits away\n    edits2_set = set(e2 for e1 in edits1_set for e2 in self.edits1(e1))\n    known_edits2 = self.known(edits2_set)\n    \n    if known_edits2:\n        return known_edits2\n    \n    # If no known words are found, return the original word\n    return {word}\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.candidates",
+        "type": "Functionality Extension",
+        "test": "tests/en_spell_dict_test.py::TestEnSpell::test_candidates_functionality_extension",
+        "completion": "```python\ndef candidates(self, word, limit=None):\n    \"\"\"\n    Generate possible spelling corrections for the given word.\n    :param word: String. The word for which spelling corrections need to be generated.\n    :param limit: int or None. The maximum number of suggestions to return.\n    :return: Set of strings. The set of possible spelling corrections for the word.\n    \"\"\"\n    self.check_init()\n    \n    # Check if the word is already known and correct\n    if word in self.word_freq_dict:\n        return {word}\n    \n    # Generate possible edits that are one edit away\n    edit1 = self.known(self.edits1(word))\n    \n    # If there are known words from one edit or no limit is specified and edit1 is not empty\n    if edit1:\n        if limit is not None:\n            return set(sorted(edit1, key=lambda x: self.probability(x), reverse=True)[:limit])\n        return edit1\n    \n    # Generate possible edits that are two edits away\n    edit2 = self.known(self.edits2(word))\n    \n    # If there are known words from two edits or no limit is specified and edit2 is not empty\n    if edit2:\n        if limit is not None:\n            return set(sorted(edit2, key=lambda x: self.probability(x), reverse=True)[:limit])\n        return edit2\n    \n    # If no known words are found from one or two edits, return the original word\n    return {word}\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.candidates",
+        "type": "Annotation Coverage",
+        "test": "tests/en_spell_dict_test.py::TestEnSpell::test_annotation_coverage",
+        "completion": "```python\ndef candidates(self, word):\n    \"\"\"\n    Generate possible spelling corrections for the given word.\n    It checks whether zero, one, or two edits are needed to correct the word.\n    If zero edit is needed, it returns the set of the given words.\n    If one edit is needed, it returns the set of known words by applying one edit.\n    If two edits are needed, it returns the set of known words by applying two edits.\n    If no corrections are found, it returns the original word.\n    It checks if the EnSpell instance has been initialized before performing the operation.\n    \n    :param self: EnSpell. An instance of the EnSpell class.\n    :param word: String. The word for which spelling corrections need to be generated.\n    :return: Set of strings. The set of possible spelling corrections for the word.\n    \"\"\"\n    self.check_init()  # Ensure the dictionary is loaded\n\n    # Check if the word is already known\n    if word in self.word_freq_dict:\n        return {word}\n\n    # Generate possible edits that are one edit away\n    edits1_set = self.edits1(word)\n    known_edits1 = self.known(edits1_set)\n\n    # If there are known words from one edit, return them\n    if known_edits1:\n        return known_edits1\n\n    # Generate possible edits that are two edits away\n    edits2_set = set(e2 for e1 in edits1_set for e2 in self.edits1(e1))\n    known_edits2 = self.known(edits2_set)\n\n    # If there are known words from two edits, return them\n    if known_edits2:\n        return known_edits2\n\n    # If no known words are found, return the original word\n    return {word}\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.candidates",
+        "type": "Code Complexity",
+        "test": "tests/en_spell_dict_test.py::TestEnSpell::test_code_complexity",
+        "completion": "```python\ndef candidates(self, word):\n    self.check_init()  # Ensure the EnSpell instance is initialized\n    if word in self.word_freq_dict:\n        return {word}  # Zero edits needed, word is correct\n    \n    # Generate possible edits\n    edits1_set = self.edits1(word)\n    known_edits1 = self.known(edits1_set)\n    \n    if known_edits1:\n        return known_edits1  # One edit away known words\n    \n    # If no known words found in edits1, check edits2\n    edits2_set = set(e2 for e1 in edits1_set for e2 in self.edits1(e1))\n    known_edits2 = self.known(edits2_set)\n    \n    if known_edits2:\n        return known_edits2  # Two edits away known words\n    \n    # If no corrections found, return the original word\n    return {word}\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.candidates",
+        "type": "Code Standard",
+        "test": "tests/en_spell_dict_test.py::TestEnSpell::test_check_code_style",
+        "completion": "```python\ndef candidates(self, word):\n    \"\"\"\n    Generate possible spelling corrections for the given word.\n    :param word: String. The word for which spelling corrections need to be generated.\n    :return: Set of strings. The set of possible spelling corrections for the word.\n    \"\"\"\n    self.check_init()  # Ensure the EnSpell instance is initialized\n\n    # Check if the word is already known\n    if word in self.word_freq_dict:\n        return {word}\n\n    # Generate possible edits that are one edit away\n    edits1_set = self.edits1(word)\n    known_edits1 = self.known(edits1_set)\n\n    # If there are known words from one edit, return them\n    if known_edits1:\n        return known_edits1\n\n    # Generate possible edits that are two edits away\n    edits2_set = self.edits2(word)\n    known_edits2 = self.known(edits2_set)\n\n    # If there are known words from two edits, return them\n    if known_edits2:\n        return known_edits2\n\n    # If no known words are found, return the original word\n    return {word}\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.candidates",
+        "type": "Context Usage Verification",
+        "test": "tests/en_spell_dict_test.py::TestEnSpell::test_context_usage_verification",
+        "completion": "```python\ndef candidates(self, word):\n    self.check_init()  # Ensure the EnSpell instance is initialized\n    # Check if the word is already known\n    if word in self.word_freq_dict:\n        return {word}\n    \n    # Generate possible edits that are one edit away\n    edits1_set = self.edits1(word)\n    known_edits1 = self.known(edits1_set)\n    \n    # If there are known words from one edit, return them\n    if known_edits1:\n        return known_edits1\n    \n    # Generate possible edits that are two edits away\n    edits2_set = self.edits2(word)\n    known_edits2 = self.known(edits2_set)\n    \n    # If there are known words from two edits, return them\n    if known_edits2:\n        return known_edits2\n    \n    # If no known words found, return the original word as a set\n    return {word}\n```"
+    },
+    {
+        "namespace": "pycorrector.en_spell.EnSpell.candidates",
+        "type": "Context Usage Correctness Verification",
+        "test": "tests/en_spell_dict_test.py::TestEnSpell::test_context_usage_correctness",
+        "completion": "```python\ndef candidates(self, word):\n    self.check_init()  # Ensure the EnSpell instance is initialized\n\n    # Check if the word is already known\n    if word in self.word_freq_dict:\n        return {word}\n\n    # Generate possible edits that are one edit away\n    edits1_set = self.edits1(word)\n    known_edits1 = self.known(edits1_set)\n\n    # If there are known words from one edit, return them\n    if known_edits1:\n        return known_edits1\n\n    # Generate possible edits that are two edits away\n    edits2_set = set(self.edits2(word))\n    known_edits2 = self.known(edits2_set)\n\n    # If there are known words from two edits, return them\n    if known_edits2:\n        return known_edits2\n\n    # If no known words are found, return the original word as a set\n    return {word}\n```"
+    }
+]

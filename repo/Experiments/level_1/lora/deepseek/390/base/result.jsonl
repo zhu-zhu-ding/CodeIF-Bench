@@ -1,0 +1,82 @@
+[
+    {
+        "namespace": "benedict.utils.type_util.is_json_serializable",
+        "completion": "def is_json_serializable(val):\n    try:\n        json.dumps(val)\n        return True\n    except (TypeError, OverflowError):\n        return False\n"
+    },
+    {
+        "namespace": "feedparser.urls.convert_to_idn",
+        "completion": "To convert a URL to IDN notation, you can use the `idna` library in Python. The `idna` library is designed to convert internationalized domain names (IDNs) to ASCII using the IDNA2008 standard.\n\nFirst, you need to install the `idna` library if you haven't already:\n\n```bash\npip install idna\n```\n\nNow, you can write the `convert_to_idn` function as follows:\n\n```python\nimport idna\nfrom urllib.parse import urlparse, urlunparse\n\ndef convert_to_idn(url):\n    \"\"\"\n    Convert a URL to IDN notation.\n\n    :param url: String. The URL to be converted to IDN notation.\n    :return: String. The URL in IDN notation.\n    \"\"\"\n    parsed_url = urlparse(url)\n    try:\n        # Try to encode the host in ASCII\n        ascii_host = idna.encode(parsed_url.hostname, uts46=True).decode('ascii')\n    except UnicodeError:\n        # If encoding fails, convert the host to IDN form\n        ascii_host = idna.encode(parsed_url.hostname, uts46=True).decode('utf-8')\n\n    # Reconstruct the URL with the IDN host\n    return urlunparse((\n        parsed_url.scheme,\n        ascii_host + ':' + parsed_url.port if parsed_url.port else ascii_host,\n        parsed_url.path,\n        parsed_url.params,\n        parsed_url.query,\n        parsed_url.fragment\n    ))\n\n# Example usage:\nurl = 'http://\u043f\u0440\u0438\u043c\u0435\u0440.\u0440\u0444/path?query=example#fragment'\nconverted_url = convert_to_idn(url)\nprint(converted_url)\n```\n\nThis function uses `idna.encode` to convert the host part of the URL to ASCII. If the host cannot be encoded in ASCII, it falls back to using the UTS #46 algorithm, which is designed to handle non-ASCII characters in domain names. The `urlparse` and `urlunparse` functions are used to manipulate the URL components.\n"
+    },
+    {
+        "namespace": "googleapiclient._helpers.parse_unique_urlencoded",
+        "completion": "def parse_unique_urlencoded(content):\n    \"\"\"\n    Parse unique key-value parameters from URL-encoded content.\n\n    Args:\n        content (str): URL-encoded key-value pairs.\n\n    Returns:\n        dict: The key-value pairs from the input content.\n\n    Raises:\n        ValueError: If one of the keys is repeated.\n    \"\"\"\n    parsed_content = urllib.parse.parse_qs(content)\n    keys = set()\n    for key, values in parsed_content.items():\n        if key in keys:\n            raise ValueError(f\"Repeated key found: {key}\")\n        keys.add(key)\n    return parsed_content\n"
+    },
+    {
+        "namespace": "jinja2.async_utils.auto_aiter",
+        "completion": "def auto_aiter(iterable):\n    if hasattr(iterable, '__aiter__'):\n        async def aiter():\n            async for item in iterable:\n                yield item\n        return aiter()\n    else:\n        def aiter():\n            for item in iterable:\n                yield item\n        return aiter()\n"
+    },
+    {
+        "namespace": "csvs_to_sqlite.utils.table_exists",
+        "completion": "def table_exists(conn, table):\n    \"\"\"\n    Check if the table exists in the database.\n\n    :param conn: Connection. The connection to the database.\n    :param table: String. The name of the table to check.\n    :return: Bool. True if the table exists, False otherwise.\n    \"\"\"\n    try:\n        # Execute a simple query to check if the table exists\n        cursor = conn.cursor()\n        cursor.execute(f\"SELECT 1 FROM {table} LIMIT 0\")\n        return True\n    except Exception as e:\n        # If an exception is raised, the table does not exist\n        return False\n"
+    },
+    {
+        "namespace": "sqlitedict.SqliteDict.get_tablenames",
+        "completion": "def get_tablenames(filename):\n    import sqlite3\n    import os\n\n    if not os.path.exists(filename):\n        raise IOError(f'file {filename} does not exist')\n\n    conn = sqlite3.connect(filename)\n    cursor = conn.cursor()\n\n    cursor.execute(\"SELECT name FROM sqlite_master WHERE type='table';\")\n    table_names = [table[0] for table in cursor.fetchall()]\n\n    conn.close()\n    return table_names\n"
+    },
+    {
+        "namespace": "psd_tools.utils.pack",
+        "completion": "def pack(fmt, *args):\n    return struct.pack(fmt, *args)\n"
+    },
+    {
+        "namespace": "psd_tools.utils.unpack",
+        "completion": "def unpack(fmt, data):\n    \"\"\"\n    Unpacks the given data according to the specified format.\n\n    :param fmt: String. The format string to be used for unpacking the data.\n    :param data: Data. The data to be unpacked.\n    :return: Tuple. A tuple containing the unpacked values.\n    \"\"\"\n    return struct.unpack(fmt, data)\n"
+    },
+    {
+        "namespace": "exodus_bundler.bundling.bytes_to_int",
+        "completion": "def bytes_to_int(byte_string, byteorder='big'):\n    \"\"\"\n    Convert a byte string into an integer.\n\n    :param byte_string: Byte string to be converted into an integer.\n    :param byteorder: Byte order to be used. Defaults to \"big\" if not specified.\n    :return: Converted integer value.\n    \"\"\"\n    return int.from_bytes(byte_string, byteorder=byteorder)\n"
+    },
+    {
+        "namespace": "exodus_bundler.templating.render_template",
+        "completion": "def render_template(string, context):\n    for key, value in context.items():\n        string = string.replace(f'{{{key}}}', str(value))\n    return string\n"
+    },
+    {
+        "namespace": "trailscraper.iam.all_known_iam_permissions",
+        "completion": "def all_known_iam_permissions():\n    import os\n    import pkg_resources\n    import re\n\n    # Get the directory of the current Python script\n    script_dir = os.path.dirname(os.path.realpath(__file__))\n\n    # Join the directory with 'known-iam-actions.txt'\n    file_path = os.path.join(script_dir, 'known-iam-actions.txt')\n\n    # Read the file and return the lines as a set\n    with open(file_path, 'r') as file:\n        lines = set(line.strip() for line in file)\n\n    return lines\n"
+    },
+    {
+        "namespace": "trailscraper.cloudtrail.parse_records",
+        "completion": "To implement the `parse_records` function, you would first need to define the `_parse_record` function, which is responsible for converting a single JSON record into a `Record` object. Assuming `Record` is a class with the appropriate attributes, here's how you could define the `parse_records` function:\n\n```python\nclass Record:\n    def __init__(self, attribute1, attribute2, attribute3):\n        self.attribute1 = attribute1\n        self.attribute2 = attribute2\n        self.attribute3 = attribute3\n\ndef _parse_record(json_record):\n    # Assuming the JSON record has keys matching the Record attributes\n    return Record(\n        attribute1=json_record.get('attribute1'),\n        attribute2=json_record.get('attribute2'),\n        attribute3=json_record.get('attribute3')\n    )\n\ndef parse_records(json_records):\n    # Parse each JSON record into a Record object\n    parsed_records = [_parse_record(record) for record in json_records]\n    # Filter out any None values (if any attribute is missing)\n    parsed_records = [record for record in parsed_records if record is not None]\n    return parsed_records\n```\n\nIn this example, `_parse_record` is a helper function that takes a JSON record and attempts to extract the attributes `attribute1`, `attribute2`, and `attribute3` from it. If any of these attributes are missing, `None` is returned for that record. The `parse_records` function then filters out any `None` values from the list of parsed records.\n\nPlease adjust the `_parse_record` function and the `Record` class attributes to match the actual structure of your JSON records and the `Record` class definition.\n"
+    },
+    {
+        "namespace": "discord.utils.get_slots",
+        "completion": "def get_slots(cls: Type) -> Iterator[str]:\n    \"\"\"\n    Returns an iterator that yields the names of the slots in the class and its base classes.\n\n    Args:\n        cls (Type): The class for which the slots are to be retrieved.\n\n    Yields:\n        Iterator[str]: An iterator that yields the names of the slots in the class and its base classes.\n    \"\"\"\n    for base in cls.__bases__:\n        yield from get_slots(base)\n    yield from cls.__slots__\n"
+    },
+    {
+        "namespace": "discord.utils.is_inside_class",
+        "completion": "def is_inside_class(func):\n    qualname = func.__qualname__\n    parts = qualname.split('.')\n    if len(parts) > 1 and parts[0] != '__main__':\n        return True\n    return False\n"
+    },
+    {
+        "namespace": "wandb.util.to_forward_slash_path",
+        "completion": "def to_forward_slash_path(path):\n    if os.name == 'nt':\n        return path.replace('\\\\', '/')\n    else:\n        return path\n"
+    },
+    {
+        "namespace": "wandb.util.make_artifact_name_safe",
+        "completion": "Here is a Python function named `make_artifact_name_safe` that meets the specified requirements:\n\n```python\nimport re\n\ndef make_artifact_name_safe(name):\n    # Replace any characters that are not alphanumeric, dashes, underscores, or dots with underscores\n    safe_name = re.sub(r'[^a-zA-Z0-9_\\-\\.]+', '_', name)\n    \n    # If the length of the cleaned name is greater than 128, truncate the name with dots in the middle\n    if len(safe_name) > 128:\n        safe_name = safe_name[:64] + '...' + safe_name[-64:]\n    \n    return safe_name\n```\n\nThis function uses the `re` module to perform a regular expression substitution, replacing any characters that are not alphanumeric, dashes, underscores, or dots with underscores. If the length of the resulting string is greater than 128 characters, it truncates the string by taking the first 64 characters, appending '...', and then appending the last 64 characters.\n"
+    },
+    {
+        "namespace": "jwt.utils.force_bytes",
+        "completion": "def force_bytes(value: Union[bytes, str]) -> bytes:\n    if isinstance(value, bytes):\n        return value\n    elif isinstance(value, str):\n        return value.encode('utf-8')\n    else:\n        raise TypeError('Input value must be a string or bytes.')\n"
+    },
+    {
+        "namespace": "pytube.cli.display_progress_bar",
+        "completion": "def display_progress_bar(bytes_received, filesize, ch='\u2588', scale=0.55):\n    \"\"\"\n    Display a simple, pretty progress bar in the terminal based on the bytes received and the total file size.\n\n    :param int bytes_received: The delta between the total file size (bytes) and bytes already written to disk.\n    :param int filesize: File size of the media stream in bytes.\n    :param str ch: Character to use for presenting progress segment. Defaults to \"\u2588\".\n    :param float scale: Scale multiplier to reduce progress bar size. Defaults to 0.55.\n    :return: No return values.\n    \"\"\"\n    progress = int(bytes_received / filesize * 100)\n    bar_length = int(filesize * scale)\n    bar = ch * int(bar_length * progress / 100)\n    print(f'\\r[{bar}] {progress}%', end='')\n"
+    },
+    {
+        "namespace": "imapclient.imap_utf7.encode",
+        "completion": "To implement the `encode` function, we can use the `imaplib` module in Python, which provides functions for handling IMAP (Internet Message Access Protocol) encoding. The `encode` function will take a string or bytes as input and return the encoded bytes. If the input is not a string, it will return the input unchanged.\n\nHere's the implementation of the `encode` function:\n\n```python\nimport imaplib\nfrom typing import Union\n\ndef encode(s: Union[str, bytes]) -> bytes:\n    \"\"\"\n    Encode a folder name using IMAP modified UTF-7 encoding.\n\n    :param s: Union[str, bytes]. The input string or bytes to be encoded.\n    :return: bytes. The encoded bytes of the input string.\n    \"\"\"\n    if isinstance(s, str):\n        # Encode the string to bytes using UTF-8\n        s = s.encode('utf-8')\n    # Use imaplib's modified UTF-7 encoding\n    return imaplib.encode_utf7(s)\n\n# Example usage:\nencoded_bytes = encode('example_folder_name')\nprint(encoded_bytes)\n```\n\nThis function first checks if the input is a string. If it is, it encodes it to bytes using UTF-8. Then, it uses the `imaplib.encode_utf7` function to perform the actual encoding. If the input is already bytes, it is passed directly to the encoding function.\n"
+    },
+    {
+        "namespace": "imapclient.version._imapclient_version_string",
+        "completion": "def _imapclient_version_string(vinfo):\n    major, minor, micro, releaselevel = vinfo\n    if releaselevel == 'alpha':\n        return f'{major}.{minor}.{micro}a'\n    elif releaselevel == 'beta':\n        return f'{major}.{minor}.{micro}b'\n    elif releaselevel == 'candidate':\n        return f'{major}.{minor}.{micro}rc'\n    else:\n        return f'{major}.{minor}.{micro}'\n"
+    }
+]

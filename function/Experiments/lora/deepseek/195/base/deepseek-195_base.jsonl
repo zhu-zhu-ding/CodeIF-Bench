@@ -1,0 +1,202 @@
+[
+    {
+        "task_id": 11,
+        "completion": "Here is a Python function that removes the first and last occurrence of a given character from a string:\n\n```python\ndef remove_occ(s, ch):\n    first_index = s.find(ch)\n    last_index = s.rfind(ch)\n    if first_index != -1 and last_index != -1:\n        s = s[:first_index] + s[first_index+1:]\n        s = s[:last_index] + s[last_index+1:]\n    return s\n```\n\nThis function works by first finding the index of the first and last occurrence of the given character in the string. If both indices are valid (i.e., they are not -1), it then slices the string to remove the first and last occurrence of the character.\n"
+    },
+    {
+        "task_id": 12,
+        "completion": "Here is a Python function that sorts a given matrix in ascending order according to the sum of its rows:\n\n```python\ndef sort_matrix(matrix):\n    # Calculate the sum of each row\n    row_sums = [sum(row) for row in matrix]\n    # Sort the matrix based on the row sums\n    sorted_matrix = sorted(matrix, key=lambda x: sum(x))\n    return sorted_matrix\n```\n\nThis function works by first calculating the sum of each row in the input matrix and storing these sums in a list called `row_sums`. It then sorts the matrix based on these row sums using the `sorted` function and the `key` parameter, which specifies a function of one argument that is used to extract a comparison key from each element in the matrix. The `lambda` function `lambda x: sum(x)` is used to sum the elements of each row.\n\nHere is an example of how to use this function:\n\n```python\nmatrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nsorted_matrix = sort_matrix(matrix)\nprint(sorted_matrix)\n```\n\nThis will output:\n\n```\n[[1, 2, 3], [4, 5, 6], [7, 8, 9]]\n```\n\nThis is the original matrix, since the sums of the rows are all the same (6), and the original order is preserved.\n"
+    },
+    {
+        "task_id": 13,
+        "completion": "Sure, here is a simple Python function that counts the most common words in a dictionary.\n\n```python\nfrom collections import Counter\n\ndef count_common(dictionary):\n    # Convert the dictionary to a list of words\n    words = list(dictionary.values())\n\n    # Count the frequency of each word\n    word_counts = Counter(words)\n\n    # Return the most common word(s)\n    return word_counts.most_common(1)\n```\n\nThis function uses the `Counter` class from the `collections` module to count the frequency of each word in the dictionary. The `most_common(1)` method returns a list of the most common word(s) and their counts.\n\nPlease note that this function assumes that the dictionary is a dictionary where the keys are the words and the values are the counts. If your dictionary is structured differently, you may need to adjust the function accordingly.\n"
+    },
+    {
+        "task_id": 14,
+        "completion": "Sure, here is a simple Python function that calculates the volume of a triangular prism. The function takes the base, height, and length of the prism as parameters.\n\n```python\ndef find_volume(base, height, length):\n    # Calculate the area of the triangular base\n    area = 0.5 * base * height\n    # Calculate the volume of the prism\n    volume = area * length\n    return volume\n```\n\nThis function first calculates the area of the triangular base using the formula for the area of a triangle (0.5 * base * height). It then multiplies this area by the length of the prism to find the volume.\n"
+    },
+    {
+        "task_id": 15,
+        "completion": "Here is a simple Python function that splits a string at lowercase letters:\n\n```python\ndef split_lowerstring(s):\n    return s.split('a')\n```\n\nThis function uses the `split()` method of Python strings, which splits a string into a list where each word is a list item. The `split()` method splits a string into a list where each word is a list item.\n\nIn this case, we are splitting the string `s` at every occurrence of the lowercase letter 'a'.\n\nPlease note that this function will only split the string at the lowercase letter 'a'. If you want to split the string at all lowercase letters, you will need to use a loop to iterate over all lowercase letters and split the string at each one.\n\nHere is an example of how to do this:\n\n```python\ndef split_lowerstring(s):\n    result = [s]\n    for c in 'abcdefghijklmnopqrstuvwxyz':\n        result = [x for sublist in result for x in (sublist.split(c),)]\n    return result\n```\n\nThis function will split the string at every occurrence of any lowercase letter.\n"
+    },
+    {
+        "task_id": 16,
+        "completion": "Sure, here is a simple Python function that uses regular expressions to find sequences of lowercase letters joined with an underscore:\n\n```python\nimport re\n\ndef text_lowercase_underscore(text):\n    pattern = r'\\b[a-z]+_[a-z]+\\b'\n    matches = re.findall(pattern, text)\n    return matches\n```\n\nThis function will return a list of all sequences of lowercase letters joined with an underscore in the input text.\n\nFor example, if you call `text_lowercase_underscore('hello_world this_is_a_test')`, it will return `['hello_world', 'this_is_a_test']`.\n"
+    },
+    {
+        "task_id": 17,
+        "completion": "Sure, here is a simple function in Python to calculate the perimeter of a square:\n\n```python\ndef square_perimeter(side_length):\n    return 4 * side_length\n```\n\nThis function takes the length of one side of the square as an argument and returns the perimeter. The perimeter of a square is simply the side length multiplied by 4.\n"
+    },
+    {
+        "task_id": 18,
+        "completion": "Here is a Python function that removes characters from the first string which are present in the second string:\n\n```python\ndef remove_dirty_chars(s1, s2):\n    return ''.join(c for c in s1 if c not in s2)\n```\n\nThis function uses a generator expression to iterate over each character in `s1` and includes it in the result only if it is not present in `s2`. The `join` method is used to concatenate the characters back into a string.\n"
+    },
+    {
+        "task_id": 19,
+        "completion": "def test_duplicate(arr):\n    if len(arr) == len(set(arr)):\n        return False\n    else:\n        return True\n"
+    },
+    {
+        "task_id": 20,
+        "completion": "A Woodall number is a positive integer of the form 2^n * (2^n - 1) for some non-negative integer n.\n\nHere is a Python function that checks if a given number is a Woodall number:\n\n```python\ndef is_woodall(n):\n    i = 0\n    while True:\n        woodall_num = 2**i * (2**i - 1)\n        if woodall_num == n:\n            return True\n        if woodall_num > n:\n            return False\n        i += 1\n```\n\nThis function uses a while loop to generate Woodall numbers starting from 0. It checks if the generated number is equal to the input number `n`. If it is, the function returns `True`. If the generated number is greater than `n`, the function returns `False`. If the function has not returned after checking all possible Woodall numbers, it means `n` is not a Woodall number, and the function returns `False`.\n\nPlease note that this function is not the most efficient for large numbers, as it checks all possible Woodall numbers up to `n`. For a more efficient solution, you can use a mathematical approach to directly check if `n` is a Woodall number without generating all previous Woodall numbers.\n"
+    },
+    {
+        "task_id": 21,
+        "completion": "Here is a simple Python function that does exactly that:\n\n```python\ndef multiples_of_num(n, m):\n    multiples = [i * n for i in range(1, m + 1)]\n    return multiples\n```\n\nThis function takes two arguments, `n` and `m`. `n` is the number you want to find multiples of, and `m` is the number of multiples you want to find. The function uses a list comprehension to generate a list of the first `m` multiples of `n`.\n\nFor example, if you call `multiples_of_num(3, 5)`, the function will return `[3, 6, 9, 12, 15]`, which are the first five multiples of 3.\n"
+    },
+    {
+        "task_id": 22,
+        "completion": "def find_first_duplicate(nums):\n    num_set = set()\n    for num in nums:\n        if num in num_set:\n            return num\n        num_set.add(num)\n    return -1\n"
+    },
+    {
+        "task_id": 23,
+        "completion": "Here is a Python function named 'maximum_sum' that finds the maximum sum of elements of lists in a list of lists:\n\n```python\ndef maximum_sum(list_of_lists):\n    return max(sum(sub_list) for sub_list in list_of_lists)\n```\n\nThis function uses a generator expression to sum each sublist in `list_of_lists` and then uses the `max` function to find the maximum sum.\n"
+    },
+    {
+        "task_id": 24,
+        "completion": "def binary_to_decimal(binary):\n    binary = str(binary)\n    decimal = 0\n    for digit in binary:\n        decimal = decimal*2 + int(digit)\n    return decimal\n"
+    },
+    {
+        "task_id": 25,
+        "completion": "def find_product(arr):\n    count_dict = {}\n    for num in arr:\n        if num in count_dict:\n            count_dict[num] += 1\n        else:\n            count_dict[num] = 1\n    product = 1\n    for num, count in count_dict.items():\n        if count == 1:\n            product *= num\n    return product\n"
+    },
+    {
+        "task_id": 26,
+        "completion": "Sure, here is a simple function that checks if a given list of tuples contains all k elements:\n\n```python\ndef check_k_elements(tuples_list, k):\n    for tup in tuples_list:\n        if len(tup) != k:\n            return False\n    return True\n```\n\nThis function iterates over each tuple in the list and checks if the length of the tuple is equal to k. If any tuple has a length different from k, the function immediately returns False. If all tuples have a length of k, the function returns True.\n"
+    },
+    {
+        "task_id": 27,
+        "completion": "Sure, here is a simple Python function that uses list comprehension to remove all digits from a list of strings:\n\n```python\ndef remove(input_list):\n    return [''.join([i for i in x if not i.isdigit()]) for x in input_list]\n```\n\nThis function works by iterating over each string in the input list, and for each string, it iterates over each character. If the character is not a digit (as determined by the `isdigit()` method), it is included in the new string. The `join()` method is used to combine the characters back into a string.\n\nFor example, if you call `remove(['abc123', 'def456', 'ghi789'])`, it will return `['abc', 'def', 'ghi']`.\n"
+    },
+    {
+        "task_id": 28,
+        "completion": "Sure, here is a simple Python function to calculate the binomial coefficient using the formula:\n\n```python\ndef binomial_coeff(n, k):\n    if k > n:\n        return 0\n    if k == 0 or k == n:\n        return 1\n    return binomial_coeff(n - 1, k - 1) + binomial_coeff(n - 1, k)\n```\n\nThis function uses recursion to calculate the binomial coefficient. However, this function is not efficient for large values of `n` and `k` because it performs a lot of redundant calculations.\n\nA more efficient way to calculate the binomial coefficient is to use dynamic programming:\n\n```python\ndef binomial_coeff(n, k):\n    C = [[0 for x in range(k+1)] for x in range(n+1)]\n    for i in range(n+1):\n        for j in range(min(i, k)+1):\n            if j == 0 or j == i:\n                C[i][j] = 1\n            else:\n                C[i][j] = C[i-1][j-1] + C[i-1][j]\n    return C[n][k]\n```\n\nThis function uses a 2D array `C` to store the results of subproblems, which avoids redundant calculations.\n"
+    },
+    {
+        "task_id": 29,
+        "completion": "def get_odd_occurrence(arr):\n    res = 0\n    for element in arr:\n        res ^= element\n    return res\n\n# Test the function\narr = [2, 3, 5, 4, 5, 2, 4, 3, 5, 2, 4, 4, 2]\nprint(get_odd_occurrence(arr))  # Output: 5\n"
+    },
+    {
+        "task_id": 30,
+        "completion": "Here is a Python function that counts all the substrings starting and ending with the same characters:\n\n```python\ndef count_substring_with_equal_ends(s):\n    n = len(s)\n    count = 0\n    for i in range(n):\n        for j in range(i+1, n):\n            if s[i] == s[j]:\n                count += 1\n    return count\n```\n\nThis function works by iterating over all possible substrings of the input string `s` and checking if the first and last characters of the substring are the same. If they are, it increments the `count` variable. The function returns the total count of such substrings.\n\nPlease note that this function has a time complexity of O(n^2), where n is the length of the input string. This is because it has to check every possible substring of the string. If the input string is very long, this function may take a long time to run.\n"
+    },
+    {
+        "task_id": 31,
+        "completion": "Here is a Python function that uses the heapq module to find the top k integers that occur most frequently from a given list of sorted and distinct integers:\n\n```python\nimport heapq\n\ndef func(nums, k):\n    count_map = {}\n    for num in nums:\n        if num in count_map:\n            count_map[num] += 1\n        else:\n            count_map[num] = 1\n\n    heap = []\n    for num, count in count_map.items():\n        if len(heap) < k:\n            heapq.heappush(heap, (count, num))\n        else:\n            if count > heap[0][0]:\n                heapq.heapreplace(heap, (count, num))\n\n    return [num for _, num in heap]\n```\n\nIn this function, we first create a dictionary to count the occurrences of each number. Then, we iterate over the dictionary and use a heap to keep track of the top k numbers with the highest counts. If the heap size is less than k, we push the current number and its count onto the heap. If the heap size is equal to k and the current count is greater than the smallest count in the heap, we replace the smallest count with the current count. Finally, we return the numbers in the heap.\n"
+    },
+    {
+        "task_id": 32,
+        "completion": "Here is a Python function that finds the largest prime factor of a given number:\n\n```python\ndef max_prime_factors(n):\n    max_prime = -1\n    while n % 2 == 0:\n        max_prime = 2\n        n >>= 1\n    for i in range(3, int(n**0.5) + 1, 2):\n        while n % i == 0:\n            max_prime = i\n            n = n / i\n    if n > 2:\n        max_prime = n\n    return int(max_prime)\n```\n\nThis function works by first dividing the input number by 2 as long as it is divisible. Then, it checks for any odd factors starting from 3 and goes up to the square root of the number. If a factor is found, it updates the `max_prime` variable and divides the number by the factor. If the number is greater than 2 after all these steps, it means the number itself is a prime number and is the largest prime factor.\n"
+    },
+    {
+        "task_id": 33,
+        "completion": "Sure, here is a simple Python function that converts a decimal number to a binary number:\n\n```python\ndef decimal_to_binary(n):\n    return bin(n).replace(\"0b\", \"\")\n```\n\nThis function uses Python's built-in `bin` function to convert the decimal number to binary, and then removes the \"0b\" prefix that `bin` adds.\n\nIf you want to implement the conversion manually (without using `bin`), you can do so with the following function:\n\n```python\ndef decimal_to_binary(n):\n    binary = \"\"\n    while n > 0:\n        binary = str(n % 2) + binary\n        n = n // 2\n    return binary\n```\n\nThis function works by repeatedly dividing the number by 2 and prepending the remainder to the binary string. The process continues until the number is 0.\n"
+    },
+    {
+        "task_id": 34,
+        "completion": "Sure, here is a Python function that uses binary search to find the missing number in a sorted array.\n\n```python\ndef find_missing(arr):\n    left, right = 0, len(arr) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] != mid + 1 and (mid == 0 or arr[mid - 1] == mid):\n            return mid + 1\n        elif arr[mid] == mid + 1:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1\n```\n\nThis function works by checking the middle element of the array. If the middle element is not equal to its index + 1, and the element before it is equal to its index, then the missing number is the index + 1. If the middle element is equal to its index + 1, then the missing number is to the right of the middle element, so we update the left pointer. If the middle element is not equal to its index + 1 and the element before it is not equal to its index, then the missing number is to the left of the middle element, so we update the right pointer.\n\nPlease note that this function assumes that the array is sorted in ascending order and contains no duplicate elements.\n"
+    },
+    {
+        "task_id": 35,
+        "completion": "A rectangular number is a number that can be represented as the product of two positive integers. For example, 1, 2, 3, 4, 6, 8, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36, 40, 42, 45, 48, 50, 54, 56, 60, 64, 70, 72, 75, 77, 80, 81, 84, 90, 96, 100, 105, 112, 120, 125, 126, 128, 135, 140, 144, 150, 160, 162, 168, 175, 180, 189, 192, 196, 200, 210, 216, 224, 225, 240, 243, 250, 252, 256, 270, 280, 288, 300, 308, 315, 320, 324, 336, 350, 360, 375, 378, 384, 392, 400, 405, 420, 432, 448, 450, 455, 480, 486, 500, 504, 525, 540, 560, 576, 600, 605, 612, 625, 630, 640, 648, 672, 675, 700, 705, 720, 728, 735, 750, 756, 768, 784, 800, 810, 840, 864, 900, 911, 924, 945, 960, 972, 980, 1000, 1008, 1024, 1050, 1080, 1100, 1120, 1152, 1176, 1200, 1215, 1224, 1250, 1260, 1280, 1296, 1323, 1344, 1350, 1400, 1416, 1440, 1458, 1470, 1500, 1512, 1536, 1568, 1575, 1600, 1620, 1650, 1680, 1728, 1750, 1764, 1792, 1800, 1820, 1848, 1875, 1890, 1920, 1944, 1960, 1984, 2000, 2016, 2025, 2048, 2100, 2160, 2200, 2240, 2268, 2304, 2352, 2400, 2430, 2450, 2475, 2500, 2520, 2560, 2592, 2646, 2688, 2700, 2730, 2800, 2835"
+    },
+    {
+        "task_id": 36,
+        "completion": "Here is a Python function that finds the nth digit in the proper fraction of two given numbers:\n\n```python\ndef find_nth_digit(num1, num2, n):\n    # Convert the numbers to strings\n    num1_str = str(num1)\n    num2_str = str(num2)\n\n    # Concatenate the two numbers\n    fraction_str = num1_str + num2_str\n\n    # Check if n is within the range of the fraction\n    if n < 0 or n >= len(fraction_str):\n        return None\n\n    # Return the nth digit\n    return int(fraction_str[n])\n```\n\nThis function first converts the two given numbers to strings. It then concatenates these strings to form the proper fraction. If `n` is out of range (less than 0 or greater than or equal to the length of the fraction), it returns `None`. Otherwise, it returns the nth digit of the fraction as an integer.\n"
+    },
+    {
+        "task_id": 37,
+        "completion": "Here is a Python function that sorts a mixed list of integers and strings.\n\n```python\ndef sort_mixed_list(mixed_list):\n    return sorted(mixed_list, key=lambda x: (isinstance(x, int), x))\n```\n\nThis function uses the `sorted` function to sort the list. The `key` parameter is a function that takes an element from the list and returns a value that will be used for sorting. In this case, the function returns a tuple. The first element of the tuple is a boolean indicating whether the element is an integer (`True` if it is, `False` if it's a string). The second element of the tuple is the element itself.\n\nThe `sorted` function sorts the list first by the boolean value (which will be `False` for strings and `True` for integers), and then by the actual value. This means that all integers will be sorted before all strings.\n\nFor example:\n\n```python\nprint(sort_mixed_list([1, 'a', 2, 'b', 'c', 3]))\n```\n\nOutput:\n\n```python\n[1, 2, 3, 'a', 'b', 'c']\n```\n"
+    },
+    {
+        "task_id": 38,
+        "completion": "Here is a Python function that accomplishes this task:\n\n```python\ndef div_even_odd(nums):\n    even = [x for x in nums if x % 2 == 0]\n    odd = [x for x in nums if x % 2 != 0]\n    if even and odd:\n        return even[0] / odd[0]\n    else:\n        return \"No even or odd number in the list\"\n```\n\nThis function works by first creating two lists: `even` and `odd`, which contain only the even and odd numbers from the input list, respectively. It then checks if both lists are not empty. If they are not, it returns the division of the first element of each list. If either list is empty, it returns a message indicating that there are no even or odd numbers in the list.\n"
+    },
+    {
+        "task_id": 39,
+        "completion": "Here is a Python function that checks if the letters of a given string can be rearranged so that two characters that are adjacent to each other are different:\n\n```python\ndef rearrange_string(s):\n    # Count the frequency of each character\n    freq = {}\n    for char in s:\n        if char in freq:\n            freq[char] += 1\n        else:\n            freq[char] = 1\n\n    # Sort the characters by their frequency in descending order\n    sorted_chars = sorted(freq.items(), key=lambda x: x[1], reverse=True)\n\n    # Check if the characters can be rearranged\n    for i in range(len(sorted_chars) - 1):\n        if sorted_chars[i][1] > sorted_chars[i + 1][1]:\n            return False\n\n    return True\n```\n\nThis function first counts the frequency of each character in the string. Then, it sorts the characters by their frequency in descending order. Finally, it checks if the characters can be rearranged so that two characters that are adjacent to each other are different. If the frequency of a character is greater than the frequency of the next character, it means that the characters cannot be rearranged to satisfy the condition, and the function returns `False`. Otherwise, it returns `True`.\n"
+    },
+    {
+        "task_id": 40,
+        "completion": "Sure, here is a function that uses the `collections` module to find the frequency of elements in a given list of lists:\n\n```python\nimport collections\n\ndef freq_element(list_of_lists):\n    flat_list = [item for sublist in list_of_lists for item in sublist]\n    freq_dict = collections.Counter(flat_list)\n    return freq_dict\n```\n\nIn this function, we first flatten the list of lists into a single list using list comprehension. Then, we use `collections.Counter` to count the frequency of each element in the list. The function returns a dictionary where the keys are the elements and the values are their frequencies.\n"
+    },
+    {
+        "task_id": 41,
+        "completion": "Sure, here is a Python function that uses a lambda function to filter even numbers from a list:\n\n```python\ndef filter_evennumbers(numbers):\n    return list(filter(lambda x: (x%2 == 0), numbers))\n```\n\nIn this function, `filter_evennumbers`, `filter` is a built-in Python function that constructs an iterator from elements of `numbers` for which the function `lambda x: (x%2 == 0)` returns true. The `lambda` function checks if a number is even by checking if the remainder of the number divided by 2 is 0.\n\nYou can use this function like this:\n\n```python\nnumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\nprint(filter_evennumbers(numbers))\n```\n\nThis will output:\n\n```python\n[2, 4, 6, 8, 10]\n```\n"
+    },
+    {
+        "task_id": 42,
+        "completion": "Here is a Python function named 'find_sum' that finds the sum of repeated elements in a given array.\n\n```python\ndef find_sum(arr):\n    # Create an empty dictionary to store the count of each element\n    count_dict = {}\n    for num in arr:\n        if num in count_dict:\n            count_dict[num] += 1\n        else:\n            count_dict[num] = 1\n\n    # Find the sum of elements that appear more than once\n    sum_repeated = 0\n    for num, count in count_dict.items():\n        if count > 1:\n            sum_repeated += num * count\n\n    return sum_repeated\n```\n\nThis function works by first counting the occurrences of each element in the array using a dictionary. Then, it iterates over the dictionary and adds up the sum of the elements that appear more than once, taking into account their count.\n"
+    },
+    {
+        "task_id": 43,
+        "completion": "Sure, here is a Python function that uses regex to find sequences of lowercase letters joined with an underscore:\n\n```python\nimport re\n\ndef text_match(text):\n    pattern = '[_][a-z]+'\n    if re.search(pattern, text):\n        return True\n    else:\n        return False\n```\n\nIn this function, `pattern` is a regex pattern that matches a sequence of one or more lowercase letters (`[a-z]+`) joined with an underscore (`[_]`). The `re.search` function is used to search the input `text` for the first occurrence of this pattern. If a match is found, `re.search` returns a match object, which is truthy, so the function returns `True`. If no match is found, `re.search` returns `None`, which is falsy, so the function returns `False`.\n"
+    },
+    {
+        "task_id": 44,
+        "completion": "Sure, here is a simple function in Python that uses the `str.startswith()` method to check if a string starts with a specific word:\n\n```python\ndef text_match_string(text, word):\n    if text.startswith(word):\n        return True\n    else:\n        return False\n```\n\nThis function takes two arguments: `text` and `word`. It checks if `text` starts with `word` and returns `True` if it does, and `False` otherwise.\n"
+    },
+    {
+        "task_id": 45,
+        "completion": "Sure, here is a Python function that uses the built-in `math.gcd` function to find the greatest common divisor (GCD) of an array of numbers:\n\n```python\nimport math\nfrom functools import reduce\n\ndef get_gcd(arr):\n    return reduce(math.gcd, arr)\n```\n\nThis function uses the `reduce` function from the `functools` module to apply the `math.gcd` function cumulatively to the elements of the array, from left to right, so as to reduce the array to a single GCD value.\n\nNote: This function assumes that the input array `arr` is not empty and contains only positive integers. If the array can contain non-integer or negative values, you should add error checking to handle these cases.\n"
+    },
+    {
+        "task_id": 46,
+        "completion": "Sure, here is a simple Python function that checks if all the numbers in a list are distinct.\n\n```python\ndef test_distinct(nums):\n    return len(nums) == len(set(nums))\n```\n\nThis function works by converting the list to a set, which automatically removes any duplicate elements. If the length of the list and the set are the same, that means all elements in the list were distinct. If they are not the same, that means there were duplicate elements in the list.\n"
+    },
+    {
+        "task_id": 47,
+        "completion": "Sure, here is a Python function that computes the last digit of the factorial of a number divided by the factorial of another number.\n\n```python\ndef compute_last_digit(a, b):\n    # Calculate the last digit of factorial(a)\n    last_digit_a = (a % 10)\n\n    # Calculate the last digit of factorial(b)\n    last_digit_b = (b % 10)\n\n    # Calculate the last digit of factorial(a) / factorial(b)\n    last_digit_result = (last_digit_a // last_digit_b)\n\n    return last_digit_result\n```\n\nThis function works by first calculating the last digit of `a` and `b` using the modulo operator (`%`). It then calculates the last digit of the division of `a` by `b` by using integer division (`//`). The result is the last digit of the factorial of `a` divided by the factorial of `b`.\n\nPlease note that this function assumes that `a` and `b` are positive integers. If `b` is zero, the function will raise a `ZeroDivisionError`.\n"
+    },
+    {
+        "task_id": 48,
+        "completion": "Here is a Python function that sets all odd bits of a given number:\n\n```python\ndef odd_bit_set_number(n):\n    # Convert the number to binary and reverse it\n    binary = bin(n)[2:][::-1]\n    # Iterate over the binary string\n    for i in range(len(binary)):\n        # If the bit is 0 and the index is odd, set it to 1\n        if binary[i] == '0' and i % 2 != 0:\n            binary = binary[:i] + '1' + binary[i+1:]\n    # Convert the binary string back to a number and return it\n    return int(binary[::-1], 2)\n```\n\nThis function works by first converting the given number to binary and reversing it. It then iterates over the binary string, setting all bits at odd indices (0-based) to 1 if they are currently 0. Finally, it converts the binary string back to a number and returns it.\n"
+    },
+    {
+        "task_id": 49,
+        "completion": "Here is a Python function that extracts every first or specified element from a given two-dimensional list:\n\n```python\ndef specified_element(input_list, position=0):\n    return [x[position] for x in input_list]\n```\n\nThis function uses list comprehension to iterate over each sublist in the input_list and extract the element at the specified position (default is 0, which is the first element).\n\nFor example, if you have a two-dimensional list like this:\n\n```python\nlist_2d = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\n```\n\nYou can extract the first element from each sublist like this:\n\n```python\nprint(specified_element(list_2d))  # Output: [1, 4, 7]\n```\n\nOr, if you want to extract a different element, you can specify the position:\n\n```python\nprint(specified_element(list_2d, 1))  # Output: [2, 5, 8]\n```\n"
+    },
+    {
+        "task_id": 50,
+        "completion": "Here is a Python function that uses a lambda function to find the list with the minimum length:\n\n```python\ndef min_length_list(list_of_lists):\n    return min(list_of_lists, key=lambda x: len(x))\n```\n\nThis function takes a list of lists as an argument and returns the list with the minimum length. The `key` parameter of the `min` function is set to a lambda function that returns the length of each list.\n"
+    },
+    {
+        "task_id": 51,
+        "completion": "Sure, here is a simple Python function that checks if a triangle is equilateral or not.\n\n```python\ndef check_equilateral(a, b, c):\n    if a == b == c:\n        return \"The triangle is equilateral\"\n    else:\n        return \"The triangle is not equilateral\"\n```\n\nIn this function, `a`, `b`, and `c` are the sides of the triangle. The function checks if all sides are equal, in which case it returns \"The triangle is equilateral\". Otherwise, it returns \"The triangle is not equilateral\".\n"
+    },
+    {
+        "task_id": 52,
+        "completion": "Sure, here is a simple function in Python to calculate the area of a parallelogram:\n\n```python\ndef parallelogram_area(base, height):\n    return base * height\n```\n\nThis function takes two arguments: the base and the height of the parallelogram, and returns their product as the area.\n"
+    },
+    {
+        "task_id": 53,
+        "completion": "def check_equality(input_string):\n    if input_string[0] == input_string[-1]:\n        return True\n    else:\n        return False\n"
+    },
+    {
+        "task_id": 54,
+        "completion": "Sure, here is a simple implementation of the counting sort algorithm in Python:\n\n```python\ndef counting_sort(arr):\n    # Find the maximum element in the array\n    max_val = max(arr)\n\n    # Initialize the count array with zeros\n    count = [0] * (max_val + 1)\n\n    # Store the count of each element in the count array\n    for num in arr:\n        count[num] += 1\n\n    # Reconstruct the sorted array\n    sorted_arr = []\n    for i in range(len(count)):\n        sorted_arr.extend([i] * count[i])\n\n    return sorted_arr\n```\n\nThis function works by first finding the maximum value in the input array, which is used to determine the size of the count array. It then populates the count array with the count of each element in the input array. Finally, it reconstructs the sorted array by iterating over the count array and adding each element the number of times it appears in the count array.\n"
+    },
+    {
+        "task_id": 55,
+        "completion": "Sure, I can help you with that. Here is a Python function that calculates the t-nth term of a geometric series:\n\n```python\ndef tn_gp(a, r, t):\n    \"\"\"\n    Calculate the t-nth term of a geometric series.\n\n    Parameters:\n    a (float): The first term of the geometric series.\n    r (float): The common ratio of the geometric series.\n    t (int): The term number to calculate.\n\n    Returns:\n    float: The t-nth term of the geometric series.\n    \"\"\"\n    return a * (r ** (t - 1))\n```\n\nIn this function, `a` is the first term of the geometric series, `r` is the common ratio, and `t` is the term number you want to calculate. The function uses the formula for the n-th term of a geometric series, which is `a * (r ** (n - 1))`.\n"
+    },
+    {
+        "task_id": 56,
+        "completion": "Here is a Python function that checks if a given number is one less than twice its reverse:\n\n```python\ndef check(n):\n    n_str = str(n)\n    reverse_n = int(n_str[::-1])\n    return n == 2 * reverse_n - 1\n```\n\nThis function works by first converting the input number to a string, then reversing the string to get the reverse of the number. It then checks if the original number is one less than twice the reverse. If it is, the function returns `True`; otherwise, it returns `False`.\n"
+    },
+    {
+        "task_id": 57,
+        "completion": "Here is a Python function that finds the largest number that can be formed with the given digits:\n\n```python\ndef find_max_num(digits):\n    digits.sort(reverse=True)\n    return int(''.join(map(str, digits)))\n```\n\nThis function works by first sorting the list of digits in descending order, which ensures that the largest number is formed. It then joins the sorted digits into a string and converts it to an integer to get the final result.\n"
+    },
+    {
+        "task_id": 58,
+        "completion": "Sure, here is a simple Python function that checks if two integers have opposite signs:\n\n```python\ndef opposite_signs(num1, num2):\n    return (num1 ^ num2) < 0\n```\n\nThis function uses the bitwise XOR operator (`^`). If the two numbers have opposite signs, their XOR will be negative.\n\nFor example, if `num1` is 1 and `num2` is -1, the XOR will be `1^(-1) = 0`, which is not negative, so the function will return `False`.\n\nIf `num1` is -1 and `num2` is 1, the XOR will be `(-1)^(1) = -2`, which is negative, so the function will return `True`.\n"
+    },
+    {
+        "task_id": 59,
+        "completion": "An octagonal number is a figurate number that extends the concept of triangular and square numbers to the eight-sided polygon. The nth octagonal number can be found by the formula n*(3*n - 2).\n\nHere is a Python function that implements this formula:\n\n```python\ndef is_octagonal(n):\n    return n * (3 * n - 2)\n```\n\nThis function takes an integer n as input and returns the nth octagonal number.\n"
+    },
+    {
+        "task_id": 60,
+        "completion": "Here is a Python function that uses dynamic programming to solve the problem:\n\n```python\ndef max_len_sub(arr):\n    n = len(arr)\n    dp = [1] * n\n    for i in range(1, n):\n        for j in range(i):\n            if abs(arr[i] - arr[j]) == i - j:\n                dp[i] = max(dp[i], dp[j] + 1)\n    return max(dp)\n```\n\nThis function works by iterating over the array and for each element, checking all previous elements to see if the difference between them and the current element is equal to the difference between their indices. If it is, it updates the maximum length of the subsequence ending at the current element.\n\nThe time complexity of this function is O(n^2), where n is the length of the input array. This is because in the worst case, the function has to check every pair of elements in the array.\n"
+    }
+]

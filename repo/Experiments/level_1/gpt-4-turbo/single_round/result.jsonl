@@ -1,0 +1,794 @@
+[
+    {
+        "namespace": "benedict.utils.type_util.is_json_serializable",
+        "type": "Input-Output Conditions",
+        "test": "tests/utils/test_type_util.py::type_util_test_case::test_input_output_conditions",
+        "completion": "def is_json_serializable(val):\n    \"\"\"\n    Check if the input value is JSON serializable.\n\n    :param val: Any. The input value to be checked for JSON serializability.\n    :return: Bool. True if the input value is JSON serializable, False otherwise.\n    \"\"\"\n    # List of JSON serializable types\n    serializable_types = (int, float, str, bool, type(None), list, tuple, dict)\n    \n    # Check if the type of the input value is in the list of serializable types\n    if isinstance(val, serializable_types):\n        # For lists, tuples, and dicts, check if their elements are serializable\n        if isinstance(val, (list, tuple)):\n            return all(is_json_serializable(item) for item in val)\n        elif isinstance(val, dict):\n            return all(is_json_serializable(key) and is_json_serializable(value) for key, value in val.items())\n        return True\n    else:\n        return False\n\n# Example usage:\nprint(is_json_serializable(42))  # True\nprint(is_json_serializable([1, 2, 3]))  # True\nprint(is_json_serializable({'a': 1, 'b': 2}))  # True\nprint(is_json_serializable({1, 2, 3}))  # False\nprint(is_json_serializable(complex(1, 2)))  # False\nprint(is_json_serializable(lambda x: x))  # False"
+    },
+    {
+        "namespace": "benedict.utils.type_util.is_json_serializable",
+        "type": "Exception Handling",
+        "test": "tests/utils/test_type_util.py::type_util_test_case::test_exception_handling",
+        "completion": "```python\nimport json\n\ndef is_json_serializable(val):\n    try:\n        json.dumps(val)\n        return True\n    except (TypeError, OverflowError):\n        return False\n```"
+    },
+    {
+        "namespace": "benedict.utils.type_util.is_json_serializable",
+        "type": "Edge Case Handling",
+        "test": "tests/utils/test_type_util.py::type_util_test_case::test_edge_case_handling",
+        "completion": "```python\nimport json\n\ndef is_json_serializable(val):\n    try:\n        json.dumps(val)\n        return True\n    except (TypeError, OverflowError):\n        return False\n```"
+    },
+    {
+        "namespace": "benedict.utils.type_util.is_json_serializable",
+        "type": "Functionality Extension",
+        "test": "tests/utils/test_type_util.py::type_util_test_case::test_functionality_extension",
+        "completion": "```python\nimport json\nimport numpy as np\n\ndef is_json_serializable(val):\n    \"\"\"\n    Check if the input value is JSON serializable.\n    \n    :param val: Any. The input value to be checked for JSON serializability.\n    :return: Bool. True if the input value is JSON serializable, False otherwise.\n    \"\"\"\n    try:\n        # First, check if the value is a numpy array or numpy scalar\n        if isinstance(val, (np.ndarray, np.generic)):\n            return False\n        \n        # Attempt to serialize the value using json.dumps\n        json.dumps(val)\n        return True\n    except (TypeError, OverflowError):\n        return False\n```"
+    },
+    {
+        "namespace": "benedict.utils.type_util.is_json_serializable",
+        "type": "Annotation Coverage",
+        "test": "tests/utils/test_type_util.py::type_util_test_case::test_annotation_coverage",
+        "completion": "```python\nimport json\nfrom typing import Any\n\ndef is_json_serializable(val: Any) -> bool:\n    \"\"\"\n    Check if the input value is JSON serializable.\n\n    :param val: Any. The input value to be checked for JSON serializability.\n    :return: Bool. True if the input value is JSON serializable, False otherwise.\n    \"\"\"\n    try:\n        json.dumps(val)\n        return True\n    except (TypeError, OverflowError):\n        return False\n```"
+    },
+    {
+        "namespace": "benedict.utils.type_util.is_json_serializable",
+        "type": "Code Complexity",
+        "test": "tests/utils/test_type_util.py::type_util_test_case::test_code_complexity",
+        "completion": "def is_json_serializable(val):\n    \"\"\"\n    Check if the input value is JSON serializable by checking if it is of the JSON serializable types.\n    \n    :param val: Any. The input value to be checked for JSON serializability.\n    :return: Bool. True if the input value is JSON serializable, False otherwise.\n    \"\"\"\n    # JSON serializable types include: str, int, float, bool, list, dict, None\n    return isinstance(val, (str, int, float, bool, list, dict, type(None)))"
+    },
+    {
+        "namespace": "benedict.utils.type_util.is_json_serializable",
+        "type": "Code Standard",
+        "test": "tests/utils/test_type_util.py::type_util_test_case::test_check_code_style",
+        "completion": "```python\nimport json\n\ndef is_json_serializable(val):\n    \"\"\"\n    Check if the input value is JSON serializable.\n    \n    :param val: Any. The input value to be checked for JSON serializability.\n    :return: Bool. True if the input value is JSON serializable, False otherwise.\n    \"\"\"\n    try:\n        json.dumps(val)\n        return True\n    except (TypeError, OverflowError):\n        return False\n```"
+    },
+    {
+        "namespace": "feedparser.urls.convert_to_idn",
+        "type": "Exception Handling",
+        "test": "tests/runtests.py::TestConvertToIdn::test_exception_handling_invalid_url",
+        "completion": "```python\nfrom urllib.parse import urlparse, urlunparse\n\ndef convert_to_idn(url):\n    # Check if the input is a valid URL\n    if not isinstance(url, str):\n        raise ValueError(\"Input must be a string representing a URL\")\n    \n    # Parse the URL\n    parsed_url = urlparse(url)\n    \n    # Check if the URL is valid\n    if not parsed_url.scheme or not parsed_url.netloc:\n        raise ValueError(\"Invalid URL provided\")\n    \n    try:\n        # Convert the host to IDN notation if necessary\n        idn_host = parsed_url.hostname.encode('idna').decode('ascii')\n        \n        # Reconstruct the URL with the IDN host\n        idn_url = parsed_url._replace(netloc=idn_host)\n        return urlunparse(idn_url)\n    except UnicodeError:\n        raise UnicodeError(\"Conversion to IDN failed\")\n```"
+    },
+    {
+        "namespace": "feedparser.urls.convert_to_idn",
+        "type": "Edge Case Handling",
+        "test": "tests/runtests.py::TestConvertToIdn::test_edge_case_empty_string",
+        "completion": "Here's a Python function that meets the requirements specified:\n\n```python\nfrom urllib.parse import urlparse, urlunparse\n\ndef convert_to_idn(url):\n    if not url:\n        return url  # Return the empty string if input is empty\n    \n    parsed_url = urlparse(url)\n    hostname = parsed_url.hostname\n    \n    if not hostname:\n        return url  # Return the original URL if there's no hostname\n    \n    try:\n        # Attempt to encode the hostname in ASCII to check if it's already IDN-safe\n        hostname.encode('ascii')\n    except UnicodeEncodeError:\n        # If it fails, convert the hostname to IDN notation\n        hostname = hostname.encode('idna').decode('ascii')\n    \n    # Reconstruct the URL with the possibly modified hostname\n    new_netloc = hostname\n    if parsed_url.port:\n        new_netloc += f\":{parsed_url.port}\"\n    if parsed_url.username:\n        new_netloc = f\"{parsed_url.username}@{new_netloc}\"\n    if parsed_url.password:\n        new_netloc = f\"{parsed_url.username}:{parsed_url.password}@{new_netloc}\"\n    \n    # Create a new ParseResult with the IDN-converted hostname\n    new_parsed_url = parsed_url._replace(netloc=new_netloc)\n    \n    # Convert the ParseResult back to a URL string\n    return urlunparse(new_parsed_url)\n\n# Example usage:\nprint(convert_to_idn(\"http://www.example.com\"))\nprint(convert_to_idn(\"http://www.xn--exmple-cua.com\"))  # Already in IDN\nprint(convert_to_idn(\"http://\u4f60\u597d\u4f60\u597d.com\"))\nprint(convert_to_idn(\"http://127.0.0.1\"))\nprint(convert_to_idn(\"\"))  # Empty string\n```\n\nThis function uses the `urlparse` and `urlunparse` functions from the `urllib.parse` module to parse the URL and reconstruct it after potentially converting the hostname to IDN notation. It handles edge cases such as empty strings, URLs with no host, and URLs with only IP addresses. The function also preserves other parts of the URL such as the port, username, and password if they are present."
+    },
+    {
+        "namespace": "feedparser.urls.convert_to_idn",
+        "type": "Functionality Extension",
+        "test": "tests/runtests.py::TestConvertToIdn::test_functionality_extension_query_fragment",
+        "completion": "Here's a Python function that meets the requirements:\n\n```python\nfrom urllib.parse import urlparse, urlunparse\n\ndef convert_to_idn(url):\n    \"\"\"\n    Convert a URL to IDN notation. It checks if the host can be encoded in ASCII.\n    If not, it converts the host to IDN form.\n    \n    :param url: String. The URL to be converted to IDN notation.\n    :return: String. The URL in IDN notation.\n    \"\"\"\n    # Parse the URL into components\n    parsed_url = urlparse(url)\n    \n    # Extract the hostname from the parsed URL\n    hostname = parsed_url.hostname\n    \n    # Check if the hostname can be encoded in ASCII\n    try:\n        hostname.encode('ascii')\n    except UnicodeEncodeError:\n        # Convert the hostname to IDN notation if it cannot be encoded in ASCII\n        hostname = hostname.encode('idna').decode('ascii')\n    \n    # Reconstruct the URL with the possibly converted hostname\n    idn_url = urlunparse(parsed_url._replace(netloc=hostname))\n    \n    return idn_url\n\n# Example usage:\nurl = \"http://www.\u4f8b\u5b50.com/path?query=example#fragment\"\nconverted_url = convert_to_idn(url)\nprint(converted_url)  # Output: http://www.xn--fsq.com/path?query=example#fragment\n```\n\nThis function uses the `urlparse` and `urlunparse` functions from the `urllib.parse` module to handle the URL parsing and reconstruction. It checks if the hostname can be encoded in ASCII and if not, it converts it to IDN notation using the `idna` encoding. The function ensures that other parts of the URL such as path, query parameters, and fragments remain unchanged."
+    },
+    {
+        "namespace": "feedparser.urls.convert_to_idn",
+        "type": "Annotation Coverage",
+        "test": "tests/runtests.py::TestConvertToIdn::test_annotation_coverage",
+        "completion": "from urllib.parse import urlparse, urlunparse\nfrom typing import Tuple\n\ndef convert_to_idn(url: str) -> str:\n    \"\"\"\n    Convert a URL to IDN notation by encoding the host part if necessary.\n\n    :param url: String. The URL to be converted to IDN notation.\n    :return: String. The URL in IDN notation.\n    \"\"\"\n    parsed_url = urlparse(url)\n    try:\n        ascii_host = parsed_url.hostname.encode('ascii')\n        return url\n    except UnicodeEncodeError:\n        idn_host = parsed_url.hostname.encode('idna').decode('ascii')\n        new_netloc = parsed_url.netloc.replace(parsed_url.hostname, idn_host)\n        new_url_parts: Tuple[str, str, str, str, str, str] = (\n            parsed_url.scheme,\n            new_netloc,\n            parsed_url.path,\n            parsed_url.params,\n            parsed_url.query,\n            parsed_url.fragment\n        )\n        return urlunparse(new_url_parts)"
+    },
+    {
+        "namespace": "feedparser.urls.convert_to_idn",
+        "type": "Code Complexity",
+        "test": "tests/runtests.py::TestConvertToIdn::test_code_complexity",
+        "completion": "from urllib.parse import urlparse, urlunparse\n\ndef convert_to_idn(url):\n    \"\"\"\n    Convert a URL to IDN notation if the host can't be encoded in ASCII.\n\n    :param url: String. The URL to be converted to IDN notation.\n    :return: String. The URL in IDN notation.\n    \"\"\"\n    parsed_url = urlparse(url)\n    try:\n        # Try encoding the hostname to ASCII to check if it's already in a valid ASCII form\n        parsed_url.hostname.encode('ascii')\n    except UnicodeEncodeError:\n        # If it fails, convert the hostname to IDN (Punycode) notation\n        idn_hostname = parsed_url.hostname.encode('idna').decode('ascii')\n        # Reconstruct the URL with the IDN hostname\n        idn_url = urlunparse(parsed_url._replace(netloc=idn_hostname))\n        return idn_url\n    else:\n        # If no exception, return the original URL\n        return url\n\n# Example usage:\n# print(convert_to_idn('http://www.\u4f8b\u5b50.\u6d4b\u8bd5'))\n# print(convert_to_idn('http://www.example.com'))"
+    },
+    {
+        "namespace": "feedparser.urls.convert_to_idn",
+        "type": "Code Standard",
+        "test": "tests/runtests.py::TestConvertToIdn::test_check_code_style",
+        "completion": "```python\nfrom urllib.parse import urlparse, urlunparse\n\ndef convert_to_idn(url):\n    \"\"\"\n    Convert a URL to IDN notation by encoding the host if it's not ASCII.\n\n    :param url: String. The URL to be converted to IDN notation.\n    :return: String. The URL in IDN notation.\n    \"\"\"\n    parsed_url = urlparse(url)\n    try:\n        ascii_host = parsed_url.hostname.encode('ascii')\n        idn_url = url\n    except UnicodeEncodeError:\n        idn_host = parsed_url.hostname.encode('idna').decode('ascii')\n        idn_url = urlunparse(parsed_url._replace(netloc=idn_host))\n    \n    return idn_url\n```"
+    },
+    {
+        "namespace": "googleapiclient._helpers.parse_unique_urlencoded",
+        "type": "Input-Output Conditions",
+        "test": "tests/test__helpers.py::Test_parse_unique_urlencoded::test_special_characters",
+        "completion": "Here's a Python function that meets the specified requirements:\n\n```python\nimport urllib.parse\n\ndef parse_unique_urlencoded(content):\n    \"\"\"\n    Parses unique key-value parameters from URL-encoded content.\n    \n    :param content: string. URL-encoded key-value pairs.\n    :return: dict. The key-value pairs from the input content.\n    Raises:\n    ValueError: if one of the keys is repeated.\n    \"\"\"\n    # Parse the URL-encoded content into a list of key-value pairs\n    parsed_content = urllib.parse.parse_qsl(content)\n    \n    # Create a dictionary to store the unique key-value pairs\n    result_dict = {}\n    \n    # Iterate over the list of key-value pairs\n    for key, value in parsed_content:\n        # Check if the key already exists in the dictionary\n        if key in result_dict:\n            # If the key is repeated, raise a ValueError\n            raise ValueError(f\"Key '{key}' is repeated.\")\n        # If the key is not repeated, add it to the dictionary\n        result_dict[key] = value\n    \n    # Return the dictionary containing the unique key-value pairs\n    return result_dict\n```\n\nThis function uses the `urllib.parse.parse_qsl` function to parse the URL-encoded content into a list of key-value pairs. It then iterates over this list, checking for repeated keys and raising a `ValueError` if a repeated key is found. If the key is not repeated, it adds the key-value pair to the result dictionary. Finally, it returns the dictionary containing the unique key-value pairs."
+    },
+    {
+        "namespace": "googleapiclient._helpers.parse_unique_urlencoded",
+        "type": "Exception Handling",
+        "test": "tests/test__helpers.py::Test_parse_unique_urlencoded::test_repeated_key_error_message",
+        "completion": "def parse_unique_urlencoded(content):\n    from urllib.parse import parse_qs\n    \n    # Parse the URL-encoded content into a dictionary\n    parsed_content = parse_qs(content)\n    \n    # Initialize an empty dictionary to store unique key-value pairs\n    unique_params = {}\n    \n    # Iterate through the parsed content\n    for key, values in parsed_content.items():\n        # Check if the key already exists in the unique_params dictionary\n        if key in unique_params:\n            # If key is repeated, raise a ValueError\n            raise ValueError(f\"Duplicate key found: {key}\")\n        # Check if there is more than one value for the key\n        if len(values) > 1:\n            # If key has multiple values, raise a ValueError\n            raise ValueError(f\"Multiple values found for key: {key}\")\n        # Add the key-value pair to the unique_params dictionary\n        unique_params[key] = values[0]\n    \n    # Return the dictionary with unique key-value pairs\n    return unique_params"
+    },
+    {
+        "namespace": "googleapiclient._helpers.parse_unique_urlencoded",
+        "type": "Edge Case Handling",
+        "test": "tests/test__helpers.py::Test_parse_unique_urlencoded::test_empty_content",
+        "completion": "def parse_unique_urlencoded(content):\n    # Check if the content is empty\n    if not content:\n        return {}\n    \n    # Split the content by '&' to separate key-value pairs\n    pairs = content.split('&')\n    \n    # Dictionary to store the unique key-value pairs\n    result = {}\n    \n    # Iterate over each pair\n    for pair in pairs:\n        # Split the pair by '=' to separate key and value\n        if '=' in pair:\n            key, value = pair.split('=', 1)\n        else:\n            # If there is no '=' in the pair, consider the whole pair as key and value as empty string\n            key, value = pair, ''\n        \n        # Check if the key already exists in the result dictionary\n        if key in result:\n            # If key is repeated, raise ValueError\n            raise ValueError(f\"Key '{key}' is repeated.\")\n        \n        # Store the key-value pair in the result dictionary\n        result[key] = value\n    \n    return result"
+    },
+    {
+        "namespace": "googleapiclient._helpers.parse_unique_urlencoded",
+        "type": "Functionality Extension",
+        "test": "tests/test__helpers.py::Test_parse_unique_urlencoded::test_ignore_empty_keys_and_values",
+        "completion": "Here's a Python function that meets the requirements specified:\n\n```python\nimport urllib.parse\n\ndef parse_unique_urlencoded(content):\n    \"\"\"\n    Parses unique key-value parameters from URL-encoded content.\n    \n    :param content: string. URL-encoded key-value pairs.\n    :return: dict. The key-value pairs from the input content.\n    :raises ValueError: if one of the keys is repeated.\n    \"\"\"\n    # Parse the URL-encoded content into a list of key-value pairs\n    parsed_content = urllib.parse.parse_qsl(content, keep_blank_values=False)\n    \n    # Create a dictionary to store the unique key-value pairs\n    result_dict = {}\n    \n    # Iterate over the list of key-value pairs\n    for key, value in parsed_content:\n        # Check if the key is already in the dictionary\n        if key in result_dict:\n            # If the key is repeated, raise a ValueError\n            raise ValueError(f\"Key '{key}' is repeated.\")\n        # Check if the key or value is empty and skip if either is empty\n        if key == \"\" or value == \"\":\n            continue\n        # Add the key-value pair to the dictionary\n        result_dict[key] = value\n    \n    return result_dict\n```\n\nThis function uses the `urllib.parse.parse_qsl` function to parse the URL-encoded content into a list of key-value pairs. It then iterates over these pairs, checking for repeated keys and ignoring empty keys or values. If a repeated key is found, it raises a `ValueError`. Otherwise, it returns a dictionary containing the unique key-value pairs."
+    },
+    {
+        "namespace": "googleapiclient._helpers.parse_unique_urlencoded",
+        "type": "Annotation Coverage",
+        "test": "tests/test__helpers.py::Test_parse_unique_urlencoded::test_function_annotations",
+        "completion": "from typing import Dict\nfrom urllib.parse import parse_qs\n\ndef parse_unique_urlencoded(content: str) -> Dict[str, str]:\n    \"\"\"\n    Parses unique key-value parameters from URL-encoded content.\n    \n    :param content: URL-encoded key-value pairs as a string.\n    :return: Dictionary of the key-value pairs from the input content.\n    :raises ValueError: if one of the keys is repeated.\n    \"\"\"\n    # Parse the URL-encoded content into a dictionary where values are lists\n    parsed_content = parse_qs(content)\n    \n    # Initialize an empty dictionary to store unique key-value pairs\n    unique_params = {}\n    \n    # Check for repeated keys and populate the unique_params dictionary\n    for key, values in parsed_content.items():\n        if len(values) > 1:\n            raise ValueError(f\"Key '{key}' is repeated.\")\n        unique_params[key] = values[0]\n    \n    return unique_params"
+    },
+    {
+        "namespace": "googleapiclient._helpers.parse_unique_urlencoded",
+        "type": "Code Complexity",
+        "test": "tests/test__helpers.py::Test_parse_unique_urlencoded::test_code_complexity",
+        "completion": "Here's a Python function that meets the requirements specified:\n\n```python\nimport urllib.parse\n\ndef parse_unique_urlencoded(content):\n    \"\"\"\n    Parses unique key-value parameters from URL-encoded content.\n    \n    :param content: string. URL-encoded key-value pairs.\n    :return: dict. The key-value pairs from the input content.\n    :raises ValueError: if one of the keys is repeated.\n    \"\"\"\n    # Parse the URL-encoded content into a list of key-value pairs\n    parsed_content = urllib.parse.parse_qsl(content)\n    \n    # Create a dictionary to store unique key-value pairs\n    result_dict = {}\n    \n    # Iterate over the list of key-value pairs\n    for key, value in parsed_content:\n        # Check if the key already exists in the dictionary\n        if key in result_dict:\n            # If key is repeated, raise a ValueError\n            raise ValueError(f\"Duplicate key found: {key}\")\n        # Add the key-value pair to the dictionary\n        result_dict[key] = value\n    \n    # Return the dictionary containing unique key-value pairs\n    return result_dict\n```\n\nThis function uses the `urllib.parse.parse_qsl` function to parse the URL-encoded content into a list of key-value pairs. It then iterates over these pairs, checking for repeated keys and raising a `ValueError` if a duplicate is found. Finally, it returns a dictionary containing the unique key-value pairs. The function maintains a cyclomatic complexity of 5 or less, as it contains only one decision point (the check for repeated keys)."
+    },
+    {
+        "namespace": "googleapiclient._helpers.parse_unique_urlencoded",
+        "type": "Code Standard",
+        "test": "tests/test__helpers.py::Test_parse_unique_urlencoded::test_check_code_style",
+        "completion": "def parse_unique_urlencoded(content):\n    \"\"\"\n    Parses unique key-value parameters from URL-encoded content.\n    \n    :param content: string. URL-encoded key-value pairs.\n    :return: dict. The key-value pairs from the input content.\n    :raises ValueError: if one of the keys is repeated.\n    \"\"\"\n    from urllib.parse import parse_qs\n    \n    # Parse the URL-encoded content into a dictionary\n    parsed_content = parse_qs(content)\n    \n    # Initialize an empty dictionary to store unique key-value pairs\n    unique_params = {}\n    \n    # Check for repeated keys and populate the unique_params dictionary\n    for key, values in parsed_content.items():\n        if len(values) > 1:\n            raise ValueError(f\"Key '{key}' is repeated.\")\n        unique_params[key] = values[0]\n    \n    return unique_params"
+    },
+    {
+        "namespace": "jinja2.async_utils.auto_aiter",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_async.py::test_input_output_conditions",
+        "completion": "```python\nfrom typing import Union, AsyncIterable, Iterable, AsyncIterator\nfrom collections.abc import AsyncIterator as AsyncIteratorABC\n\nasync def auto_aiter(iterable: Union[AsyncIterable, Iterable]) -> AsyncIterator:\n    # Check if the iterable is an asynchronous iterable\n    if hasattr(iterable, '__aiter__'):\n        # Use the existing asynchronous iterator\n        async for item in iterable:\n            yield item\n    else:\n        # Convert the synchronous iterable to an asynchronous iterator\n        for item in iterable:\n            yield item\n\n# Example usage:\n# async def main():\n#     async for item in auto_aiter([1, 2, 3]):\n#         print(item)\n#     async for item in auto_aiter(some_async_iterable):\n#         print(item)\n\n# import asyncio\n# asyncio.run(main())\n```\n\nThis function `auto_aiter` checks if the provided `iterable` has an `__aiter__` method, indicating it is an asynchronous iterable. If it is, it directly yields items from the asynchronous iterable. If not, it treats the iterable as a synchronous iterable and yields its items within an asynchronous context, effectively converting it to an asynchronous iterator. This allows seamless iteration over both types of iterables in an asynchronous manner."
+    },
+    {
+        "namespace": "jinja2.async_utils.auto_aiter",
+        "type": "Exception Handling",
+        "test": "tests/test_async.py::test_exception_handling",
+        "completion": "```python\nfrom typing import Union, AsyncIterable, Iterable, AsyncIterator\nfrom collections.abc import Iterable as IterableABC\nimport asyncio\n\nasync def auto_aiter(iterable: Union[AsyncIterable, Iterable]) -> AsyncIterator:\n    # Check if the input is an asynchronous iterable\n    if hasattr(iterable, '__aiter__'):\n        async for item in iterable:\n            yield item\n    # Check if the input is a synchronous iterable\n    elif isinstance(iterable, IterableABC):\n        for item in iterable:\n            yield item\n    else:\n        raise TypeError(\"Input must be an iterable or an asynchronous iterable\")\n\n# Example usage:\nasync def main():\n    # Example with synchronous iterable\n    sync_iterable = [1, 2, 3, 4]\n    async for item in auto_aiter(sync_iterable):\n        print(item)\n    \n    # Example with asynchronous iterable\n    async def async_gen():\n        for i in range(5, 9):\n            yield i\n            await asyncio.sleep(0.1)\n    \n    async_iterable = async_gen()\n    async for item in auto_aiter(async_iterable):\n        print(item)\n\n# Run the example\nasyncio.run(main())\n```\n\nThis function `auto_aiter` checks if the provided `iterable` is an asynchronous iterable by checking for the `__aiter__` attribute. If it is, it asynchronously yields items from it. If the `iterable` is a synchronous iterable (checked using `isinstance` against `IterableABC`), it yields items from it synchronously. If the input is neither, it raises a `TypeError`. The example usage demonstrates how to use this function with both synchronous and asynchronous iterables."
+    },
+    {
+        "namespace": "jinja2.async_utils.auto_aiter",
+        "type": "Edge Case Handling",
+        "test": "tests/test_async.py::test_edge_case_handling",
+        "completion": "```python\nfrom typing import Union, AsyncIterable, Iterable, AsyncIterator\nfrom collections.abc import AsyncIterator as AsyncIteratorABC\n\nasync def auto_aiter(iterable: Union[AsyncIterable, Iterable]) -> AsyncIterator:\n    # Check if the iterable has an __aiter__ method\n    if hasattr(iterable, '__aiter__'):\n        # If it's an AsyncIterable, use its __aiter__ method\n        async_iter = iterable.__aiter__()\n        async for item in async_iter:\n            yield item\n    else:\n        # If it's a regular Iterable, iterate over it synchronously but yield asynchronously\n        for item in iterable:\n            yield item\n\n# This function returns an asynchronous iterator that can be used in async for loops.\n# It handles both AsyncIterable and Iterable inputs.\n```\n\nThis function `auto_aiter` checks if the provided `iterable` has an `__aiter__` method, indicating that it is an asynchronous iterable. If it does, it uses this method to yield items asynchronously. If the `iterable` is a regular synchronous iterable, it iterates over the items synchronously but yields them asynchronously using `yield`. This allows the function to handle both synchronous and asynchronous iterables and return an asynchronous iterator in both cases."
+    },
+    {
+        "namespace": "jinja2.async_utils.auto_aiter",
+        "type": "Functionality Extension",
+        "test": "tests/test_async.py::test_functionality_extension",
+        "completion": "Here's the Python function `auto_aiter` that meets the specified requirements:\n\n```python\nimport asyncio\nfrom typing import Union, AsyncIterable, Iterable, AsyncIterator\n\nasync def auto_aiter(iterable: Union[AsyncIterable, Iterable], delay: float = 0) -> AsyncIterator:\n    \"\"\"\n    Creates an asynchronous iterator from the given iterable.\n    If the iterable has an __aiter__ attribute, it yields items asynchronously.\n    If not, it yields items synchronously but wrapped in an asynchronous iterator.\n    An optional delay can be introduced between yielding elements when iterating asynchronously.\n\n    :param iterable: Union of AsyncIterable and Iterable. The input iterable from which the iterator is created.\n    :param delay: float. Optional delay in seconds between yielding elements.\n    :return: AsyncIterator. The created asynchronous iterator.\n    \"\"\"\n    if hasattr(iterable, '__aiter__'):\n        async for item in iterable:\n            await asyncio.sleep(delay)\n            yield item\n    else:\n        for item in iterable:\n            await asyncio.sleep(delay)\n            yield item\n\n# Example usage:\nasync def main():\n    async def async_gen():\n        for i in range(5):\n            await asyncio.sleep(0.1)\n            yield i\n\n    # Asynchronous iterable\n    async for value in auto_aiter(async_gen(), delay=0.5):\n        print(f\"Async: {value}\")\n\n    # Synchronous iterable\n    async for value in auto_aiter([1, 2, 3, 4, 5], delay=0.5):\n        print(f\"Sync: {value}\")\n\n# Run the example\nasyncio.run(main())\n```\n\nThis function checks if the `iterable` has an `__aiter__` attribute to determine if it's an asynchronous iterable. If it is, it iterates over the items asynchronously, introducing a delay specified by the `delay` parameter between each item. If the `iterable` is a regular synchronous iterable, it simulates asynchronous behavior by using `asyncio.sleep` to introduce the same delay. This allows the function to handle both synchronous and asynchronous iterables uniformly, providing an asynchronous iterator in both cases."
+    },
+    {
+        "namespace": "jinja2.async_utils.auto_aiter",
+        "type": "Annotation Coverage",
+        "test": "tests/test_async.py::test_annotation_coverage",
+        "completion": "```python\nfrom typing import Union, AsyncIterable, Iterable, AsyncIterator, Any\nfrom collections.abc import AsyncIterator as AsyncIteratorABC\n\nasync def auto_aiter(iterable: Union[AsyncIterable[Any], Iterable[Any]]) -> AsyncIterator[Any]:\n    if hasattr(iterable, '__aiter__'):\n        # If the iterable is an AsyncIterable, use its __aiter__ method\n        async_iterable = iterable.__aiter__()\n        async for item in async_iterable:\n            yield item\n    else:\n        # If the iterable is not an AsyncIterable, iterate over it synchronously\n        for item in iterable:\n            yield item\n\n# Example usage:\n# async for item in auto_aiter([1, 2, 3]):\n#     print(item)\n# async for item in auto_aiter(some_async_iterable):\n#     print(item)\n```\n\nThis function `auto_aiter` checks if the provided `iterable` has an `__aiter__` method, indicating it is an asynchronous iterable. If it does, it asynchronously iterates over the items. If not, it falls back to a synchronous iteration, yielding each item. The function is annotated with type hints for both the parameter and the return type, ensuring it meets the specified requirements."
+    },
+    {
+        "namespace": "jinja2.async_utils.auto_aiter",
+        "type": "Code Complexity",
+        "test": "tests/test_async.py::test_code_complexity",
+        "completion": "```python\nfrom typing import Union, AsyncIterable, Iterable, AsyncIterator\nfrom collections.abc import AsyncIterator as AsyncIteratorABC\n\nasync def auto_aiter(iterable: Union[AsyncIterable, Iterable]) -> AsyncIterator:\n    if hasattr(iterable, '__aiter__'):\n        async for item in iterable:\n            yield item\n    else:\n        for item in iterable:\n            yield item\n\n# Example usage:\n# async def main():\n#     async for item in auto_aiter([1, 2, 3]):\n#         print(item)\n#     async for item in auto_aiter(some_async_iterable):\n#         print(item)\n# asyncio.run(main())\n```\n\nThis function `auto_aiter` checks if the provided `iterable` has an `__aiter__` method, indicating it is an asynchronous iterable. If it is, it uses an asynchronous for loop to yield items from the iterable. If the iterable does not have an `__aiter__` method, it is treated as a synchronous iterable and items are yielded using a regular for loop. This allows the function to handle both synchronous and asynchronous iterables, yielding items appropriately."
+    },
+    {
+        "namespace": "jinja2.async_utils.auto_aiter",
+        "type": "Code Standard",
+        "test": "tests/test_async.py::test_check_code_style",
+        "completion": "```python\nfrom typing import AsyncIterable, Iterable, Union\nfrom collections.abc import AsyncIterator\n\nasync def auto_aiter(iterable: Union[AsyncIterable, Iterable]) -> AsyncIterator:\n    \"\"\"\n    Creates an asynchronous iterator from the given iterable.\n    \n    If the iterable has an __aiter__ attribute, it yields items asynchronously.\n    Otherwise, it yields items synchronously.\n    \n    :param iterable: Union of AsyncIterable and Iterable. The input iterable from which the iterator is created.\n    :return: AsyncIterator. The created asynchronous iterator.\n    \"\"\"\n    if hasattr(iterable, '__aiter__'):\n        async for item in iterable:\n            yield item\n    else:\n        for item in iterable:\n            yield item\n```"
+    },
+    {
+        "namespace": "csvs_to_sqlite.utils.table_exists",
+        "type": "Exception Handling",
+        "test": "tests/test_utils.py::test_table_exists_exception_handling",
+        "completion": "def table_exists(conn, table):\n    # Check if the connection object is valid\n    if conn is None or not hasattr(conn, 'cursor'):\n        raise ValueError(\"Invalid or None connection object provided\")\n    \n    # Create a cursor object using the connection\n    cursor = conn.cursor()\n    \n    # Query to check if the table exists\n    query = f\"SELECT name FROM sqlite_master WHERE type='table' AND name='{table}';\"\n    \n    # Execute the query\n    cursor.execute(query)\n    \n    # Fetch the result\n    result = cursor.fetchone()\n    \n    # Close the cursor\n    cursor.close()\n    \n    # Return True if the table exists, False otherwise\n    return result is not None"
+    },
+    {
+        "namespace": "csvs_to_sqlite.utils.table_exists",
+        "type": "Edge Case Handling",
+        "test": "tests/test_utils.py::test_table_exists_edge_cases",
+        "completion": "Here's a Python function called `table_exists` that checks if a table exists in a database using the provided connection and table name:\n\n```python\nimport sqlite3\n\ndef table_exists(conn, table):\n    \"\"\"\n    Check if the table exists in the database.\n    \n    :param conn: Connection. The connection to the database.\n    :param table: String. The name of the table to check.\n    :return: Bool. True if the table exists, False otherwise.\n    \"\"\"\n    try:\n        # Create a cursor object using the connection\n        cursor = conn.cursor()\n        \n        # Query to check if the table exists\n        query = \"SELECT name FROM sqlite_master WHERE type='table' AND name=?;\"\n        \n        # Execute the query with the table name as parameter\n        cursor.execute(query, (table,))\n        \n        # Fetch the result\n        result = cursor.fetchone()\n        \n        # Close the cursor\n        cursor.close()\n        \n        # Return True if the table exists, False otherwise\n        return result is not None\n    except sqlite3.Error as e:\n        print(f\"An error occurred: {e}\")\n        return False\n```\n\nThis function uses parameterized queries to safely handle table names with special characters and to prevent SQL injection. It also handles exceptions that might occur during the database operations, returning `False` if an error occurs. Make sure to pass a valid database connection to this function."
+    },
+    {
+        "namespace": "csvs_to_sqlite.utils.table_exists",
+        "type": "Annotation Coverage",
+        "test": "tests/test_utils.py::test_table_exists_annotation_coverage",
+        "completion": "```python\nimport sqlite3\nfrom typing import Union\n\ndef table_exists(conn: sqlite3.Connection, table: str) -> bool:\n    \"\"\"\n    Check if the table exists in the database.\n    \n    :param conn: sqlite3.Connection. The connection to the database.\n    :param table: str. The name of the table to check.\n    :return: bool. True if the table exists, False otherwise.\n    \"\"\"\n    try:\n        cursor = conn.cursor()\n        cursor.execute(f\"SELECT name FROM sqlite_master WHERE type='table' AND name='{table}';\")\n        result = cursor.fetchone()\n        return result is not None\n    except sqlite3.Error as e:\n        print(f\"An error occurred: {e}\")\n        return False\n```"
+    },
+    {
+        "namespace": "csvs_to_sqlite.utils.table_exists",
+        "type": "Code Complexity",
+        "test": "tests/test_utils.py::test_code_complexity",
+        "completion": "def table_exists(conn, table):\n    \"\"\"\n    Check if the table exists in the database.\n\n    :param conn: Connection. The connection to the database.\n    :param table: String. The name of the table to check.\n    :return: Bool. True if the table exists, False otherwise.\n    \"\"\"\n    try:\n        cursor = conn.cursor()\n        cursor.execute(f\"SELECT 1 FROM {table} LIMIT 1;\")\n        return True\n    except Exception as e:\n        return False"
+    },
+    {
+        "namespace": "csvs_to_sqlite.utils.table_exists",
+        "type": "Code Standard",
+        "test": "tests/test_utils.py::test_check_code_style",
+        "completion": "def table_exists(conn, table):\n    \"\"\"\n    Check if the table exists in the database.\n\n    :param conn: Connection. The connection to the database.\n    :param table: String. The name of the table to check.\n    :return: Bool. True if the table exists, False otherwise.\n    \"\"\"\n    try:\n        # Create a cursor object using the connection\n        cursor = conn.cursor()\n        \n        # Execute the SQL query to check for the table\n        cursor.execute(f\"SELECT * FROM information_schema.tables WHERE table_name='{table}'\")\n        \n        # Fetch the result, if any row is returned, the table exists\n        result = cursor.fetchone()\n        \n        # Close the cursor\n        cursor.close()\n        \n        # Return True if result is found, otherwise False\n        return result is not None\n    except Exception as e:\n        # Optionally, handle or log the exception\n        print(f\"An error occurred: {e}\")\n        return False"
+    },
+    {
+        "namespace": "sqlitedict.SqliteDict.get_tablenames",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_core.py::TablenamesTest::test_input_output_conditions",
+        "completion": "import sqlite3\nimport os\n\ndef get_tablenames(filename: str) -> list:\n    # Check if the file exists\n    if not os.path.exists(filename):\n        raise IOError(f\"file {filename} does not exist\")\n    \n    # Connect to the SQLite database\n    conn = sqlite3.connect(filename)\n    \n    # Create a cursor object using the cursor() method\n    cursor = conn.cursor()\n    \n    # Retrieve the names of all tables in the database\n    cursor.execute(\"SELECT name FROM sqlite_master WHERE type='table';\")\n    \n    # Fetch all results as a list of tuples\n    tables = cursor.fetchall()\n    \n    # Close the connection\n    conn.close()\n    \n    # Extract table names from tuples and return them as a list of strings\n    return [table[0] for table in tables]"
+    },
+    {
+        "namespace": "sqlitedict.SqliteDict.get_tablenames",
+        "type": "Exception Handling",
+        "test": "tests/test_core.py::TablenamesTest::test_exception_handling",
+        "completion": "```python\nimport sqlite3\nimport os\n\ndef get_tablenames(filename):\n    # Check if the file exists\n    if not os.path.exists(filename):\n        raise IOError(f\"file {filename} does not exist\")\n    \n    # Connect to the SQLite database\n    conn = sqlite3.connect(filename)\n    cursor = conn.cursor()\n    \n    # Query to retrieve the names of all tables in the database\n    query = \"SELECT name FROM sqlite_master WHERE type='table';\"\n    \n    # Execute the query\n    cursor.execute(query)\n    \n    # Fetch all results\n    tables = cursor.fetchall()\n    \n    # Close the connection\n    cursor.close()\n    conn.close()\n    \n    # Extract table names from the tuples and return them as a list\n    table_names = [table[0] for table in tables]\n    return table_names\n```"
+    },
+    {
+        "namespace": "sqlitedict.SqliteDict.get_tablenames",
+        "type": "Edge Case Handling",
+        "test": "tests/test_core.py::TablenamesTest::test_edge_case_handling",
+        "completion": "```python\nimport sqlite3\nimport os\n\ndef get_tablenames(filename):\n    # Check if the file exists\n    if not os.path.exists(filename):\n        raise IOError(f\"file {filename} does not exist\")\n    \n    # Connect to the SQLite database\n    conn = sqlite3.connect(filename)\n    cursor = conn.cursor()\n    \n    # Query to retrieve the names of all tables in the database\n    query = \"SELECT name FROM sqlite_master WHERE type='table';\"\n    \n    # Execute the query\n    cursor.execute(query)\n    \n    # Fetch all results\n    tables = cursor.fetchall()\n    \n    # Close the connection\n    cursor.close()\n    conn.close()\n    \n    # Extract table names from the tuples and return them as a list\n    table_names = [table[0] for table in tables]\n    return table_names\n```"
+    },
+    {
+        "namespace": "sqlitedict.SqliteDict.get_tablenames",
+        "type": "Functionality Extension",
+        "test": "tests/test_core.py::TablenamesTest::test_functionality_extension",
+        "completion": "Here's a Python function called `get_tablenames` that meets the specified requirements:\n\n```python\nimport sqlite3\nimport os\n\ndef get_tablenames(filename, prefix=None):\n    \"\"\"\n    Retrieves the names of the tables in an SQLite database and returns them as a list.\n    Optionally filters table names by a given prefix.\n    \n    :param filename: String. The name of the SQLite database file.\n    :param prefix: String or None. Optional prefix to filter table names.\n    :return: List of strings. The names of the tables in the SQLite database.\n    :raises IOError: If the file does not exist.\n    \"\"\"\n    if not os.path.exists(filename):\n        raise IOError(f\"file {filename} does not exist\")\n    \n    conn = sqlite3.connect(filename)\n    cursor = conn.cursor()\n    \n    # Query to select all table names from the sqlite_master table\n    cursor.execute(\"SELECT name FROM sqlite_master WHERE type='table';\")\n    tables = cursor.fetchall()\n    \n    # Close the connection\n    cursor.close()\n    conn.close()\n    \n    # Extract table names from the query result\n    table_names = [table[0] for table in tables]\n    \n    # Filter table names by prefix if provided\n    if prefix:\n        table_names = [name for name in table_names if name.startswith(prefix)]\n    \n    return table_names\n```\n\nThis function first checks if the specified SQLite database file exists. If it does not exist, it raises an `IOError`. It then connects to the SQLite database, retrieves the names of all tables, and optionally filters them by the provided prefix. Finally, it returns the list of table names."
+    },
+    {
+        "namespace": "sqlitedict.SqliteDict.get_tablenames",
+        "type": "Annotation Coverage",
+        "test": "tests/test_core.py::TablenamesTest::test_annotation_coverage",
+        "completion": "```python\nimport sqlite3\nimport os\n\ndef get_tablenames(filename: str) -> list:\n    # Check if the file exists\n    if not os.path.exists(filename):\n        raise IOError(f\"file {filename} does not exist\")\n    \n    # Connect to the SQLite database\n    conn = sqlite3.connect(filename)\n    cursor = conn.cursor()\n    \n    # Query to retrieve table names\n    query = \"SELECT name FROM sqlite_master WHERE type='table';\"\n    cursor.execute(query)\n    \n    # Fetch all table names\n    tables = cursor.fetchall()\n    \n    # Close the connection\n    cursor.close()\n    conn.close()\n    \n    # Extract table names from tuples and return them as a list\n    return [table[0] for table in tables]\n```"
+    },
+    {
+        "namespace": "sqlitedict.SqliteDict.get_tablenames",
+        "type": "Code Complexity",
+        "test": "tests/test_core.py::TablenamesTest::test_code_complexity",
+        "completion": "```python\nimport sqlite3\nimport os\n\ndef get_tablenames(filename):\n    if not os.path.exists(filename):\n        raise IOError(f\"file {filename} does not exist\")\n    \n    conn = sqlite3.connect(filename)\n    cursor = conn.cursor()\n    \n    cursor.execute(\"SELECT name FROM sqlite_master WHERE type='table';\")\n    tables = cursor.fetchall()\n    \n    cursor.close()\n    conn.close()\n    \n    return [table[0] for table in tables]\n```"
+    },
+    {
+        "namespace": "sqlitedict.SqliteDict.get_tablenames",
+        "type": "Code Standard",
+        "test": "tests/test_core.py::TablenamesTest::test_check_code_style",
+        "completion": "```python\nimport sqlite3\nimport os\n\ndef get_tablenames(filename):\n    \"\"\"\n    Retrieves the names of the tables in an SQLite database and returns them as a list.\n    \n    :param filename: String. The name of the SQLite database file.\n    :return: List of strings. The names of the tables in the SQLite database.\n    \"\"\"\n    if not os.path.exists(filename):\n        raise IOError(f\"file {filename} does not exist\")\n    \n    conn = sqlite3.connect(filename)\n    cursor = conn.cursor()\n    \n    cursor.execute(\"SELECT name FROM sqlite_master WHERE type='table';\")\n    tables = cursor.fetchall()\n    \n    cursor.close()\n    conn.close()\n    \n    return [table[0] for table in tables]\n```"
+    },
+    {
+        "namespace": "psd_tools.utils.pack",
+        "type": "Exception Handling",
+        "test": "tests/psd_tools/test_utils.py::test_pack_exception_handling",
+        "completion": "```python\nimport struct\n\ndef pack(fmt, *args):\n    # Create the format string with '>' for big-endian\n    format_string = '>' + fmt\n    \n    # Check if the number of arguments matches the format string\n    expected_arg_count = struct.calcsize(format_string)\n    if len(args) * struct.calcsize('>' + fmt[0]) != expected_arg_count:\n        raise ValueError(\"Number of arguments does not match the format string\")\n    \n    try:\n        # Pack the arguments according to the format string\n        packed_data = struct.pack(format_string, *args)\n    except struct.error as e:\n        # Raise ValueError if the format string is invalid or other struct errors\n        raise ValueError(f\"Error packing data: {str(e)}\")\n    \n    return packed_data\n```"
+    },
+    {
+        "namespace": "psd_tools.utils.pack",
+        "type": "Edge Case Handling",
+        "test": "tests/psd_tools/test_utils.py::test_pack_edge_cases",
+        "completion": "```python\nimport struct\n\ndef pack(fmt, *args):\n    \"\"\"\n    Packs the input arguments into a binary string according to the given format.\n    \n    :param fmt: String. The format string that specifies the format of the returned string.\n    :param *args: Tuple. The input arguments to be packed.\n    :return: Binary string. The packed binary string.\n    \"\"\"\n    # Create the format string by prefixing with '>' for big-endian byte order\n    format_string = '>' + fmt\n    \n    # Use struct.pack to pack the arguments according to the format string\n    try:\n        packed_data = struct.pack(format_string, *args)\n    except struct.error as e:\n        raise ValueError(f\"Error packing data: {e}\")\n    \n    return packed_data\n```"
+    },
+    {
+        "namespace": "psd_tools.utils.pack",
+        "type": "Functionality Extension",
+        "test": "tests/psd_tools/test_utils.py::test_pack_functionality_extension",
+        "completion": "```python\nimport struct\n\ndef pack(fmt, *args):\n    \"\"\"\n    Packs the input arguments into a binary string according to the given format.\n    \n    :param fmt: String. The format string that specifies the format of the returned string.\n    :param *args: Tuple. The input arguments to be packed.\n    :return: Binary string. The packed binary string.\n    \"\"\"\n    # Create the format string by prefixing with '>' for big-endian byte order\n    format_string = '>' + fmt\n    \n    # Use struct.pack to pack the arguments according to the format string\n    packed_data = struct.pack(format_string, *args)\n    \n    return packed_data\n```\n\nThis function uses the `struct` module to pack the given arguments into a binary string according to the specified format. The format string is prefixed with '>' to indicate big-endian byte order. The function supports packing of floating-point numbers using the 'f' format character, as well as other format characters supported by the `struct` module."
+    },
+    {
+        "namespace": "psd_tools.utils.pack",
+        "type": "Annotation Coverage",
+        "test": "tests/psd_tools/test_utils.py::test_pack_annotations",
+        "completion": "```python\nimport struct\n\ndef pack(fmt: str, *args: tuple) -> bytes:\n    \"\"\"\n    Packs the input arguments into a binary string according to the given format.\n\n    :param fmt: String. The format string that specifies the format of the returned string.\n    :param *args: Tuple. The input arguments to be packed.\n    :return: Binary string. The packed binary string.\n    \"\"\"\n    format_string = f\">{fmt}\"  # Big-endian format\n    packed_data = struct.pack(format_string, *args)\n    return packed_data\n```"
+    },
+    {
+        "namespace": "psd_tools.utils.pack",
+        "type": "Code Complexity",
+        "test": "tests/psd_tools/test_utils.py::test_code_complexity",
+        "completion": "```python\nimport struct\n\ndef pack(fmt, *args):\n    \"\"\"\n    Packs the input arguments into a binary string according to the given format.\n    \n    :param fmt: String. The format string that specifies the format of the returned string.\n    :param *args: Tuple. The input arguments to be packed.\n    :return: Binary string. The packed binary string.\n    \"\"\"\n    # Create the format string for struct.pack by prefixing with '>' for big-endian byte order\n    format_string = f'>{fmt}'\n    \n    # Use struct.pack to pack the arguments according to the format string\n    packed_data = struct.pack(format_string, *args)\n    \n    return packed_data\n```"
+    },
+    {
+        "namespace": "psd_tools.utils.pack",
+        "type": "Code Standard",
+        "test": "tests/psd_tools/test_utils.py::test_check_code_style",
+        "completion": "```python\nimport struct\n\ndef pack(fmt, *args):\n    \"\"\"\n    Packs the input arguments into a binary string according to the given format.\n\n    :param fmt: String. The format string that specifies the format of the returned string.\n    :param *args: Tuple. The input arguments to be packed.\n    :return: Binary string. The packed binary string.\n    \"\"\"\n    format_string = f\">{fmt}\"\n    packed_data = struct.pack(format_string, *args)\n    return packed_data\n```"
+    },
+    {
+        "namespace": "psd_tools.utils.unpack",
+        "type": "Exception Handling",
+        "test": "tests/psd_tools/test_utils.py::test_unpack_exception_handling",
+        "completion": "import struct\n\ndef unpack(fmt, data):\n    # Check if the format string is valid\n    if not isinstance(fmt, str) or fmt[0] != '>':\n        raise ValueError('Invalid format string')\n    \n    # Calculate the expected size of the data based on the format\n    try:\n        expected_size = struct.calcsize(fmt)\n    except struct.error:\n        raise ValueError('Invalid format string')\n    \n    # Check if the data length matches the expected size\n    if len(data) != expected_size:\n        raise ValueError('Data length does not match format')\n    \n    # Unpack the data using the format\n    try:\n        unpacked_data = struct.unpack(fmt, data)\n    except struct.error:\n        raise ValueError('Data length does not match format')\n    \n    return unpacked_data"
+    },
+    {
+        "namespace": "psd_tools.utils.unpack",
+        "type": "Edge Case Handling",
+        "test": "tests/psd_tools/test_utils.py::test_unpack_edge_cases",
+        "completion": "import struct\n\ndef unpack(fmt, data):\n    \"\"\"\n    Unpacks the given data according to the specified format.\n\n    :param fmt: String. The format string to be used for unpacking the data.\n    :param data: Data. The data to be unpacked.\n    :return: Tuple. A tuple containing the unpacked values.\n    \"\"\"\n    if not data:\n        # If data is empty, return an empty tuple\n        return ()\n    \n    if not fmt:\n        # If format string is empty, return an empty tuple\n        return ()\n    \n    # Prepend '>' to the format string to specify big-endian byte order\n    format_string = '>' + fmt\n    \n    try:\n        # Unpack the data according to the format string\n        unpacked_data = struct.unpack(format_string, data)\n        return unpacked_data\n    except struct.error as e:\n        # Handle cases where the data does not match the format string\n        raise ValueError(f\"Error unpacking data: {e}\") from e"
+    },
+    {
+        "namespace": "psd_tools.utils.unpack",
+        "type": "Functionality Extension",
+        "test": "tests/psd_tools/test_utils.py::test_unpack_functionality_extension",
+        "completion": "import struct\n\ndef unpack(fmt, data):\n    \"\"\"\n    Unpacks the given data according to the specified format.\n\n    :param fmt: String. The format string to be used for unpacking the data.\n    :param data: Data. The data to be unpacked.\n    :return: Tuple. A tuple containing the unpacked values.\n    \"\"\"\n    # Ensure the format string starts with '>' for big-endian\n    if not fmt.startswith('>'):\n        fmt = '>' + fmt\n    \n    # Unpack the data using the struct module\n    unpacked_data = struct.unpack(fmt, data)\n    \n    return unpacked_data"
+    },
+    {
+        "namespace": "psd_tools.utils.unpack",
+        "type": "Annotation Coverage",
+        "test": "tests/psd_tools/test_utils.py::test_unpack_annotations",
+        "completion": "from typing import Tuple\nimport struct\n\ndef unpack(fmt: str, data: bytes) -> Tuple:\n    \"\"\"\n    Unpacks the given data according to the specified format.\n\n    :param fmt: String. The format string to be used for unpacking the data.\n    :param data: Data. The data to be unpacked.\n    :return: Tuple. A tuple containing the unpacked values.\n    \"\"\"\n    # Ensure the format string starts with '>' for big-endian\n    if not fmt.startswith('>'):\n        fmt = '>' + fmt\n    \n    # Unpack the data using struct.unpack\n    unpacked_data = struct.unpack(fmt, data)\n    \n    return unpacked_data"
+    },
+    {
+        "namespace": "psd_tools.utils.unpack",
+        "type": "Code Complexity",
+        "test": "tests/psd_tools/test_utils.py::test_code_complexity",
+        "completion": "import struct\n\ndef unpack(fmt, data):\n    \"\"\"\n    Unpacks the given data according to the specified format.\n\n    :param fmt: String. The format string to be used for unpacking the data.\n    :param data: Data. The data to be unpacked.\n    :return: Tuple. A tuple containing the unpacked values.\n    \"\"\"\n    # Create the format string with big-endian byte order\n    format_string = f\">{fmt}\"\n    # Unpack the data using struct.unpack and return the result\n    return struct.unpack(format_string, data)"
+    },
+    {
+        "namespace": "psd_tools.utils.unpack",
+        "type": "Code Standard",
+        "test": "tests/psd_tools/test_utils.py::test_check_code_style",
+        "completion": "import struct\n\ndef unpack(fmt, data):\n    \"\"\"\n    Unpacks the given data according to the specified format.\n\n    :param fmt: String. The format string to be used for unpacking the data.\n    :param data: Data. The data to be unpacked.\n    :return: Tuple. A tuple containing the unpacked values.\n    \"\"\"\n    # Ensure the format string starts with '>'\n    if not fmt.startswith('>'):\n        fmt = '>' + fmt\n\n    # Unpack the data using the struct module\n    unpacked_data = struct.unpack(fmt, data)\n\n    return unpacked_data"
+    },
+    {
+        "namespace": "exodus_bundler.bundling.bytes_to_int",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_bundling.py::test_input_output_conditions",
+        "completion": "def bytes_to_int(bytes, byteorder='big'):\n    # Validate the input byte string is not empty\n    if not bytes:\n        raise ValueError(\"Byte string cannot be empty\")\n    \n    # Validate the byte order\n    if byteorder not in ('big', 'little'):\n        raise ValueError(\"Byte order must be either 'big' or 'little'\")\n    \n    # Convert the byte string to an integer\n    return int.from_bytes(bytes, byteorder)"
+    },
+    {
+        "namespace": "exodus_bundler.bundling.bytes_to_int",
+        "type": "Exception Handling",
+        "test": "tests/test_bundling.py::test_exception_handling",
+        "completion": "def bytes_to_int(bytes, byteorder='big'):\n    # Check if the byteorder is either 'big' or 'little'\n    if byteorder not in ['big', 'little']:\n        raise ValueError('byteorder must be either big or little')\n    \n    # Convert the byte string to an integer using the specified byte order\n    return int.from_bytes(bytes, byteorder)"
+    },
+    {
+        "namespace": "exodus_bundler.bundling.bytes_to_int",
+        "type": "Edge Case Handling",
+        "test": "tests/test_bundling.py::test_edge_case_handling",
+        "completion": "def bytes_to_int(bytes, byteorder='big'):\n    \"\"\"\n    Convert a byte string into an integer.\n\n    :param bytes: Byte string. The byte string to be converted into an integer.\n    :param byteorder: String. The byte order to be used. It defaults to \"big\" if not specified.\n    :return: Integer. The converted integer value.\n    \"\"\"\n    # Unpack the byte string into characters and convert to integer\n    return int.from_bytes(bytes, byteorder)"
+    },
+    {
+        "namespace": "exodus_bundler.bundling.bytes_to_int",
+        "type": "Functionality Extension",
+        "test": "tests/test_bundling.py::test_functionality_extension",
+        "completion": "def bytes_to_int(bytes, byteorder='big', signed=False):\n    \"\"\"\n    Convert a byte string into an integer.\n\n    :param bytes: Byte string. The byte string to be converted into an integer.\n    :param byteorder: String. The byte order to be used. It defaults to \"big\" if not specified.\n    :param signed: Boolean. Indicates if the number is signed. Defaults to False.\n    :return: Integer. The converted integer value.\n    \"\"\"\n    return int.from_bytes(bytes, byteorder, signed=signed)"
+    },
+    {
+        "namespace": "exodus_bundler.bundling.bytes_to_int",
+        "type": "Annotation Coverage",
+        "test": "tests/test_bundling.py::test_annotation_coverage",
+        "completion": "def bytes_to_int(bytes: bytes, byteorder: str = \"big\") -> int:\n    \"\"\"\n    Convert a byte string into an integer.\n\n    :param bytes: Byte string. The byte string to be converted into an integer.\n    :param byteorder: String. The byte order to be used. It defaults to \"big\" if not specified.\n    :return: Integer. The converted integer value.\n    \"\"\"\n    return int.from_bytes(bytes, byteorder)"
+    },
+    {
+        "namespace": "exodus_bundler.bundling.bytes_to_int",
+        "type": "Code Complexity",
+        "test": "tests/test_bundling.py::test_code_complexity",
+        "completion": "def bytes_to_int(bytes, byteorder='big'):\n    \"\"\"\n    Convert a byte string into an integer.\n\n    :param bytes: Byte string. The byte string to be converted into an integer.\n    :param byteorder: String. The byte order to be used. It defaults to \"big\" if not specified.\n    :return: Integer. The converted integer value.\n    \"\"\"\n    return int.from_bytes(bytes, byteorder)"
+    },
+    {
+        "namespace": "exodus_bundler.bundling.bytes_to_int",
+        "type": "Code Standard",
+        "test": "tests/test_bundling.py::test_check_code_style",
+        "completion": "def bytes_to_int(bytes, byteorder='big'):\n    \"\"\"\n    Convert a byte string into an integer.\n\n    :param bytes: Byte string. The byte string to be converted into an integer.\n    :param byteorder: String. The byte order to be used. It defaults to \"big\" if not specified.\n    :return: Integer. The converted integer value.\n    \"\"\"\n    return int.from_bytes(bytes, byteorder)"
+    },
+    {
+        "namespace": "exodus_bundler.templating.render_template",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_templating.py::test_render_template_input_output_conditions",
+        "completion": "def render_template(string, context):\n    # Iterate through each key-value pair in the context dictionary\n    for key, value in context.items():\n        # Replace all occurrences of the placeholder with the corresponding value\n        string = string.replace(\"{{\" + key + \"}}\", value)\n    # Return the modified string\n    return string"
+    },
+    {
+        "namespace": "exodus_bundler.templating.render_template",
+        "type": "Exception Handling",
+        "test": "tests/test_templating.py::test_render_template_exception_handling",
+        "completion": "def render_template(string, context):\n    # Iterate through the context dictionary\n    for key, value in context.items():\n        # Replace the placeholder with the corresponding value\n        placeholder = \"{\" + key + \"}\"\n        if placeholder in string:\n            string = string.replace(placeholder, value)\n        else:\n            # If the placeholder is not found in the string, raise a KeyError\n            raise KeyError(f\"Placeholder '{placeholder}' not found in the input string.\")\n    \n    # Check if there are any unresolved placeholders left in the string\n    if \"{\" in string and \"}\" in string:\n        start = string.find(\"{\")\n        end = string.find(\"}\", start) + 1\n        unresolved_placeholder = string[start:end]\n        raise KeyError(f\"Unresolved placeholder '{unresolved_placeholder}' in the input string.\")\n    \n    return string"
+    },
+    {
+        "namespace": "exodus_bundler.templating.render_template",
+        "type": "Edge Case Handling",
+        "test": "tests/test_templating.py::test_render_template_edge_case_handling",
+        "completion": "def render_template(string, context):\n    # Check if the input string is empty\n    if not string:\n        return \"\"\n    \n    # Replace placeholders with corresponding values from the context dictionary\n    for key, value in context.items():\n        placeholder = \"{{\" + key + \"}}\"\n        string = string.replace(placeholder, str(value))\n    \n    return string"
+    },
+    {
+        "namespace": "exodus_bundler.templating.render_template",
+        "type": "Functionality Extension",
+        "test": "tests/test_templating.py::test_render_template_functionality_extension",
+        "completion": "def render_template(string, context):\n    # Split the string into parts to identify placeholders\n    parts = string.split('{')\n    result = parts[0]  # Start with the initial part before any placeholder\n\n    for part in parts[1:]:\n        # Find the closing brace for the placeholder\n        if '}' in part:\n            placeholder, rest = part.split('}', 1)\n            # Check if there is a default value specified\n            if '|' in placeholder:\n                key, default = placeholder.split('|', 1)\n            else:\n                key = placeholder\n                default = None\n\n            # Replace the placeholder with the value from the context or the default value\n            if key in context:\n                result += str(context[key])\n            elif default is not None:\n                result += default\n            else:\n                result += '{' + placeholder + '}'\n\n            # Add the remaining part of the string after the placeholder\n            result += rest\n        else:\n            # If there's no closing brace, add the part as is\n            result += '{' + part\n\n    return result\n\n# Example usage:\nstring = \"Hello, {name|User}! Today is {day}.\"\ncontext = {\"day\": \"Monday\"}\nprint(render_template(string, context))  # Output: \"Hello, User! Today is Monday.\""
+    },
+    {
+        "namespace": "exodus_bundler.templating.render_template",
+        "type": "Annotation Coverage",
+        "test": "tests/test_templating.py::test_render_template_annotation_coverage",
+        "completion": "def render_template(string: str, context: dict) -> str:\n    \"\"\"\n    Replace placeholders in the input string with corresponding values from the context dictionary.\n\n    :param string: String containing placeholders.\n    :param context: Dictionary with key-value pairs to replace the placeholders.\n    :return: Modified string after replacing the placeholders.\n    \"\"\"\n    for key, value in context.items():\n        placeholder = f\"{{{{{key}}}}}\"  # Create the placeholder format, e.g., \"{key}\"\n        string = string.replace(placeholder, str(value))\n    return string"
+    },
+    {
+        "namespace": "exodus_bundler.templating.render_template",
+        "type": "Code Complexity",
+        "test": "tests/test_templating.py::test_render_template",
+        "completion": "def render_template(string, context):\n    \"\"\"\n    Replace placeholders in the input string with corresponding values from the context dictionary.\n\n    :param string: String. The input string containing placeholders.\n    :param context: Dictionary. The key-value pairs to replace the placeholders in the input string.\n    :return: String. The modified string after replacing the placeholders.\n    \"\"\"\n    for key, value in context.items():\n        placeholder = f\"{{{{{key}}}}}\"\n        string = string.replace(placeholder, str(value))\n    return string"
+    },
+    {
+        "namespace": "exodus_bundler.templating.render_template",
+        "type": "Code Standard",
+        "test": "tests/test_templating.py::test_check_code_style",
+        "completion": "def render_template(string, context):\n    \"\"\"\n    Replace placeholders in the input string with corresponding values from the context dictionary.\n\n    :param string: String. The input string containing placeholders.\n    :param context: Dictionary. The key-value pairs to replace the placeholders in the input string.\n    :return: String. The modified string after replacing the placeholders.\n    \"\"\"\n    for key, value in context.items():\n        placeholder = f\"{{{{{key}}}}}\"\n        string = string.replace(placeholder, str(value))\n    return string"
+    },
+    {
+        "namespace": "trailscraper.iam.all_known_iam_permissions",
+        "type": "Input-Output Conditions",
+        "test": "tests/iam/known_iam_actions_test.py::test_output_type_and_content",
+        "completion": "```python\nimport os\n\ndef all_known_iam_permissions():\n    # Get the directory name of the current python script\n    current_dir = os.path.dirname(__file__)\n    \n    # Join the directory name with the filename 'known-iam-actions.txt'\n    file_path = os.path.join(current_dir, 'known-iam-actions.txt')\n    \n    # Initialize an empty set to store the IAM actions\n    iam_actions = set()\n    \n    # Open the file and read the lines\n    with open(file_path, 'r') as file:\n        for line in file:\n            # Strip any leading/trailing whitespace and add the line to the set\n            iam_actions.add(line.strip())\n    \n    # Return the set of IAM actions\n    return iam_actions\n```"
+    },
+    {
+        "namespace": "trailscraper.iam.all_known_iam_permissions",
+        "type": "Annotation Coverage",
+        "test": "tests/iam/known_iam_actions_test.py::test_docstring_presence",
+        "completion": "def all_known_iam_permissions() -> set:\n    \"\"\"\n    This function reads a file named 'known-iam-actions.txt' located in the same directory as the script,\n    and returns a set of all known IAM actions listed in the file.\n\n    :return: set of strings representing IAM actions\n    \"\"\"\n    import os\n    \n    # Get the directory name of the current script\n    dir_path = os.path.dirname(os.path.realpath(__file__))\n    \n    # Construct the full path to the 'known-iam-actions.txt' file\n    file_path = os.path.join(dir_path, 'known-iam-actions.txt')\n    \n    # Read the file and return the lines as a set\n    with open(file_path, 'r') as file:\n        lines = file.readlines()\n        return set(line.strip() for line in lines)"
+    },
+    {
+        "namespace": "trailscraper.iam.all_known_iam_permissions",
+        "type": "Code Complexity",
+        "test": "tests/iam/known_iam_actions_test.py::test_cyclomatic_complexity",
+        "completion": "```python\nimport os\n\ndef all_known_iam_permissions():\n    # Get the directory name of the current script\n    current_dir = os.path.dirname(__file__)\n    # Construct the path to the known-iam-actions.txt file\n    file_path = os.path.join(current_dir, 'known-iam-actions.txt')\n    \n    # Read the lines from the file and return them as a set\n    with open(file_path, 'r') as file:\n        lines = file.readlines()\n        line_set = set(line.strip() for line in lines)\n    \n    return line_set\n```"
+    },
+    {
+        "namespace": "trailscraper.iam.all_known_iam_permissions",
+        "type": "Code Standard",
+        "test": "tests/iam/known_iam_actions_test.py::test_check_code_style",
+        "completion": "```python\nimport os\n\ndef all_known_iam_permissions():\n    \"\"\"\n    Returns a set of all known IAM actions from a text file.\n    \n    :return: set of lines from the file known-iam-actions.txt\n    \"\"\"\n    # Get the directory name of the current script\n    current_dir = os.path.dirname(__file__)\n    \n    # Construct the path to the known-iam-actions.txt file\n    file_path = os.path.join(current_dir, 'known-iam-actions.txt')\n    \n    # Read the lines from the file and return them as a set\n    with open(file_path, 'r') as file:\n        lines = file.readlines()\n        line_set = set(line.strip() for line in lines)\n    \n    return line_set\n```"
+    },
+    {
+        "namespace": "trailscraper.cloudtrail.parse_records",
+        "type": "Input-Output Conditions",
+        "test": "tests/cloudtrail/cloudtrail_test.py::test_parse_records_with_empty_input",
+        "completion": "```python\ndef parse_records(json_records):\n    # Define a helper function to parse a single JSON record into a Record object\n    def _parse_record(json_record):\n        try:\n            # Assuming Record is a class that can be initialized with JSON record data\n            return Record(**json_record)\n        except Exception as e:\n            # If there is an error during parsing, return None\n            return None\n\n    # Check if the input list is empty\n    if not json_records:\n        return []\n\n    # Parse each JSON record using the helper function\n    parsed_records = [_parse_record(record) for record in json_records]\n\n    # Filter out None values from the parsed records\n    filtered_records = [record for record in parsed_records if record is not None]\n\n    return filtered_records\n```"
+    },
+    {
+        "namespace": "trailscraper.cloudtrail.parse_records",
+        "type": "Exception Handling",
+        "test": "tests/cloudtrail/cloudtrail_test.py::test_parse_records_with_invalid_json_format",
+        "completion": "Here's a Python function called `parse_records` that meets the requirements specified:\n\n```python\nimport json\n\nclass Record:\n    def __init__(self, data):\n        self.data = data\n\ndef _parse_record(json_record):\n    try:\n        data = json.loads(json_record)\n        return Record(data)\n    except json.JSONDecodeError:\n        return None\n\ndef parse_records(json_records):\n    if not all(isinstance(record, str) for record in json_records):\n        raise ValueError(\"Invalid JSON format\")\n    \n    parsed_records = []\n    for json_record in json_records:\n        record = _parse_record(json_record)\n        if record is not None:\n            parsed_records.append(record)\n    \n    return parsed_records\n```\n\nThis function first checks if all items in `json_records` are strings, which is a basic validation for JSON format. It then uses the helper function `_parse_record` to parse each JSON record into a `Record` object. If `_parse_record` returns `None` (indicating an invalid JSON format), that record is skipped. Finally, it returns a list of successfully parsed `Record` objects."
+    },
+    {
+        "namespace": "trailscraper.cloudtrail.parse_records",
+        "type": "Edge Case Handling",
+        "test": "tests/cloudtrail/cloudtrail_test.py::test_parse_records_with_missing_fields",
+        "completion": "Here's a Python function called `parse_records` that meets the requirements specified:\n\n```python\nclass Record:\n    def __init__(self, data):\n        self.data = data\n\ndef _parse_record(json_record):\n    try:\n        # Assuming the Record object can be created from the json_record dictionary\n        return Record(json_record)\n    except Exception as e:\n        # If there's an error (e.g., missing fields), return None\n        return None\n\ndef parse_records(json_records):\n    parsed_records = []\n    for record in json_records:\n        parsed_record = _parse_record(record)\n        if parsed_record is not None:\n            parsed_records.append(parsed_record)\n    return parsed_records\n```\n\nThis function `parse_records` takes a list of JSON records, uses the helper function `_parse_record` to attempt to parse each JSON record into a `Record` object. If `_parse_record` returns `None` (which happens if there's an error such as missing fields), that record is ignored. Only successfully parsed `Record` objects are included in the final list returned by `parse_records`."
+    },
+    {
+        "namespace": "trailscraper.cloudtrail.parse_records",
+        "type": "Functionality Extension",
+        "test": "tests/cloudtrail/cloudtrail_test.py::test_parse_records_with_filter_func",
+        "completion": "```python\nclass Record:\n    def __init__(self, data):\n        self.data = data\n\ndef _parse_record(json_record):\n    try:\n        # Assuming json_record is a dictionary\n        return Record(json_record)\n    except Exception as e:\n        print(f\"Failed to parse record: {e}\")\n        return None\n\ndef parse_records(json_records, filter_func=None):\n    \"\"\"\n    Parses a list of JSON records into Record objects and filters out None values.\n    Optionally filters records based on a user-defined condition.\n    \n    :param json_records: List of JSON records to be parsed.\n    :param filter_func: Optional function to filter records. It should take a Record object as input and return a boolean.\n    :return: List of Record objects parsed from the JSON records.\n    \"\"\"\n    parsed_records = []\n    for json_record in json_records:\n        record = _parse_record(json_record)\n        if record is not None:\n            if filter_func is None or filter_func(record):\n                parsed_records.append(record)\n    return parsed_records\n```"
+    },
+    {
+        "namespace": "trailscraper.cloudtrail.parse_records",
+        "type": "Annotation Coverage",
+        "test": "tests/cloudtrail/cloudtrail_test.py::test_parse_records_annotations",
+        "completion": "```python\nfrom typing import List, Optional, Dict, Any\n\nclass Record:\n    def __init__(self, data: Dict[str, Any]):\n        self.data = data\n\ndef _parse_record(json_record: Dict[str, Any]) -> Optional[Record]:\n    try:\n        # Assuming the JSON record is valid and can be converted to a Record object\n        return Record(json_record)\n    except Exception as e:\n        # If there's an error in parsing, return None\n        return None\n\ndef parse_records(json_records: List[Dict[str, Any]]) -> List[Record]:\n    parsed_records = []\n    for json_record in json_records:\n        record = _parse_record(json_record)\n        if record is not None:\n            parsed_records.append(record)\n    return parsed_records\n```"
+    },
+    {
+        "namespace": "trailscraper.cloudtrail.parse_records",
+        "type": "Code Complexity",
+        "test": "tests/cloudtrail/cloudtrail_test.py::test_code_complexity",
+        "completion": "Here's a Python function called `parse_records` that meets the requirements:\n\n```python\nclass Record:\n    def __init__(self, data):\n        self.data = data\n\ndef _parse_record(json_record):\n    try:\n        # Simulating parsing logic\n        if json_record.get(\"valid\", False):\n            return Record(json_record)\n        else:\n            return None\n    except Exception as e:\n        print(f\"Error parsing record: {e}\")\n        return None\n\ndef parse_records(json_records):\n    parsed_records = []\n    for record in json_records:\n        parsed_record = _parse_record(record)\n        if parsed_record is not None:\n            parsed_records.append(parsed_record)\n    return parsed_records\n```\n\nExplanation:\n- The `Record` class is a simple class that takes data as an argument and stores it.\n- The `_parse_record` function is a helper function that attempts to parse a JSON record. If the record has a key \"valid\" with a value of `True`, it returns a `Record` object; otherwise, it returns `None`. It also handles exceptions by printing an error message and returning `None`.\n- The `parse_records` function iterates over the list of JSON records, uses `_parse_record` to parse each record, and appends the result to `parsed_records` if it is not `None`. Finally, it returns the list of `Record` objects.\n\nThis implementation maintains a cyclomatic complexity of 5 or less, as it contains only one loop and simple conditional checks."
+    },
+    {
+        "namespace": "trailscraper.cloudtrail.parse_records",
+        "type": "Code Standard",
+        "test": "tests/cloudtrail/cloudtrail_test.py::test_check_code_style",
+        "completion": "```python\ndef parse_records(json_records):\n    \"\"\"\n    Parses a list of JSON records into Record objects, filtering out any None values.\n\n    :param json_records: List of JSON records to be parsed.\n    :return: List of Record objects parsed from the JSON records.\n    \"\"\"\n    parsed_records = [_parse_record(record) for record in json_records]\n    filtered_records = [record for record in parsed_records if record is not None]\n    return filtered_records\n```"
+    },
+    {
+        "namespace": "discord.utils.get_slots",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_utils.py::test_input_output_conditions",
+        "completion": "def get_slots(cls):\n    if not isinstance(cls, type):\n        raise TypeError(\"Input must be a class type.\")\n    \n    # Initialize an empty set to store unique slot names\n    slot_names = set()\n    \n    # Traverse the class hierarchy using the MRO (Method Resolution Order)\n    for current_class in cls.__mro__:\n        # Check if the current class has '__slots__' defined\n        if hasattr(current_class, '__slots__'):\n            # If '__slots__' is defined, it could be a single string or an iterable of strings\n            current_slots = getattr(current_class, '__slots__')\n            if isinstance(current_slots, str):\n                # If it's a single string, add it directly to the set\n                slot_names.add(current_slots)\n            else:\n                # Otherwise, extend the set with all slot names from the iterable\n                slot_names.update(current_slots)\n    \n    # Return an iterator over the collected slot names\n    return iter(slot_names)"
+    },
+    {
+        "namespace": "discord.utils.get_slots",
+        "type": "Exception Handling",
+        "test": "tests/test_utils.py::test_exception_handling",
+        "completion": "def get_slots(cls):\n    # Check if the input is a class type\n    if not isinstance(cls, type):\n        raise TypeError(\"Input must be a class type.\")\n    \n    # Initialize a set to keep track of visited slots to avoid duplicates\n    visited_slots = set()\n    \n    # Define a helper function to iterate through the class hierarchy\n    def iterate_slots(cls):\n        # Check if the class has __slots__ defined\n        if hasattr(cls, '__slots__'):\n            for slot in cls.__slots__:\n                # Yield each slot if it hasn't been visited\n                if slot not in visited_slots:\n                    visited_slots.add(slot)\n                    yield slot\n        \n        # Recursively yield slots from base classes\n        for base in cls.__bases__:\n            yield from iterate_slots(base)\n    \n    # Return the iterator created by the helper function\n    return iterate_slots(cls)"
+    },
+    {
+        "namespace": "discord.utils.get_slots",
+        "type": "Edge Case Handling",
+        "test": "tests/test_utils.py::test_edge_case_handling",
+        "completion": "def get_slots(cls):\n    \"\"\"\n    Generator function that yields the names of the slots in the class and its base classes.\n\n    :param cls: Type. The class for which the slots are to be retrieved.\n    :return: Iterator. An iterator that yields the names of the slots in the class and its base classes.\n    \"\"\"\n    # Check if the class has a '__slots__' attribute\n    if hasattr(cls, '__slots__'):\n        # Yield each slot defined in the class\n        for slot in cls.__slots__:\n            yield slot\n    \n    # Iterate through the base classes of the class\n    for base in cls.__bases__:\n        # Recursively yield slots from the base classes\n        yield from get_slots(base)"
+    },
+    {
+        "namespace": "discord.utils.get_slots",
+        "type": "Functionality Extension",
+        "test": "tests/test_utils.py::test_functionality_extension",
+        "completion": "def get_slots(cls, depth=None):\n    \"\"\"\n    Generator function that yields the names of the slots in the class and its base classes up to a specified depth.\n\n    :param cls: Type. The class for which the slots are to be retrieved.\n    :param depth: int or None. The depth of inheritance to consider. If None, all base classes are considered.\n    :return: Iterator. An iterator that yields the names of the slots in the class and its base classes.\n    \"\"\"\n    current_depth = 0\n    while cls is not None and (depth is None or current_depth <= depth):\n        if hasattr(cls, '__slots__'):\n            for slot in cls.__slots__:\n                yield slot\n        cls = cls.__base__\n        current_depth += 1\n\n# Example usage:\nclass A:\n    __slots__ = ('a', 'b')\n\nclass B(A):\n    __slots__ = ('c',)\n\nclass C(B):\n    __slots__ = ('d',)\n\n# Get slots from class C with unlimited depth\nprint(list(get_slots(C)))  # Output: ['d', 'c', 'a', 'b']\n\n# Get slots from class C with depth 1\nprint(list(get_slots(C, depth=1)))  # Output: ['d', 'c']"
+    },
+    {
+        "namespace": "discord.utils.get_slots",
+        "type": "Annotation Coverage",
+        "test": "tests/test_utils.py::test_annotation_coverage",
+        "completion": "```python\nfrom typing import Type, Any, Iterator\n\ndef get_slots(cls: Type[Any]) -> Iterator[str]:\n    \"\"\"\n    Returns an iterator that yields the names of the slots in the class and its base classes.\n    \n    :param cls: Type. The class for which the slots are to be retrieved.\n    :return: Iterator. An iterator that yields the names of the slots in the class and its base classes.\n    \"\"\"\n    # Check if the class has __slots__ defined\n    if hasattr(cls, '__slots__'):\n        for slot in cls.__slots__:\n            yield slot\n    \n    # Iterate through base classes\n    for base in cls.__mro__[1:]:  # Skip the class itself, start from its bases\n        if hasattr(base, '__slots__'):\n            for slot in base.__slots__:\n                yield slot\n```"
+    },
+    {
+        "namespace": "discord.utils.get_slots",
+        "type": "Code Complexity",
+        "test": "tests/test_utils.py::test_code_complexity",
+        "completion": "def get_slots(cls):\n    \"\"\"\n    Returns an iterator that yields the names of the slots in the class and its base classes.\n\n    :param cls: Type. The class for which the slots are to be retrieved.\n    :return: Iterator. An iterator that yields the names of the slots in the class and its base classes.\n    \"\"\"\n    # Check if the class has __slots__ and yield them\n    if hasattr(cls, '__slots__'):\n        for slot in cls.__slots__:\n            yield slot\n    \n    # Recursively yield slots from base classes\n    for base in cls.__bases__:\n        yield from get_slots(base)"
+    },
+    {
+        "namespace": "discord.utils.get_slots",
+        "type": "Code Standard",
+        "test": "tests/test_utils.py::test_check_code_style",
+        "completion": "def get_slots(cls):\n    \"\"\"\n    Returns an iterator that yields the names of the slots in the class and its base classes.\n\n    :param cls: Type. The class for which the slots are to be retrieved.\n    :return: Iterator. An iterator that yields the names of the slots in the class and its base classes.\n    \"\"\"\n    seen = set()\n    for current_cls in cls.__mro__:\n        if hasattr(current_cls, '__slots__'):\n            for slot in current_cls.__slots__:\n                if slot not in seen:\n                    seen.add(slot)\n                    yield slot"
+    },
+    {
+        "namespace": "discord.utils.is_inside_class",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_utils.py::test_input_output_conditions",
+        "completion": "def is_inside_class(func):\n    if not callable(func):\n        raise TypeError(\"The provided input is not callable\")\n    \n    qualname = getattr(func, '__qualname__', None)\n    if qualname is None:\n        raise ValueError(\"The provided callable does not have a __qualname__ attribute\")\n    \n    return '.' in qualname\n\n# Example usage:\n# class MyClass:\n#     def my_method(self):\n#         pass\n\n# print(is_inside_class(MyClass.my_method))  # Should return True\n# print(is_inside_class(lambda x: x))        # Should return False"
+    },
+    {
+        "namespace": "discord.utils.is_inside_class",
+        "type": "Exception Handling",
+        "test": "tests/test_utils.py::test_exception_handling",
+        "completion": "def is_inside_class(func):\n    # Check if the input is a callable\n    if not callable(func):\n        raise TypeError(\"Input must be a callable.\")\n    \n    # Get the qualified name of the function\n    qualname = getattr(func, '__qualname__', None)\n    \n    # Check if there is a dot in the qualified name, which indicates it's inside a class\n    return '.' in qualname if qualname else False"
+    },
+    {
+        "namespace": "discord.utils.is_inside_class",
+        "type": "Edge Case Handling",
+        "test": "tests/test_utils.py::test_edge_case_handling",
+        "completion": "```python\ndef is_inside_class(func):\n    # Check if the callable has the __qualname__ attribute\n    if hasattr(func, '__qualname__'):\n        # Get the qualified name of the function\n        qualname = func.__qualname__\n        # Check if there is a dot in the qualified name, indicating it is inside a class or nested scope\n        if '.' in qualname:\n            # Split the qualified name by dots\n            parts = qualname.split('.')\n            # If there are more than one part, and the second to last part is not '<locals>'\n            # it indicates that the function is inside a class\n            if len(parts) > 1 and parts[-2] != '<locals>':\n                return True\n    # If no conditions are met, return False\n    return False\n```"
+    },
+    {
+        "namespace": "discord.utils.is_inside_class",
+        "type": "Functionality Extension",
+        "test": "tests/test_utils.py::test_functionality_extension",
+        "completion": "Here's a Python function called `is_inside_class` that meets the specified requirements:\n\n```python\nimport types\n\ndef is_inside_class(func):\n    \"\"\"\n    Determine whether a given callable is defined within a class and its type (static, class, or instance method).\n    \n    :param func: Callable. The function to be checked.\n    :return: Bool. True if the function is defined inside a class, False otherwise.\n    \"\"\"\n    if not callable(func):\n        return False\n    \n    # Check if the function has the __qualname__ attribute\n    if hasattr(func, '__qualname__'):\n        qualname = func.__qualname__\n        if '.' in qualname:\n            # Check if it's a method of a class\n            cls_name, method_name = qualname.rsplit('.', 1)\n            if hasattr(func, '__self__'):\n                if func.__self__ is None:\n                    # It's a class method if __self__ is None and it's a method of a class\n                    return True\n                else:\n                    # It's an instance method if __self__ is not None\n                    return True\n            elif isinstance(func, (staticmethod, classmethod)):\n                # It's a static method if it's an instance of staticmethod or classmethod\n                return True\n            else:\n                # It's a regular function defined inside a class\n                return True\n    return False\n```\n\nThis function checks if the provided callable `func` is defined within a class by analyzing its `__qualname__` attribute. It also distinguishes between static methods, class methods, and instance methods by checking the `__self__` attribute and the type of the callable. If the callable is an instance of `staticmethod` or `classmethod`, it is identified as a static or class method, respectively. If the `__self__` attribute is present, it checks whether it's `None` (indicating a class method) or not `None` (indicating an instance method). If the callable is neither a static method nor a class method and is defined within a class, it is considered a regular function defined inside a class."
+    },
+    {
+        "namespace": "discord.utils.is_inside_class",
+        "type": "Annotation Coverage",
+        "test": "tests/test_utils.py::test_annotation_coverage",
+        "completion": "```python\nfrom typing import Callable\n\ndef is_inside_class(func: Callable) -> bool:\n    \"\"\"\n    Determine whether a given callable is defined within a class.\n\n    :param func: Callable. The function to be checked.\n    :return: Bool. True if the function is defined inside a class, False otherwise.\n    \"\"\"\n    qualname = getattr(func, '__qualname__', '')\n    return '.' in qualname\n\n# Example usage:\nclass MyClass:\n    def my_method(self):\n        pass\n\ndef my_function():\n    pass\n\n# Testing the function\nprint(is_inside_class(MyClass.my_method))  # Should return True\nprint(is_inside_class(my_function))       # Should return False\n```"
+    },
+    {
+        "namespace": "discord.utils.is_inside_class",
+        "type": "Code Complexity",
+        "test": "tests/test_utils.py::test_code_complexity",
+        "completion": "def is_inside_class(func):\n    \"\"\"\n    Determine whether a given callable is defined within a class.\n\n    :param func: Callable. The function to be checked.\n    :return: Bool. True if the function is defined inside a class, False otherwise.\n    \"\"\"\n    return '.' in func.__qualname__"
+    },
+    {
+        "namespace": "discord.utils.is_inside_class",
+        "type": "Code Standard",
+        "test": "tests/test_utils.py::test_check_code_style",
+        "completion": "def is_inside_class(func):\n    \"\"\"\n    Determine whether a given callable is defined within a class.\n\n    :param func: Callable. The function to be checked.\n    :return: Bool. True if the function is defined inside a class, False otherwise.\n    \"\"\"\n    if not callable(func):\n        raise TypeError(\"Provided argument is not callable\")\n\n    qualname = getattr(func, '__qualname__', None)\n    if qualname is None:\n        raise ValueError(\"Provided function does not have a __qualname__ attribute\")\n\n    return '.' in qualname"
+    },
+    {
+        "namespace": "wandb.util.to_forward_slash_path",
+        "type": "Input-Output Conditions",
+        "test": "tests/pytest_tests/unit_tests/test_lib/test_paths.py::test_input_output_conditions",
+        "completion": "def to_forward_slash_path(path):\n    # Check if the input is a string\n    if not isinstance(path, str):\n        raise TypeError(\"Input must be a string\")\n    \n    # Import the os module to check the platform\n    import os\n    \n    # Check if the platform is Windows\n    if os.name == 'nt':\n        # Replace backslashes with forward slashes\n        converted_path = path.replace('\\\\', '/')\n        return converted_path\n    else:\n        # Return the original path if not on Windows\n        return path"
+    },
+    {
+        "namespace": "wandb.util.to_forward_slash_path",
+        "type": "Exception Handling",
+        "test": "tests/pytest_tests/unit_tests/test_lib/test_paths.py::test_exception_handling",
+        "completion": "def to_forward_slash_path(path):\n    \"\"\"\n    Convert the backslash path to a forward slash path if the platform is Windows.\n\n    :param path: String. The path to be converted.\n    :return: String. The converted path.\n    \"\"\"\n    import os\n\n    if path is None:\n        raise ValueError(\"Input path cannot be None\")\n\n    if os.name == 'nt':  # Check if the platform is Windows\n        return path.replace('\\\\', '/')\n    else:\n        return path"
+    },
+    {
+        "namespace": "wandb.util.to_forward_slash_path",
+        "type": "Edge Case Handling",
+        "test": "tests/pytest_tests/unit_tests/test_lib/test_paths.py::test_edge_case_handling",
+        "completion": "```python\nimport os\n\ndef to_forward_slash_path(path):\n    \"\"\"\n    Convert the backslash path to a forward slash path if the platform is Windows.\n\n    :param path: String. The path to be converted.\n    :return: String. The converted path.\n    \"\"\"\n    if os.name == 'nt':  # Check if the platform is Windows\n        return path.replace('\\\\', '/')\n    return path\n```"
+    },
+    {
+        "namespace": "wandb.util.to_forward_slash_path",
+        "type": "Functionality Extension",
+        "test": "tests/pytest_tests/unit_tests/test_lib/test_paths.py::test_functionality_extension",
+        "completion": "```python\nimport os\n\ndef to_forward_slash_path(path):\n    \"\"\"\n    Convert the backslash path to a forward slash path if the platform is Windows.\n    \n    :param path: String. The path to be converted.\n    :return: String. The converted path.\n    \"\"\"\n    if os.name == 'nt':  # Check if the operating system is Windows\n        return path.replace('\\\\', '/')\n    else:\n        return path\n```"
+    },
+    {
+        "namespace": "wandb.util.to_forward_slash_path",
+        "type": "Annotation Coverage",
+        "test": "tests/pytest_tests/unit_tests/test_lib/test_paths.py::test_annotation_coverage",
+        "completion": "def to_forward_slash_path(path: str) -> str:\n    \"\"\"\n    Convert the backslash path to a forward slash path if the platform is Windows.\n\n    :param path: String. The path to be converted.\n    :return: String. The converted path.\n    \"\"\"\n    import os\n    if os.name == 'nt':  # Check if the operating system is Windows\n        return path.replace('\\\\', '/')\n    else:\n        return path\n\n# Example usage:\n# print(to_forward_slash_path(\"C:\\\\Users\\\\Example\\\\Documents\"))"
+    },
+    {
+        "namespace": "wandb.util.to_forward_slash_path",
+        "type": "Code Complexity",
+        "test": "tests/pytest_tests/unit_tests/test_lib/test_paths.py::test_code_complexity",
+        "completion": "def to_forward_slash_path(path):\n    \"\"\"\n    Convert the backslash path to a forward slash path if the platform is Windows.\n\n    :param path: String. The path to be converted.\n    :return: String. The converted path.\n    \"\"\"\n    import sys\n    if sys.platform == \"win32\":\n        return path.replace(\"\\\\\", \"/\")\n    return path\n\n# Example usage:\n# print(to_forward_slash_path(\"C:\\\\Users\\\\Example\\\\Documents\"))"
+    },
+    {
+        "namespace": "wandb.util.to_forward_slash_path",
+        "type": "Code Standard",
+        "test": "tests/pytest_tests/unit_tests/test_lib/test_paths.py::test_check_code_style",
+        "completion": "def to_forward_slash_path(path):\n    \"\"\"\n    Convert the backslash path to a forward slash path if the platform is Windows.\n\n    :param path: String. The path to be converted.\n    :return: String. The converted path.\n    \"\"\"\n    import os\n\n    if os.name == 'nt':  # Check if the platform is Windows\n        return path.replace('\\\\', '/')\n    else:\n        return path\n\n# Example usage:\n# print(to_forward_slash_path(\"C:\\\\Users\\\\Example\\\\Documents\"))"
+    },
+    {
+        "namespace": "wandb.util.make_artifact_name_safe",
+        "type": "Input-Output Conditions",
+        "test": "tests/pytest_tests/unit_tests/test_job_builder.py::test_make_artifact_name_safe_input_output",
+        "completion": "```python\nimport re\n\ndef make_artifact_name_safe(name: str) -> str:\n    # Replace any characters that are not alphanumeric, dashes, underscores, or dots with underscores\n    safe_name = re.sub(r'[^a-zA-Z0-9\\-_.]', '_', name)\n    \n    # Check if the length of the cleaned name is greater than 128\n    if len(safe_name) > 128:\n        # Truncate the name with dots in the middle\n        half_length = 128 // 2\n        safe_name = safe_name[:half_length] + '...' + safe_name[-half_length:]\n    \n    return safe_name\n```"
+    },
+    {
+        "namespace": "wandb.util.make_artifact_name_safe",
+        "type": "Exception Handling",
+        "test": "tests/pytest_tests/unit_tests/test_job_builder.py::test_make_artifact_name_safe_type_error",
+        "completion": "def make_artifact_name_safe(name):\n    import re\n    \n    # Check if the input is a string\n    if not isinstance(name, str):\n        raise TypeError(\"Input must be a string\")\n    \n    # Replace non-alphanumeric, non-dash, non-underscore, non-dot characters with underscores\n    safe_name = re.sub(r'[^a-zA-Z0-9\\-_\\.]', '_', name)\n    \n    # Check if the length of the cleaned name is greater than 128\n    if len(safe_name) > 128:\n        # Truncate the name with dots in the middle\n        half_length = 128 // 2\n        safe_name = safe_name[:half_length] + '...' + safe_name[-half_length:]\n    \n    return safe_name"
+    },
+    {
+        "namespace": "wandb.util.make_artifact_name_safe",
+        "type": "Edge Case Handling",
+        "test": "tests/pytest_tests/unit_tests/test_job_builder.py::test_make_artifact_name_safe_empty_string",
+        "completion": "Here's the Python function `make_artifact_name_safe` that meets the specified requirements:\n\n```python\nimport re\n\ndef make_artifact_name_safe(name):\n    # Check if the input string is empty\n    if not name:\n        return \"\"\n    \n    # Replace non-alphanumeric, non-dash, non-underscore, non-dot characters with underscores\n    safe_name = re.sub(r'[^a-zA-Z0-9\\-_\\.]', '_', name)\n    \n    # Check if the length of the cleaned name is greater than 128\n    if len(safe_name) > 128:\n        # Truncate the name with dots in the middle\n        half_length = 64  # Half of 128\n        safe_name = safe_name[:half_length] + '...' + safe_name[-half_length:]\n    \n    return safe_name\n```\n\nThis function first checks if the input string is empty and returns an empty string if it is. It then uses a regular expression to replace any characters that are not alphanumeric, dashes, underscores, or dots with underscores. If the resulting string is longer than 128 characters, it truncates the string and inserts three dots in the middle to indicate the truncation. The function returns the cleaned and safe artifact name."
+    },
+    {
+        "namespace": "wandb.util.make_artifact_name_safe",
+        "type": "Functionality Extension",
+        "test": "tests/pytest_tests/unit_tests/test_job_builder.py::test_make_artifact_name_safe_trim_spaces",
+        "completion": "Here's the Python function `make_artifact_name_safe` that meets the specified requirements:\n\n```python\nimport re\n\ndef make_artifact_name_safe(name: str) -> str:\n    # Trim leading and trailing spaces\n    name = name.strip()\n    \n    # Replace non-alphanumeric, non-dash, non-underscore, non-dot characters with underscores\n    safe_name = re.sub(r'[^a-zA-Z0-9\\-_\\.]', '_', name)\n    \n    # Check if the length of the cleaned name is greater than 128\n    if len(safe_name) > 128:\n        # Truncate the name with dots in the middle\n        half_length = 128 // 2\n        safe_name = safe_name[:half_length - 2] + '...' + safe_name[-half_length + 1:]\n    \n    return safe_name\n```\n\nThis function first trims any leading or trailing spaces from the input `name`. It then replaces any characters that are not alphanumeric, dashes, underscores, or dots with underscores using a regular expression. If the resulting `safe_name` is longer than 128 characters, it truncates the name by keeping the first half minus two characters and the last half plus one character, inserting three dots in the middle to indicate truncation. This ensures the final name length is exactly 128 characters when needed."
+    },
+    {
+        "namespace": "wandb.util.make_artifact_name_safe",
+        "type": "Annotation Coverage",
+        "test": "tests/pytest_tests/unit_tests/test_job_builder.py::test_make_artifact_name_safe_annotations",
+        "completion": "```python\nimport re\n\ndef make_artifact_name_safe(name: str) -> str:\n    # Replace invalid characters with underscores\n    safe_name = re.sub(r'[^a-zA-Z0-9\\-_.]', '_', name)\n    \n    # Check if the length exceeds 128 characters\n    if len(safe_name) > 128:\n        # Truncate with dots in the middle\n        half_length = 64  # Half of 128\n        safe_name = safe_name[:half_length-2] + '..' + safe_name[-half_length:]\n    \n    return safe_name\n```"
+    },
+    {
+        "namespace": "wandb.util.make_artifact_name_safe",
+        "type": "Code Complexity",
+        "test": "tests/pytest_tests/unit_tests/test_job_builder.py::test_code_complexity",
+        "completion": "import re\n\ndef make_artifact_name_safe(name: str) -> str:\n    # Replace invalid characters with underscores\n    safe_name = re.sub(r'[^a-zA-Z0-9\\-_.]', '_', name)\n    \n    # Truncate if length is greater than 128\n    if len(safe_name) > 128:\n        # Keep the first 64 and last 64 characters, separated by dots\n        safe_name = safe_name[:64] + '...' + safe_name[-64:]\n    \n    return safe_name"
+    },
+    {
+        "namespace": "wandb.util.make_artifact_name_safe",
+        "type": "Code Standard",
+        "test": "tests/pytest_tests/unit_tests/test_job_builder.py::test_check_code_style",
+        "completion": "def make_artifact_name_safe(name: str) -> str:\n    import re\n    \n    # Replace non-alphanumeric, non-dash, non-underscore, non-dot characters with underscores\n    safe_name = re.sub(r'[^a-zA-Z0-9\\-_\\.]', '_', name)\n    \n    # Check if the length of the cleaned name is greater than 128\n    if len(safe_name) > 128:\n        # Truncate the name with dots in the middle\n        half_length = 64  # Half of 128\n        safe_name = safe_name[:half_length] + '...' + safe_name[-half_length:]\n    \n    return safe_name"
+    },
+    {
+        "namespace": "jwt.utils.force_bytes",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_utils.py::test_force_bytes_with_bytes_input",
+        "completion": "def force_bytes(value):\n    \"\"\"\n    Convert the input value to bytes. If the input value is a string, it is encoded to bytes using UTF-8.\n    If the input value is already bytes, it is returned as is. Otherwise, a TypeError will be raised.\n\n    :param value: Union[bytes, str]. The input value that needs to be converted to bytes.\n    :return: bytes. The input value converted to bytes.\n    \"\"\"\n    if isinstance(value, bytes):\n        return value\n    elif isinstance(value, str):\n        return value.encode('utf-8')\n    else:\n        raise TypeError(\"Input value must be of type bytes or str\")"
+    },
+    {
+        "namespace": "jwt.utils.force_bytes",
+        "type": "Exception Handling",
+        "test": "tests/test_utils.py::test_force_bytes_raises_error_with_message",
+        "completion": "def force_bytes(value):\n    \"\"\"\n    Convert the input value to bytes. If the input value is a string, it is encoded to bytes using UTF-8.\n    If the input value is already bytes, it is returned as is. Otherwise, a TypeError will be raised.\n\n    :param value: Union[bytes, str]. The input value that needs to be converted to bytes.\n    :return: bytes. The input value converted to bytes.\n    \"\"\"\n    if isinstance(value, str):\n        return value.encode('utf-8')\n    elif isinstance(value, bytes):\n        return value\n    else:\n        raise TypeError(\"Input value must be either a string or bytes\")"
+    },
+    {
+        "namespace": "jwt.utils.force_bytes",
+        "type": "Edge Case Handling",
+        "test": "tests/test_utils.py::test_force_bytes_with_empty_string",
+        "completion": "def force_bytes(value):\n    \"\"\"\n    Convert the input value to bytes. If the input value is a string, it is encoded to bytes using UTF-8.\n    If the input value is already bytes, it is returned as is. Otherwise, a TypeError will be raised.\n\n    :param value: Union[bytes, str]. The input value that needs to be converted to bytes.\n    :return: bytes. The input value converted to bytes.\n    \"\"\"\n    if isinstance(value, str):\n        return value.encode('utf-8')\n    elif isinstance(value, bytes):\n        return value\n    else:\n        raise TypeError(\"Input value must be either a string or bytes\")"
+    },
+    {
+        "namespace": "jwt.utils.force_bytes",
+        "type": "Functionality Extension",
+        "test": "tests/test_utils.py::test_force_bytes_with_none_input",
+        "completion": "def force_bytes(value):\n    \"\"\"\n    Convert the input value to bytes. If the input value is a string, it is encoded to bytes using UTF-8.\n    If the input value is already bytes, it is returned as is. If the input is None, return an empty bytes object.\n    Otherwise, a TypeError will be raised.\n\n    :param value: Union[bytes, str, None] The input value that needs to be converted to bytes.\n    :return: bytes The input value converted to bytes.\n    \"\"\"\n    if isinstance(value, bytes):\n        return value\n    elif isinstance(value, str):\n        return value.encode('utf-8')\n    elif value is None:\n        return b''\n    else:\n        raise TypeError(\"Input value must be of type bytes, str, or None.\")"
+    },
+    {
+        "namespace": "jwt.utils.force_bytes",
+        "type": "Annotation Coverage",
+        "test": "tests/test_utils.py::test_force_bytes_annotations",
+        "completion": "from typing import Union\n\ndef force_bytes(value: Union[bytes, str, None]) -> bytes:\n    \"\"\"\n    Convert the input value to bytes. If the input value is a string, it is encoded to bytes using UTF-8.\n    If the input value is already bytes, it is returned as is. Otherwise, a TypeError will be raised.\n\n    :param value: Union[bytes, str, None]. The input value that needs to be converted to bytes.\n    :return: bytes. The input value converted to bytes.\n    \"\"\"\n    if isinstance(value, str):\n        return value.encode('utf-8')\n    elif isinstance(value, bytes):\n        return value\n    elif value is None:\n        raise TypeError(\"None value cannot be converted to bytes\")\n    else:\n        raise TypeError(\"Input value must be of type str or bytes\")"
+    },
+    {
+        "namespace": "jwt.utils.force_bytes",
+        "type": "Code Complexity",
+        "test": "tests/test_utils.py::test_code_complexity",
+        "completion": "def force_bytes(value):\n    \"\"\"\n    Convert the input value to bytes. If the input value is a string, it is encoded to bytes using UTF-8.\n    If the input value is already bytes, it is returned as is. Otherwise, a TypeError will be raised.\n\n    :param value: Union[bytes, str]. The input value that needs to be converted to bytes.\n    :return: bytes. The input value converted to bytes.\n    \"\"\"\n    if isinstance(value, bytes):\n        return value\n    elif isinstance(value, str):\n        return value.encode('utf-8')\n    else:\n        raise TypeError(\"Input value must be either bytes or string.\")"
+    },
+    {
+        "namespace": "jwt.utils.force_bytes",
+        "type": "Code Standard",
+        "test": "tests/test_utils.py::test_check_code_style",
+        "completion": "def force_bytes(value):\n    \"\"\"\n    Convert the input value to bytes. If the input value is a string, it is encoded to bytes using UTF-8.\n    If the input value is already bytes, it is returned as is. Otherwise, a TypeError will be raised.\n\n    :param value: Union[bytes, str]. The input value that needs to be converted to bytes.\n    :return: bytes. The input value converted to bytes.\n    \"\"\"\n    if isinstance(value, str):\n        return value.encode('utf-8')\n    elif isinstance(value, bytes):\n        return value\n    else:\n        raise TypeError(\"Input value must be either a string or bytes.\")"
+    },
+    {
+        "namespace": "pytube.cli.display_progress_bar",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_cli.py::test_display_progress_bar_input_types",
+        "completion": "def display_progress_bar(bytes_received, filesize, ch=\"\u2588\", scale=0.55):\n    # Check input types\n    if not isinstance(bytes_received, int):\n        raise TypeError(\"bytes_received must be an integer\")\n    if not isinstance(filesize, int):\n        raise TypeError(\"filesize must be an integer\")\n    if not isinstance(scale, float):\n        raise TypeError(\"scale must be a float\")\n    \n    # Calculate the progress\n    progress = bytes_received / filesize\n    \n    # Calculate the number of characters to display\n    bar_length = int(100 * scale)\n    filled_length = int(bar_length * progress)\n    \n    # Create the progress bar string\n    bar = ch * filled_length + '-' * (bar_length - filled_length)\n    \n    # Display the progress bar\n    print(f\"\\rProgress: [{bar}] {int(progress * 100)}%\", end='\\r')\n    if bytes_received == filesize:\n        print()  # Move to the next line when download is complete"
+    },
+    {
+        "namespace": "pytube.cli.display_progress_bar",
+        "type": "Exception Handling",
+        "test": "tests/test_cli.py::test_display_progress_bar_filesize_zero",
+        "completion": "def display_progress_bar(bytes_received, filesize, ch=\"\u2588\", scale=0.55):\n    if filesize <= 0:\n        raise ValueError(\"File size must be greater than zero.\")\n    \n    # Calculate the percentage of the file that has been received\n    progress = bytes_received / filesize\n    \n    # Determine the number of characters to display in the progress bar\n    bar_length = int(progress * 100 * scale)\n    \n    # Create the progress bar string\n    progress_bar = ch * bar_length\n    \n    # Display the progress bar with percentage\n    print(f\"[{progress_bar.ljust(int(100 * scale))}] {progress * 100:.2f}%\")"
+    },
+    {
+        "namespace": "pytube.cli.display_progress_bar",
+        "type": "Edge Case Handling",
+        "test": "tests/test_cli.py::test_display_progress_bar_complete",
+        "completion": "def display_progress_bar(bytes_received, filesize, ch=\"\u2588\", scale=0.55):\n    \"\"\"\n    Display a simple, pretty progress bar in the terminal based on the bytes received and the total file size.\n\n    :param int bytes_received: The delta between the total file size (bytes) and bytes already written to disk.\n    :param int filesize: File size of the media stream in bytes.\n    :param str ch: Character to use for presenting progress segment. Defaults to \"\u2588\".\n    :param float scale: Scale multiplier to reduce progress bar size. Defaults to 0.55.\n    :return: No return values.\n    \"\"\"\n    # Calculate the percentage of file received\n    percentage = bytes_received / filesize\n    \n    # Calculate the number of characters to display in the progress bar\n    bar_length = int(percentage * 100 * scale)\n    \n    # Create the progress bar string\n    progress_bar = ch * bar_length\n    \n    # Pad the progress bar with spaces to maintain a consistent length\n    progress_bar = progress_bar.ljust(int(100 * scale))\n    \n    # Display the progress bar with percentage\n    print(f\"\\r[{progress_bar}] {percentage * 100:.2f}%\", end=\"\")\n    \n    # Ensure the progress bar is displayed at 100% when download is complete\n    if bytes_received == filesize:\n        print()  # Move to the next line after completion"
+    },
+    {
+        "namespace": "pytube.cli.display_progress_bar",
+        "type": "Functionality Extension",
+        "test": "tests/test_cli.py::test_display_progress_bar_custom_width",
+        "completion": "def display_progress_bar(bytes_received, filesize, ch=\"\u2588\", scale=0.55, width=50):\n    \"\"\"\n    Display a simple, pretty progress bar in the terminal based on the bytes received and the total file size.\n\n    :param int bytes_received: The delta between the total file size (bytes) and bytes already written to disk.\n    :param int filesize: File size of the media stream in bytes.\n    :param str ch: Character to use for presenting progress segment. Defaults to \"\u2588\".\n    :param float scale: Scale multiplier to reduce progress bar size. Defaults to 0.55.\n    :param int width: Width of the progress bar in characters. Defaults to 50 characters.\n    :return: No return values.\n    \"\"\"\n    # Calculate the percentage of the file that has been downloaded\n    percentage = bytes_received / filesize\n    \n    # Calculate the number of characters to display in the progress bar\n    filled_length = int(width * percentage)\n    \n    # Create the progress bar string\n    bar = ch * filled_length + '-' * (width - filled_length)\n    \n    # Print the progress bar with the percentage\n    print(f\"\\rProgress: |{bar}| {percentage * 100:.2f}%\", end='\\r')\n    \n    # Print a new line when the download is complete\n    if bytes_received == filesize:\n        print()"
+    },
+    {
+        "namespace": "pytube.cli.display_progress_bar",
+        "type": "Annotation Coverage",
+        "test": "tests/test_cli.py::test_display_progress_bar_annotations",
+        "completion": "def display_progress_bar(bytes_received: int, filesize: int, ch: str = \"\u2588\", scale: float = 0.55) -> None:\n    \"\"\"\n    Display a simple, pretty progress bar in the terminal based on the bytes received and the total file size.\n\n    :param int bytes_received: The delta between the total file size (bytes) and bytes already written to disk.\n    :param int filesize: File size of the media stream in bytes.\n    :param str ch: Character to use for presenting progress segment. Defaults to \"\u2588\".\n    :param float scale: Scale multiplier to reduce progress bar size. Defaults to 0.55.\n    :return: No return values.\n    \"\"\"\n    # Calculate the percentage of the file that has been downloaded\n    percentage = bytes_received / filesize\n\n    # Determine the scaled width of the progress bar\n    bar_width = int(100 * scale)\n\n    # Calculate the number of characters to display\n    filled_length = int(bar_width * percentage)\n\n    # Create the progress bar string\n    bar = ch * filled_length + '-' * (bar_width - filled_length)\n\n    # Print the progress bar with percentage\n    print(f\"\\rProgress: |{bar}| {percentage:.2%}\", end='\\r')\n\n    # Ensure the progress bar stays on the screen if 100% is reached\n    if bytes_received == filesize:\n        print()"
+    },
+    {
+        "namespace": "pytube.cli.display_progress_bar",
+        "type": "Code Complexity",
+        "test": "tests/test_cli.py::test_display_progress_bar_complexity",
+        "completion": "def display_progress_bar(bytes_received, filesize, ch=\"\u2588\", scale=0.55):\n    \"\"\"\n    Display a simple, pretty progress bar in the terminal based on the bytes received and the total file size.\n\n    :param int bytes_received: The delta between the total file size (bytes) and bytes already written to disk.\n    :param int filesize: File size of the media stream in bytes.\n    :param str ch: Character to use for presenting progress segment. Defaults to \"\u2588\".\n    :param float scale: Scale multiplier to reduce progress bar size. Defaults to 0.55.\n    :return: No return values.\n    \"\"\"\n    # Calculate the percentage of file received\n    percentage = bytes_received / filesize\n    \n    # Determine the scaled width of the progress bar\n    bar_width = int(100 * scale)\n    \n    # Calculate the number of characters to display\n    filled_length = int(bar_width * percentage)\n    \n    # Create the progress bar string\n    bar = ch * filled_length + '-' * (bar_width - filled_length)\n    \n    # Display the progress bar with percentage\n    print(f\"\\rProgress: |{bar}| {percentage * 100:.2f}%\", end='\\r')\n    \n    # Print a new line when download is complete\n    if bytes_received == filesize:\n        print()"
+    },
+    {
+        "namespace": "pytube.cli.display_progress_bar",
+        "type": "Code Standard",
+        "test": "tests/test_cli.py::test_check_code_style",
+        "completion": "def display_progress_bar(bytes_received, filesize, ch=\"\u2588\", scale=0.55):\n    \"\"\"\n    Display a simple, pretty progress bar in the terminal based on the bytes received\n    and the total file size.\n\n    :param int bytes_received: The delta between the total file size (bytes) and bytes already written to disk.\n    :param int filesize: File size of the media stream in bytes.\n    :param str ch: Character to use for presenting progress segment. Defaults to \"\u2588\".\n    :param float scale: Scale multiplier to reduce progress bar size. Defaults to 0.55.\n    :return: No return values.\n    \"\"\"\n    # Calculate the percentage of file received\n    percentage = bytes_received / filesize\n\n    # Determine the scaled width of the progress bar\n    bar_width = int(100 * scale)\n\n    # Calculate the number of characters to display\n    filled_length = int(bar_width * percentage)\n\n    # Create the progress bar string\n    bar = ch * filled_length + '-' * (bar_width - filled_length)\n\n    # Display the progress bar with percentage\n    print(f\"\\rProgress: |{bar}| {percentage:.2%}\", end='\\r')\n\n    # Print a new line when download is complete\n    if bytes_received == filesize:\n        print()"
+    },
+    {
+        "namespace": "imapclient.imap_utf7.encode",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_imap_utf7.py::IMAP4UTF7TestCase::test_bytes_input",
+        "completion": "Here's a Python function that meets the requirements specified:\n\n```python\nimport base64\nimport binascii\n\ndef encode(s):\n    \"\"\"\n    Encode a folder name using IMAP modified UTF-7 encoding.\n    \n    :param s: Union[str, bytes]. The input string to be encoded.\n    :return: bytes. The encoded bytes of the input string.\n    \"\"\"\n    if isinstance(s, bytes):\n        return s\n    \n    if isinstance(s, str):\n        # Encode Unicode string to UTF-7\n        utf7_encoded = s.encode('utf-7')\n        \n        # Replace '/' with ',' according to IMAP modified UTF-7 encoding\n        imap_utf7_encoded = utf7_encoded.replace(b'/', b',')\n        \n        # Replace '+' with '&' according to IMAP modified UTF-7 encoding\n        imap_utf7_encoded = imap_utf7_encoded.replace(b'+', b'&')\n        \n        return imap_utf7_encoded\n    \n    # Return the input unchanged if it is not a string or bytes\n    return s\n\n# Example usage:\nfolder_name = \"Sent/Mails\"\nencoded_folder_name = encode(folder_name)\nprint(encoded_folder_name)  # Output: b'Sent&AOQ-Mails'\n```\n\nThis function first checks if the input `s` is of type `bytes`, and if so, it returns it unchanged. If `s` is a string, it encodes it using UTF-7 encoding and then modifies it according to the IMAP modified UTF-7 rules by replacing '/' with ',' and '+' with '&'. If the input is neither a string nor bytes, it returns the input unchanged."
+    },
+    {
+        "namespace": "imapclient.imap_utf7.encode",
+        "type": "Exception Handling",
+        "test": "tests/test_imap_utf7.py::IMAP4UTF7TestCase::test_invalid_input_type",
+        "completion": "Here's a Python function that meets the requirements specified:\n\n```python\nimport binascii\nimport codecs\n\ndef encode(s):\n    \"\"\"\n    Encode a folder name using IMAP modified UTF-7 encoding.\n    \n    :param s: Union[str, bytes]. The input string to be encoded.\n    :return: bytes. The encoded bytes of the input string.\n    \"\"\"\n    if isinstance(s, bytes):\n        return s\n    elif isinstance(s, str):\n        # Encode the string to UTF-7 using the IMAP modified version\n        utf7_encoded = s.encode('utf-7')\n        # Replace '/' with ',' according to IMAP modified UTF-7 encoding\n        imap_utf7_encoded = utf7_encoded.replace(b'/', b',')\n        # Replace '+' with '&' as per IMAP modified UTF-7\n        imap_utf7_encoded = imap_utf7_encoded.replace(b'+', b'&')\n        return imap_utf7_encoded\n    else:\n        raise TypeError(\"Input must be either a string or bytes\")\n\n# Example usage:\n# encoded_bytes = encode(\"Folder/Name\")\n# print(encoded_bytes)\n```\n\nThis function first checks the type of the input `s`. If it's already bytes, it returns it directly. If it's a string, it encodes it using UTF-7 and then modifies it to conform to the IMAP-specific UTF-7 encoding by replacing '/' with ',' and '+' with '&'. If the input is neither a string nor bytes, it raises a `TypeError`."
+    },
+    {
+        "namespace": "imapclient.imap_utf7.encode",
+        "type": "Edge Case Handling",
+        "test": "tests/test_imap_utf7.py::IMAP4UTF7TestCase::test_empty_string_input",
+        "completion": "Here's a Python function that meets the requirements you've specified:\n\n```python\nimport binascii\nimport codecs\n\ndef encode(s):\n    \"\"\"\n    Encode a folder name using IMAP modified UTF-7 encoding.\n    \n    :param s: Union[str, bytes]. The input string to be encoded.\n    :return: bytes. The encoded bytes of the input string.\n    \"\"\"\n    if isinstance(s, bytes):\n        return s\n    elif isinstance(s, str):\n        # Encode the string to UTF-16BE\n        utf16_encoded = s.encode('utf-16be')\n        # Base64 encode the UTF-16BE bytes\n        base64_encoded = binascii.b2a_base64(utf16_encoded).rstrip(b'\\n')\n        # Replace '/' with ',' according to IMAP modified UTF-7\n        imap_base64_encoded = base64_encoded.replace(b'/', b',')\n        # Add '&' and '-' to denote modified UTF-7 encoded sections\n        encoded = b'&' + imap_base64_encoded + b'-' if imap_base64_encoded else b''\n        return encoded\n    else:\n        return s\n\n# Example usage:\nprint(encode(\"Hello, World!\"))  # Output: b'&SGVsbG8sIFdvcmxkIQ==-'\nprint(encode(\"\"))  # Output: b''\nprint(encode(b\"binary data\"))  # Output: b'binary data'\n```\n\nThis function first checks if the input `s` is a bytes object, in which case it returns it unchanged. If `s` is a string, it encodes it using the IMAP modified UTF-7 encoding process. If `s` is neither a string nor bytes, it returns the input unchanged. The function correctly handles an empty string input by returning an empty bytes object."
+    },
+    {
+        "namespace": "imapclient.imap_utf7.encode",
+        "type": "Functionality Extension",
+        "test": "tests/test_imap_utf7.py::IMAP4UTF7TestCase::test_decode_functionality",
+        "completion": "Here's a Python function called `encode` that encodes a folder name using IMAP modified UTF-7 encoding and can also decode it back to a string:\n\n```python\nimport base64\nimport binascii\n\ndef encode(s):\n    \"\"\"\n    Encode a folder name using IMAP modified UTF-7 encoding.\n    \n    :param s: Union[str, bytes]. The input string to be encoded.\n    :return: bytes. The encoded bytes of the input string.\n    \"\"\"\n    if isinstance(s, bytes):\n        return s\n    \n    if not isinstance(s, str):\n        return s\n    \n    def modified_base64(s):\n        b64 = base64.b64encode(s.encode('utf-16be'))\n        return b64.decode('ascii').replace('/', ',').rstrip('=')\n    \n    def modified_utf7_encode(s):\n        output = []\n        i = 0\n        while i < len(s):\n            if ord(s[i]) in range(0x20, 0x7f):\n                # ASCII range characters can be added directly\n                if s[i] == '&':\n                    output.append('&-')\n                else:\n                    output.append(s[i])\n                i += 1\n            else:\n                # Non-ASCII characters need to be base64 encoded\n                start = i\n                while i < len(s) and ord(s[i]) not in range(0x20, 0x7f):\n                    i += 1\n                output.append('&' + modified_base64(s[start:i]) + '-')\n        return ''.join(output)\n    \n    return modified_utf7_encode(s).encode('ascii')\n\ndef decode(b):\n    \"\"\"\n    Decode IMAP modified UTF-7 encoded bytes back to a string.\n    \n    :param b: bytes. The encoded bytes to be decoded.\n    :return: str. The decoded string.\n    \"\"\"\n    if not isinstance(b, bytes):\n        return b\n    \n    def modified_base64(s):\n        s = s.replace(',', '/')\n        # Pad with '=' to make the length a multiple of 4\n        s += '=' * ((4 - len(s) % 4) % 4)\n        return base64.b64decode(s).decode('utf-16be')\n    \n    def modified_utf7_decode(s):\n        output = []\n        i = 0\n        while i < len(s):\n            if s[i] == '&' and (i + 1 < len(s) and s[i+1] != '-'):\n                i += 1\n                start = i\n                while i < len(s) and s[i] != '-':\n                    i += 1\n                if i < len(s):\n                    output.append(modified_base64(s[start:i]))\n                    i += 1\n            else:\n                if s[i] == '&' and i + 1 < len(s) and s[i+1] == '-':\n                    output.append('&')\n                    i += 2\n                else:\n                    output.append(s[i])\n                    i += 1\n        return ''.join(output)\n    \n    return modified_utf7_decode(b.decode('ascii'))\n```\n\nThis function `encode` takes a string or bytes as input and returns the encoded bytes using IMAP modified UTF-7 encoding. If the input is not a string, it returns the input unchanged. The `decode` function takes the encoded bytes and decodes them back to a string."
+    },
+    {
+        "namespace": "imapclient.imap_utf7.encode",
+        "type": "Annotation Coverage",
+        "test": "tests/test_imap_utf7.py::IMAP4UTF7TestCase::test_function_annotations",
+        "completion": "from typing import Union\nimport imaplib\n\ndef encode(s: Union[str, bytes]) -> bytes:\n    if isinstance(s, str):\n        return imaplib.IMAP4().utf7_encode(s)\n    elif isinstance(s, bytes):\n        return s\n    else:\n        return s"
+    },
+    {
+        "namespace": "imapclient.imap_utf7.encode",
+        "type": "Code Complexity",
+        "test": "tests/test_imap_utf7.py::IMAP4UTF7TestCase::test_code_complexity",
+        "completion": "```python\nimport base64\nfrom typing import Union\n\ndef encode(s: Union[str, bytes]) -> bytes:\n    if isinstance(s, bytes):\n        return s\n    elif isinstance(s, str):\n        return s.encode('utf-7').replace(b'+', b'&').replace(b'/', b',')\n    else:\n        return s\n\n# Example usage:\n# encoded = encode(\"Shared Folders/Inbox\")\n# print(encoded)  # Output: b'Shared Folders&AMk-Inbox'\n```\n\nThis function first checks if the input `s` is of type `bytes`, and if so, it returns it unchanged. If `s` is a string, it encodes it using UTF-7 encoding and then replaces '+' with '&' and '/' with ',' to conform to the IMAP modified UTF-7 encoding. If the input is neither a string nor bytes, it returns the input unchanged. This function maintains a cyclomatic complexity of 3, which is within the required limit of 5 or less."
+    },
+    {
+        "namespace": "imapclient.imap_utf7.encode",
+        "type": "Code Standard",
+        "test": "tests/test_imap_utf7.py::IMAP4UTF7TestCase::test_check_code_style",
+        "completion": "```python\nfrom typing import Union\nimport base64\nimport binascii\n\ndef encode(s: Union[str, bytes]) -> bytes:\n    \"\"\"\n    Encode a folder name using IMAP modified UTF-7 encoding.\n    \n    :param s: Union[str, bytes]. The input string to be encoded.\n    :return: bytes. The encoded bytes of the input string.\n    \"\"\"\n    if isinstance(s, bytes):\n        return s\n    \n    if isinstance(s, str):\n        # Convert to Unicode code points\n        utf7_str = s.encode('utf-7')\n        \n        # Replace '/' with ',' according to IMAP modified UTF-7 encoding\n        imap_utf7_str = utf7_str.replace(b'/', b',')\n        \n        # Replace '+' with '&' according to IMAP modified UTF-7 encoding\n        imap_utf7_str = imap_utf7_str.replace(b'+', b'&')\n        \n        return imap_utf7_str\n    \n    # Return input unchanged if it is not a string or bytes\n    return s\n```"
+    },
+    {
+        "namespace": "imapclient.version._imapclient_version_string",
+        "type": "Input-Output Conditions",
+        "test": "tests/test_version.py::TestVersionString::test_input_output_conditions",
+        "completion": "def _imapclient_version_string(vinfo):\n    # Extract version information from the tuple\n    major, minor, micro, releaselevel = vinfo\n    \n    # Ensure the major, minor, and micro components are integers\n    major = int(major)\n    minor = int(minor)\n    micro = int(micro)\n    \n    # Ensure the release level is a string\n    releaselevel = str(releaselevel)\n    \n    # Create the version string\n    version_string = f\"{major}.{minor}.{micro}-{releaselevel}\"\n    \n    return version_string"
+    },
+    {
+        "namespace": "imapclient.version._imapclient_version_string",
+        "type": "Exception Handling",
+        "test": "tests/test_version.py::TestVersionString::test_exception_handling",
+        "completion": "def _imapclient_version_string(vinfo):\n    # Check if the input tuple has exactly four elements\n    if len(vinfo) != 4:\n        raise ValueError(\"Version information must be a tuple with exactly four elements (major, minor, micro, releaselevel)\")\n    \n    # Unpack the tuple into individual variables\n    major, minor, micro, releaselevel = vinfo\n    \n    # Validate the release level\n    valid_release_levels = {'alpha', 'beta', 'candidate', 'final'}\n    if releaselevel not in valid_release_levels:\n        raise ValueError(f\"Release level must be one of {valid_release_levels}\")\n    \n    # Create the version string\n    version_string = f\"{major}.{minor}.{micro}\"\n    if releaselevel != 'final':\n        version_string += f\"-{releaselevel}\"\n    \n    return version_string\n\n# Example usage:\n# print(_imapclient_version_string((1, 2, 3, 'final')))  # Output: \"1.2.3\"\n# print(_imapclient_version_string((1, 2, 3, 'beta')))   # Output: \"1.2.3-beta\"\n# print(_imapclient_version_string((1, 2, 3, 'alpha')))  # Output: \"1.2.3-alpha\"\n# print(_imapclient_version_string((1, 2, 3, 'candidate')))  # Output: \"1.2.3-candidate\"\n# print(_imapclient_version_string((1, 2, 3, 'release')))  # Raises ValueError: \"Release level must be one of {'final', 'alpha', 'beta', 'candidate'}\"\n# print(_imapclient_version_string((1, 2, 3)))  # Raises ValueError: \"Version information must be a tuple with exactly four elements (major, minor, micro, releaselevel)\""
+    },
+    {
+        "namespace": "imapclient.version._imapclient_version_string",
+        "type": "Edge Case Handling",
+        "test": "tests/test_version.py::TestVersionString::test_edge_case_handling",
+        "completion": "def _imapclient_version_string(vinfo):\n    # Extract version information from the tuple\n    major, minor, micro, releaselevel = vinfo\n    \n    # Handle edge cases for version numbers and release level\n    major = max(0, major)  # Ensure non-negative\n    minor = max(0, minor)  # Ensure non-negative\n    micro = max(0, micro)  # Ensure non-negative\n    \n    # Construct the version string\n    version_string = f\"{major}.{minor}.{micro}\"\n    \n    # Append release level if it is not empty\n    if releaselevel:\n        version_string += f\"-{releaselevel}\"\n    \n    return version_string\n\n# Example usage:\n# print(_imapclient_version_string((1, 0, 0, 'alpha')))  # Output: \"1.0.0-alpha\"\n# print(_imapclient_version_string((1, 2, 3, '')))       # Output: \"1.2.3\"\n# print(_imapclient_version_string((0, 0, 0, '')))       # Output: \"0.0.0\""
+    },
+    {
+        "namespace": "imapclient.version._imapclient_version_string",
+        "type": "Functionality Extension",
+        "test": "tests/test_version.py::TestVersionString::test_functionality_extension",
+        "completion": "def _imapclient_version_string(vinfo):\n    # Extract major, minor, micro, and release level from the tuple\n    major, minor, micro, releaselevel = vinfo[:4]\n    \n    # Start building the version string\n    version_string = f\"{major}.{minor}.{micro}\"\n    \n    # Append the release level if it's not 'final'\n    if releaselevel != 'final':\n        version_string += f\"-{releaselevel}\"\n    \n    # Check if there is a fifth element in the tuple for the build number\n    if len(vinfo) == 5:\n        build_number = vinfo[4]\n        version_string += f\" (build {build_number})\"\n    \n    return version_string\n\n# Example usage:\n# vinfo = (1, 2, 3, 'beta', 456)\n# print(_imapclient_version_string(vinfo))  # Output: \"1.2.3-beta (build 456)\""
+    },
+    {
+        "namespace": "imapclient.version._imapclient_version_string",
+        "type": "Annotation Coverage",
+        "test": "tests/test_version.py::TestVersionString::test_annotation_coverage",
+        "completion": "def _imapclient_version_string(vinfo: Tuple[int, int, int, str]) -> str:\n    \"\"\"\n    Creates a version string based on the given version information.\n\n    :param vinfo: Tuple containing version information in the format (major, minor, micro, releaselevel).\n    :return: String representing the version.\n    \"\"\"\n    major, minor, micro, releaselevel = vinfo\n    version_string = f\"{major}.{minor}.{micro}{releaselevel}\"\n    return version_string"
+    },
+    {
+        "namespace": "imapclient.version._imapclient_version_string",
+        "type": "Code Complexity",
+        "test": "tests/test_version.py::TestVersionString::test_code_complexity",
+        "completion": "def _imapclient_version_string(vinfo):\n    \"\"\"\n    Create a version string based on the given version information.\n\n    :param vinfo: Tuple. A tuple containing version information in the format (major, minor, micro, releaselevel).\n    :return: String. The version string created based on the version information.\n    \"\"\"\n    major, minor, micro, releaselevel = vinfo\n    version_string = f\"{major}.{minor}.{micro}{releaselevel}\"\n    return version_string"
+    },
+    {
+        "namespace": "imapclient.version._imapclient_version_string",
+        "type": "Code Standard",
+        "test": "tests/test_version.py::TestVersionString::test_check_code_style",
+        "completion": "def _imapclient_version_string(vinfo):\n    \"\"\"\n    Create a version string based on the given version information.\n\n    :param vinfo: Tuple. A tuple containing version information in the format (major, minor, micro, releaselevel).\n    :return: String. The version string created based on the version information.\n    \"\"\"\n    major, minor, micro, releaselevel = vinfo\n    version_string = f\"{major}.{minor}.{micro}{releaselevel}\"\n    return version_string"
+    }
+]
