@@ -1,7 +1,7 @@
 ## <font style="color:rgb(31, 35, 40);">About</font>
 + **CodeIF-Bench** is a benchmark for evaluating the instruction-following ability of LLM in both code generation tasks.
 + **CodeIF-Bench** contains 9 verifiable instruction strategies collected from code review tasks.
-+ **CodeIF-Bench** contains 879 verifiable instructions with test cases that cover both **SA** and **Non-SA **programming tasks and support **Multi-Turn** dialogue.
++ **CodeIF-Bench** contains 879 verifiable instructions with test cases that cover both **SA** and **Non-SA** programming tasks and support **Multi-Turn** dialogue.
 
 ## Leaderboard
 ![](https://cdn.nlark.com/yuque/0/2025/png/38861830/1738848430606-4b1254ea-4322-438e-82e7-f5b52a56f946.png)
