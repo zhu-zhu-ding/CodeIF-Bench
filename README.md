@@ -189,5 +189,3 @@ The arguments are explained as follows.
 
 ## Leaderboard
 ![](leaderboard.png)
-
-### Citation
