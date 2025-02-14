@@ -3,8 +3,6 @@
 + **CodeIF-Bench** contains 9 verifiable instruction strategies collected from code review tasks.
 + **CodeIF-Bench** contains 879 verifiable instructions with test cases that cover both **SA** and **Non-SA** programming tasks and support **Multi-Turn** dialogue.
 
-## Leaderboard
-![](leaderboard.png)
 
 ## Dataset
 <font style="color:rgb(31, 35, 40);">The original repositories can be downloaded from </font>[link](https://figshare.com/s/aa2ec81006727d9ddb0c)<font style="color:rgb(31, 35, 40);">.</font>
@@ -188,5 +186,8 @@ The arguments are explained as follows.
 + `data_file`: the metadata file.
 + `n`: number of completions per task, e.g., `1`
 + `k`:the k value in Pass@k, e.g., `1`
+
+## Leaderboard
+![](leaderboard.png)
 
 ### Citation
