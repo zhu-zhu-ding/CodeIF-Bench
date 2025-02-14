@@ -7,7 +7,7 @@
 ![](leaderboard.png)
 
 ## Dataset
-<font style="color:rgb(31, 35, 40);">The original repositories can be downloaded from </font>[link](https://huggingface.co/datasets/zzzzd/CodeIF-Bench)<font style="color:rgb(31, 35, 40);">.</font>
+<font style="color:rgb(31, 35, 40);">The original repositories can be downloaded from </font>[link](https://figshare.com/s/aa2ec81006727d9ddb0c)<font style="color:rgb(31, 35, 40);">.</font>
 
 ### funcion
 In the `L_1_part_1.jsonl` file, each line of metadata is a json object, which contains the following fields:
