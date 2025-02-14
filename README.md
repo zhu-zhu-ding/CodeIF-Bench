@@ -4,7 +4,7 @@
 + **CodeIF-Bench** contains 879 verifiable instructions with test cases that cover both **SA** and **Non-SA** programming tasks and support **Multi-Turn** dialogue.
 
 ## Leaderboard
-![Leaderboard](leaderboard.png)
+![](leaderboard.png)
 
 ## Dataset
 <font style="color:rgb(31, 35, 40);">The original repositories can be downloaded from </font>[link](https://huggingface.co/datasets/zzzzd/CodeIF-Bench)<font style="color:rgb(31, 35, 40);">.</font>
