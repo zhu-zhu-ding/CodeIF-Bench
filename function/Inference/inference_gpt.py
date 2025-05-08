@@ -139,7 +139,7 @@ if __name__ == '__main__':
                 if flag:
                     prompts += "The function should meet the following requirements: "
                     flag = False
-                temp_data['completion']
+                based = temp_data['completion']
                 prompts += item['requirements'][key]['requirement']
             save_json(args.output_file,result,False)
 
