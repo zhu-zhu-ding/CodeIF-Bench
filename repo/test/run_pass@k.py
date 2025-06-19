@@ -20,8 +20,8 @@ def get_parser():
     parser = ArgumentParser()
     parser.add_argument('--output_file', type=Path)
     parser.add_argument('--log_file', type=Path)
-    parser.add_argument('--source_code_root', type=Path, default=Path('/home/liminxiao//DEV/DevEval/Source_Code'))
-    parser.add_argument('--data_file', type=Path, default=Path('/home/liminxiao/DEV/code-instruction-follow/Experiments/benchmark/dev_l2.jsonl')) # data.jsonl
+    parser.add_argument('--source_code_root', type=Path, default=Path('/Source_Code'))
+    parser.add_argument('--data_file', type=Path, default=Path('/Experiments/dev_l2.jsonl')) # data.jsonl
     parser.add_argument('--k', type=str, default='1,3,5,10') # k in pass_at_k
     parser.add_argument('--n', type=int, default=1) # number of completions per task
     return parser.parse_args()
