@@ -1,3 +1,6 @@
+## <font style="color:rgb(31, 35, 40);">News</font>
+The new version of CodeIF-Bench is currently under review. Once the review is complete, the data and scripts will be officially released.
+
 ## <font style="color:rgb(31, 35, 40);">About</font>
 + **CodeIF-Bench** is a benchmark for evaluating the instruction-following ability of LLM in interactive code generation tasks.
 + **CodeIF-Bench** contains 9 verifiable instruction strategies collected from code review tasks.
