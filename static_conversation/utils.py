@@ -2,7 +2,7 @@ import json
 import os
 import subprocess
 import threading
-
+import re
 
 def read_json(data_path,is_list=True):
     if is_list:
@@ -33,3 +33,20 @@ def save_json(data_path,data_list,is_list=True):
         except Exception as e:
             print(f"save json_path {data_path} exception:{e}")
             return None
+
+def extract_json(text):
+    pattern = r"```json\n(.*?)```"
+    matches = re.findall(pattern, text, re.DOTALL)
+    if matches:
+        text = matches[0]
+        return text
+    else:
+        return text
+def extract_python(text):
+    pattern = r"```python\n(.*?)```"
+    matches = re.findall(pattern, text, re.DOTALL)
+    if matches:
+        text = matches[0]
+        return text
+    else:
+        return text
